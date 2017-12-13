@@ -1,13 +1,15 @@
 /*
     ./client/components/App.jsx
+    Question, why components is working dir? (if i set client in webpack context.)
+    Where to store css?
 */
 import React from 'react';
+import './dashboard.css';
 
-export default class App extends React.Component {
+export  default class App extends React.Component {
   render() {
-    return (
-     <div style={{textAlign: 'center'}}>
-        <h1>Hello World</h1>
-      </div>);
+        return (
+         <div>Hello Manager</div>
+        );
   }
 }
