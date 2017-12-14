@@ -1,4 +1,6 @@
 import React from 'react'
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import Roles from './Roles.jsx'
 
 export class Table extends React.Component {
     render() {
@@ -56,9 +58,6 @@ export class TopNav extends React.Component {
                             <a className="nav-link" href="#">Profile</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Roles</a>
-                        </li>
-                        <li className="nav-item">
                             <a className="nav-link" href="#">Help</a>
                         </li>
                     </ul>
@@ -80,16 +79,16 @@ export class LeftNav extends React.Component {
             <nav className="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
           <ul className="nav nav-pills flex-column">
             <li className="nav-item">
-              <a className="nav-link active" href="#">Overview <span className="sr-only">(current)</span></a>
+              <a className="nav-link active" href="/">Overview <span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Reports</a>
+                <Link to={'/teams'} className="nav-link">Teams</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Analytics</a>
+              <Link to={'/people'} className="nav-link">People</Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Export</a>
+            <li className ="nav-item">
+                <Link to={'/roles'} className="nav-link">Roles</Link>
             </li>
           </ul>
 
@@ -101,37 +100,13 @@ export class LeftNav extends React.Component {
 export class MainPart extends React.Component {
     render() {
         return (
-                  <main className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-          <h1>Dashboard</h1>
-          <section className="row text-center placeholders">
-                <div id="root"></div>
+            <main className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <h1>Vision</h1>
+            <section className="row text-center placeholders">
+                <div className="col-6">
+                    <Route path="/roles" component={Roles}/>
+                </div>
           </section>
-          <section className="row text-center placeholders">
-            <div className="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" className="img-fluid rounded-circle" alt="Generic placeholder thumbnail"></img>
-              <h4>Label</h4>
-              <div className="text-muted">Something else</div>
-            </div>
-            <div className="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" className="img-fluid rounded-circle" alt="Generic placeholder thumbnail"></img>
-              <h4>Label</h4>
-              <span className="text-muted">Something else</span>
-            </div>
-            <div className="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" className="img-fluid rounded-circle" alt="Generic placeholder thumbnail"></img>
-              <h4>Label</h4>
-              <span className="text-muted">Something else</span>
-            </div>
-            <div className="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" className="img-fluid rounded-circle" alt="Generic placeholder thumbnail"></img>
-              <h4>Label</h4>
-              <span className="text-muted">Something else</span>
-            </div>
-          </section>
-
-
-
-
 
         </main>
             )

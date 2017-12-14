@@ -1,44 +1,46 @@
 /*
     ./client/components/App.jsx
-    Question, why components is working dir? (if i set client in webpack context.) !!!!!!!!!!!!!!!!!!!!!!!!
-    Where to store css?
+    1) Question, why components is working dir? (if i set client in webpack context.) !!!!!!!!!!!!!!!!!!!!!!!!
+    2) Where to store css? per component, like dashboard
+    3) How handle get request to /roles
+
 */
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 
 // import PersonForm from './components/PersonForm.jsx'
 // import PersonList from './components/PersonList.jsx'
 import { TopNav, LeftNav, MainPart, Table } from './LayoutHelpers.jsx'
 
+
 export default class App extends React.Component {
   render() {
-        return (
-            <div>
-
+    return (
+        <Router>
+        <div>
             <TopNav/>
-
-
             <div className="container-fluid">
                 <div className="row">
+                    <LeftNav/>
 
-            <LeftNav/>
+                        {/*<Route path="/teams" component={Teams}/>*/}
+                        {/*<Route path="/people" c omponent={People}/>*/}
+        <MainPart/>
 
-            <MainPart/>
+        {/*<h2>Forms</h2>*/}
 
-            <h2>Forms</h2>
+        {/*<PersonForm/>*/}
 
-            {/*<PersonForm/>*/}
+        {/*<PersonList/>*/}
 
-            {/*<PersonList/>*/}
+        {/*<div className="table-responsive">*/}
+            {/*<Table/>*/}
+        {/*</div>*/}
 
-            <div className="table-responsive">
-                <Table/>
-            </div>
-
-           </div>
+                </div>
             </div>
         </div>
-
+        </Router>
         );
-  }
+    }
 }
