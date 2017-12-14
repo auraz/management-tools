@@ -1,28 +1,43 @@
+/*
+    Person form
+*/
+import React from 'react';
 
-class PersonForm extends React.Component {
+export default class PersonForm extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state = {value: ''};
+        this.state = {
+            name: '',
+            role: ''
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        console.log(event.target.name, event.target.value)
+        this.setState({
+            [event.target.naregegme]: event.target.value
+        })
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        console.log(this.state, this.state.value);
         event.preventDefault();
+
+        console.log(event.target.name, event.target.value)
+        console.log(this.state)
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <label>
-                    Name:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    Strengths:
+                    <input type="text" value={this.state.name} onChange={this.handleChange.bind(this, 'name')} />
+
                 </label>
                 <input type="submit" value="Submit" />
             </form>

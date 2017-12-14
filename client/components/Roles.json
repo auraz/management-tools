@@ -1,0 +1,17 @@
+Grades = [
+    "Junior",
+    "Middle",
+    "Senior",
+    "Lead",
+]
+
+Roles = [
+    "Developer",
+    "DevOPS",
+    "QA",
+    "Architect",
+    "Lead",
+    "Product Owner",
+    "Project Coordinator",
+    "Team Coordinator",
+]

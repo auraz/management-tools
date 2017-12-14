@@ -26,6 +26,7 @@ module.exports = {
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.css$/, loader: 'style-loader!css-loader'},
+      { test: /\.json$/, loader: 'json' },
     ],
   },
   plugins: [
@@ -34,7 +35,8 @@ module.exports = {
         $: "jquery",
         jQuery: "jquery",
         "window.jQuery": "jquery",
-        "Tether": 'tether'
+        "Tether": 'tether',
+        "JSON": 'JSON',
     }),
     ]
 }
