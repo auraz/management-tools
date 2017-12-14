@@ -7,10 +7,29 @@
 */
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import Roles from './Roles.jsx'
+
 
 // import PersonForm from './components/PersonForm.jsx'
 // import PersonList from './components/PersonList.jsx'
-import { TopNav, LeftNav, MainPart, Table } from './LayoutHelpers.jsx'
+import { TopNav, LeftNav } from './LayoutHelpers.jsx'
+
+const routes = [
+  { path: '/',
+    exact: true,
+    component: () => <h2>Overview</h2>
+  },
+  { path: '/teams',
+    component: () => <h2>Teams</h2>
+  },
+  { path: '/people',
+    component: () => <h2>People</h2>
+  },
+  { path: '/roles',
+    component: () => <Roles/>
+  }
+]
+
 
 
 export default class App extends React.Component {
@@ -23,19 +42,21 @@ export default class App extends React.Component {
                 <div className="row">
                     <LeftNav/>
 
-                        {/*<Route path="/teams" component={Teams}/>*/}
-                        {/*<Route path="/people" c omponent={People}/>*/}
-        <MainPart/>
-
-        {/*<h2>Forms</h2>*/}
-
-        {/*<PersonForm/>*/}
-
-        {/*<PersonList/>*/}
-
-        {/*<div className="table-responsive">*/}
-            {/*<Table/>*/}
-        {/*</div>*/}
+                    <main className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+                    <h1>Vision</h1>
+                    <section className="row text-center placeholders">
+                        <div className="col-6">
+                            {routes.map((route, index) => (
+                                  <Route
+                                    key={index}
+                                    path={route.path}
+                                    exact={route.exact}
+                                    component={route.component}
+                                  />
+                            ))}
+                        </div>
+                    </section>
+                    </main>
 
                 </div>
             </div>

@@ -19,7 +19,8 @@ module.exports = {
   context: __dirname + "/client",
   output: {
     path: path.resolve('dist'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -38,6 +39,9 @@ module.exports = {
         "Tether": 'tether',
         "JSON": 'JSON',
     }),
-    ]
+    ],
+    devServer: {
+      historyApiFallback: true,
+    }
 }
 

@@ -5,6 +5,9 @@ import Roles from './Roles.jsx'
 export class Table extends React.Component {
     render() {
         return (
+
+             <div className="table-responsive">
+
         <table className="table table-striped">
               <thead>
                 <tr>
@@ -32,6 +35,8 @@ export class Table extends React.Component {
                 </tr>
               </tbody>
         </table>
+
+        </div>
         )
     }
 }
@@ -93,22 +98,6 @@ export class LeftNav extends React.Component {
           </ul>
 
              </nav>
-            )
-    }
-}
-
-export class MainPart extends React.Component {
-    render() {
-        return (
-            <main className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Vision</h1>
-            <section className="row text-center placeholders">
-                <div className="col-6">
-                    <Route path="/roles" component={Roles}/>
-                </div>
-          </section>
-
-        </main>
             )
     }
 }
