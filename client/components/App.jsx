@@ -30,12 +30,15 @@ const routes = [
   }
 ]
 
-
+var basename = "";
+if (_.includes(git.branch, 'gh-pages')) {
+    basename = "/management-tools/dist" // Basename for gh-pages should be repo name + dist.
+}
 
 export default class App extends React.Component {
   render() {
     return (
-        <Router>
+        <Router basename={basename}>
         <div>
             <TopNav/>
             <div className="container-fluid">
