@@ -15,17 +15,17 @@ import Roles from './Roles.jsx'
 import { TopNav, LeftNav } from './LayoutHelpers.jsx'
 
 const routes = [
-  { path: '',
+  { path: '/',
     exact: true,
     component: () => <h2>Overview</h2>
   },
-  { path: 'teams',
+  { path: '/teams',
     component: () => <h2>Teams</h2>
   },
-  { path: 'people',
+  { path: '/people',
     component: () => <h2>People</h2>
   },
-  { path: 'roles',
+  { path: '/roles',
     component: () => <Roles/>
   }
 ]
