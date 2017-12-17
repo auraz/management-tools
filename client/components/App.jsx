@@ -35,7 +35,7 @@ const routes = [
 export default class App extends React.Component {
   render() {
     return (
-        <Router>
+        <Router basename="/management-tools/dist">
         <div>
             <TopNav/>
             <div className="container-fluid">
