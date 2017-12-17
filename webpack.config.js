@@ -42,8 +42,15 @@ module.exports = {
         "window.jQuery": "jquery",
         "Tether": 'tether',
         "JSON": 'JSON',
+        "git_branch": "git-branch",
+        "_": "lodash",
     }),
-    new CleanWebpackPlugin(["dist"]) // Remove old hashed js files on rebuilding
+    new CleanWebpackPlugin(["dist"]), // Remove old hashed js files on rebuilding.
+    new webpack.DefinePlugin({
+            'git': {
+                'branch': JSON.stringify(branch.sync())  // Used in App.jsx to generalize output for gh-pages.
+            }
+        })
     ],
     devServer: {
       historyApiFallback: true,
