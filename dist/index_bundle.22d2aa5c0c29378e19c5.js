@@ -20761,7 +20761,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // import PersonList from './components/PersonList.jsx'
 
 
-var routes = [{ path: '/',
+var routes = [{ path: '',
     exact: true,
     component: function component() {
         return _react2.default.createElement(
@@ -20770,7 +20770,7 @@ var routes = [{ path: '/',
             'Overview'
         );
     }
-}, { path: '/teams',
+}, { path: 'teams',
     component: function component() {
         return _react2.default.createElement(
             'h2',
@@ -20778,7 +20778,7 @@ var routes = [{ path: '/',
             'Teams'
         );
     }
-}, { path: '/people',
+}, { path: 'people',
     component: function component() {
         return _react2.default.createElement(
             'h2',
@@ -20786,7 +20786,7 @@ var routes = [{ path: '/',
             'People'
         );
     }
-}, { path: '/roles',
+}, { path: 'roles',
     component: function component() {
         return _react2.default.createElement(_Roles2.default, null);
     }
@@ -20804,42 +20804,45 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(
-                _reactRouterDom.BrowserRouter,
-                { basename: '/management-tools/dist' },
+            return (
+                // Basename is needed for gh-pages. And HashRouter is needed for correct page reloading on subpath urls.
                 _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_LayoutHelpers.TopNav, null),
+                    _reactRouterDom.HashRouter,
+                    { basename: '/management-tools/dist' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'container-fluid' },
+                        null,
+                        _react2.default.createElement(_LayoutHelpers.TopNav, null),
                         _react2.default.createElement(
                             'div',
-                            { className: 'row' },
-                            _react2.default.createElement(_LayoutHelpers.LeftNav, null),
+                            { className: 'container-fluid' },
                             _react2.default.createElement(
-                                'main',
-                                { className: 'col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3' },
+                                'div',
+                                { className: 'row' },
+                                _react2.default.createElement(_LayoutHelpers.LeftNav, null),
                                 _react2.default.createElement(
-                                    'h1',
-                                    null,
-                                    'Vision'
-                                ),
-                                _react2.default.createElement(
-                                    'section',
-                                    { className: 'row text-center placeholders' },
+                                    'main',
+                                    { className: 'col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3' },
                                     _react2.default.createElement(
-                                        'div',
-                                        { className: 'col-6' },
-                                        routes.map(function (route, index) {
-                                            return _react2.default.createElement(_reactRouterDom.Route, {
-                                                key: index,
-                                                path: route.path,
-                                                exact: route.exact,
-                                                component: route.component
-                                            });
-                                        })
+                                        'h1',
+                                        null,
+                                        'Vision'
+                                    ),
+                                    _react2.default.createElement(
+                                        'section',
+                                        { className: 'row text-center placeholders' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'col-6' },
+                                            routes.map(function (route, index) {
+                                                return _react2.default.createElement(_reactRouterDom.Route, {
+                                                    key: index,
+                                                    path: route.path,
+                                                    exact: route.exact,
+                                                    component: route.component
+                                                });
+                                            })
+                                        )
                                     )
                                 )
                             )

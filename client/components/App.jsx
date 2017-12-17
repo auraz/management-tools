@@ -7,6 +7,7 @@
 */
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import Roles from './Roles.jsx'
 
 
@@ -15,17 +16,17 @@ import Roles from './Roles.jsx'
 import { TopNav, LeftNav } from './LayoutHelpers.jsx'
 
 const routes = [
-  { path: '/',
+  { path: '',
     exact: true,
     component: () => <h2>Overview</h2>
   },
-  { path: '/teams',
+  { path: 'teams',
     component: () => <h2>Teams</h2>
   },
-  { path: '/people',
+  { path: 'people',
     component: () => <h2>People</h2>
   },
-  { path: '/roles',
+  { path: 'roles',
     component: () => <Roles/>
   }
 ]
@@ -35,7 +36,8 @@ const routes = [
 export default class App extends React.Component {
   render() {
     return (
-        <Router basename="/management-tools/dist">
+        // Basename is needed for gh-pages. And HashRouter is needed for correct page reloading on subpath urls.
+        <HashRouter basename="/management-tools/dist">
         <div>
             <TopNav/>
             <div className="container-fluid">
@@ -61,7 +63,7 @@ export default class App extends React.Component {
                 </div>
             </div>
         </div>
-        </Router>
+        </HashRouter>
         );
     }
 }
