@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
-import Roles from './Roles.jsx'
+
 
 export class Table extends React.Component {
     render() {
@@ -44,7 +44,6 @@ export class Table extends React.Component {
 export class TopNav extends React.Component {
     render() {
         return (
-            <div>
                 <nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
                     <button className="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -72,7 +71,6 @@ export class TopNav extends React.Component {
                     </form>
                     </div>
                 </nav>
-            </div>
         )
     }
 }

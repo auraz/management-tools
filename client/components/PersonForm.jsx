@@ -19,7 +19,7 @@ export default class PersonForm extends React.Component {
     handleChange(event) {
         console.log(event.target.name, event.target.value)
         this.setState({
-            [event.target.naregegme]: event.target.value
+            [event.target.targename]: event.target.value
         })
     }
 

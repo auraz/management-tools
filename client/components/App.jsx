@@ -1,9 +1,5 @@
 /*
     ./client/components/App.jsx
-    1) Question, why components is working dir? (if i set client in webpack context.) !!!!!!!!!!!!!!!!!!!!!!!!
-    2) Where to store css? per component, like dashboard
-    3) How handle get request to /roles
-
 */
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
@@ -31,7 +27,7 @@ const routes = [
 ]
 
 var basename = "";
-if (_.includes(git.branch, 'gh-pages')) {
+if (git.branch.includes('gh-pages')) {
     basename = "/management-tools/dist" // Basename for gh-pages should be repo name + dist.
 }
 
