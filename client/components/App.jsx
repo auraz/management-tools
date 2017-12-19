@@ -3,7 +3,9 @@
 */
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
-import Roles from './Roles.jsx'
+import Roles from './roles/Roles.jsx'
+import RolesForm from './roles/RolesForm.jsx'
+import ErrorBoundary from './common/ErrorBoundary.jsx'
 
 
 // import PersonForm from './components/PersonForm.jsx'
@@ -22,7 +24,7 @@ const routes = [
     component: () => <h2>People</h2>
   },
   { path: '/roles',
-    component: () => <Roles/>
+    component: () => <div><RolesForm/><Roles/></div>
   }
 ]
 
@@ -35,6 +37,7 @@ export default class App extends React.Component {
   render() {
     return (
         <Router basename={basename}>
+        <ErrorBoundary>
         <div>
             <TopNav/>
             <div className="container-fluid">
@@ -60,6 +63,7 @@ export default class App extends React.Component {
                 </div>
             </div>
         </div>
+        </ErrorBoundary>
         </Router>
         );
     }

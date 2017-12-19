@@ -1,0 +1,43 @@
+/*
+    Roles form
+
+    Q: how the value is defined?
+    This is class is this of prototype or instance? https://coderwall.com/p/hdklna/the-right-way-to-bind-custom-methods-in-es6-class-react-component
+*/
+import React from 'react';
+
+import Roles from "./Roles.jsx"
+
+export default class RolesForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {value: ''};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        // console.log(value, event.target.value)
+        this.setState({value: event.target.value})
+
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        let x = new Roles()
+        x.addRole(this.state.value);
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                </label>
+                <input type="submit" value="Add new Role" />
+            </form>
+        );
+    }
+
+}

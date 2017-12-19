@@ -19,7 +19,7 @@ module.exports = {
   entry: 'index.js',
   context: __dirname + "/client", // Only for entry points, not for modules.
   resolve: {
-    modules: ['node_modules', 'client'],
+    modules: ['node_modules', 'client', 'client/components'],
     extensions: ['.js', '.jsx', '.css']
   },
   output: {
