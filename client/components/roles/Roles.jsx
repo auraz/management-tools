@@ -12,20 +12,22 @@
 
 import React from 'react';
 
-export default class Roles extends React.Component {
 
-
-    addRole(role) {
+function addRole(role) {
         this.state.roles.push(role);
         localStorage.setItem('roles-state', JSON.stringify(this.state));
+        console.log(role, this.state)
+        this.setState(JSON.parse(localStorage.getItem('roles-state')))
     }
+
+export default class Roles extends React.Component {
 
     constructor(props) {
 
         super(props)
-        this.addRole = this.addRole.bind(this);
+        addRole = addRole.bind(this);
 
-        this.state = {
+        this.state = JSON.parse(localStorage.getItem('roles-state')) || {
             roles: [
                 "Developer",
                 "DevOPS",
@@ -45,17 +47,26 @@ export default class Roles extends React.Component {
             ]
         }
 
+        localStorage.setItem('roles-state', JSON.stringify(this.state));
+    }
 
-        // localStorage.setItem('roles-state', JSON.stringify(this.state));
+    toRender() {
 
-        let _roles = _.get(JSON.parse(localStorage.getItem('roles-state')), 'roles', ["Empty list of roles"])
+        this.state = JSON.parse(localStorage.getItem('roles-state'))
+
+        let _roles = _.get(this.state, 'roles', ["Empty list of roles"])
 
         this.roles = _roles.map((role) => <li key = { role } > {role} </li>);
+
+        return this.roles
     }
 
     render() {
         return (
-            <ul>{this.roles}</ul>
+            <ul>{this.toRender()}</ul>
             )
     }
 }
+
+
+export { Roles, addRole };

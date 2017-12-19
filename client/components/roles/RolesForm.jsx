@@ -6,7 +6,7 @@
 */
 import React from 'react';
 
-import Roles from "./Roles.jsx"
+import { addRole } from "./Roles.jsx"
 
 export default class RolesForm extends React.Component {
 
@@ -18,15 +18,13 @@ export default class RolesForm extends React.Component {
     }
 
     handleChange(event) {
-        // console.log(value, event.target.value)
         this.setState({value: event.target.value})
-
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        let x = new Roles()
-        x.addRole(this.state.value);
+        addRole(this.state.value);
+        this.setState({value: ""})
     }
 
     render() {
