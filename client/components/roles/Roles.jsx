@@ -1,13 +1,9 @@
 /*
     Render list of roles and for to add new role.
 
+    Q: 1) How to partially update state and rerender? setState is ugly for this (no partial update).
+    Or! model structure maybe too complex for single component?
 
-    Why this not a function
-
-    addRole(role) {
-        this.state[roles].push(role);
-        localStorage.setItem('roles-state', JSON.stringify(this.state));
-    }
 */
 
 import React from 'react';
@@ -16,8 +12,9 @@ import React from 'react';
 function addRole(role) {
         this.state.roles.push(role);
         localStorage.setItem('roles-state', JSON.stringify(this.state));
-        console.log(role, this.state)
         this.setState(JSON.parse(localStorage.getItem('roles-state')))
+
+        // console.log(role, this.state)
     }
 
 export default class Roles extends React.Component {
@@ -47,7 +44,7 @@ export default class Roles extends React.Component {
             ]
         }
 
-        localStorage.setItem('roles-state', JSON.stringify(this.state));
+        localStorage.setItem('roles-state', JSON.stringify(this.state)); // needed only in second case
     }
 
     toRender() {

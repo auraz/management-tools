@@ -1,8 +1,9 @@
 /*
     Roles form
 
-    Q: how the value is defined?
-    This is class is this of prototype or instance? https://coderwall.com/p/hdklna/the-right-way-to-bind-custom-methods-in-es6-class-react-component
+    Q:
+    1 )how the value is defined?
+    2 ) no way to call another class method from another class?
 */
 import React from 'react';
 
@@ -24,7 +25,7 @@ export default class RolesForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         addRole(this.state.value);
-        this.setState({value: ""})
+        this.setState({value: ""})  // to clean form field
     }
 
     render() {
