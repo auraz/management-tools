@@ -8,7 +8,7 @@ import App from 'components/App.jsx';
 
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'components/dashboard.css';
+import 'components/common/dashboard.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
