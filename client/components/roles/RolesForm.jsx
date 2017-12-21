@@ -1,42 +1,35 @@
 /*
     Roles form
 
-    Q:
-    1 )how the value is defined?
-    2 ) no way to call another class method from another class?
+    Q1. this.state.value not works. this.props.value works. Why?
 */
 import React from 'react';
+import { connect } from 'react-redux'
+import { saveRole } from './action.jsx';
 
-import { addRole } from "./Roles.jsx"
-
-export default class RolesForm extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {value: ''};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(event) {
-        this.setState({value: event.target.value})
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        addRole(this.state.value);
-        this.setState({value: ""})  // to clean form field
-    }
+class RolesForm_ extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.props.handleSubmit}>
                 <label>
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    <input type="text" value={this.props.value} />
                 </label>
                 <input type="submit" value="Add new Role" />
             </form>
         );
     }
-
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleSubmit: (event) => {
+            event.preventDefault();
+            dispatch(saveRole(event.target[0].value))
+        }
+    }
+}
+
+const RolesForm = connect(null, mapDispatchToProps)(RolesForm_)
+
+export default RolesForm
