@@ -4,7 +4,12 @@
 
 var webpack = require("webpack");
 const path = require('path');
-var branch = require('git-branch');
+if (process.env.DOCKER !== "yes") {
+  var branch = require('git-branch');
+  process.stdout.write(JSON.stringify(process.env.DOCKER, null, 4))
+} else {
+  branch = { sync: () => "" }
+}
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -57,7 +62,6 @@ module.exports = {
       historyApiFallback: true,
     }
 }
-
 
 if (branch.sync().includes('gh-pages')) {
     module.exports['output']['publicPath'] =  '/management-tools/dist' // Url in gh-pages is relative to repo.
