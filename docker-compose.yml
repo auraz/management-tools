@@ -10,13 +10,11 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       #POSTGRES_DB: default
-    #volumes:
-      #-
 
   web:
-    build: .  # use Dockerfile in current dir
+    build: .
     ports:
-     - "80:8080"  # proxy internal port 8080 as 80
+     - "80:8080"
     volumes:
      - .:/app  # mounting current dir inside volume, autochange
     depends_on:
