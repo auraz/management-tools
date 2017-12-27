@@ -16,10 +16,8 @@ RUN yarn
 
 # Create app folder in root of a docker container image folder and copy all files from current dir to the app folder. Set current dir to app
 WORKDIR /app
-ADD . /app
 
-
-EXPOSE 3000
+EXPOSE 8080
 EXPOSE 35729
 
 # run create.sql on init

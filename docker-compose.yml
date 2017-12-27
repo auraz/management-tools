@@ -16,8 +16,8 @@ services:
   web:
     build: .  # use Dockerfile in current dir
     ports:
-     - "80:3000"  # proxy internal port 8080 as 80
+     - "80:8080"  # proxy internal port 8080 as 80
     volumes:
-     - .:/usr/src/app  # mounting current dir inside volume
+     - .:/app  # mounting current dir inside volume, autochange
     depends_on:
       - postgres

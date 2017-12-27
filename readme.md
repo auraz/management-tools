@@ -15,7 +15,7 @@ docker image ls react:app
 docker container run -it react:app bash
 
 ### Run
-docker container run -it -p 3000:3000 -p 35729:35729 -v $(pwd):/app react:app
+docker container run -it -p 80:8080 -p 35729:35729 -v $(pwd):/app react:app
 
 
 # Print app output
@@ -25,7 +25,7 @@ $ docker logs <container id>
 $ docker exec -it <container id> /bin/bash
 
 # Test
-curl -i localhost:49160
+curl -i localhost:35729
 
 
 ## Using Docker-compose
