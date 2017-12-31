@@ -4,9 +4,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-class Roles_ extends React.Component {
+class Roles_ extends React.PureComponent {
     toRender() {
-        return this.props.roles.map((role) => <li key = { role } > {role} </li>);
+        return this.props.roles.map((role, indx) => <li key={indx}>{role}</li>);
     }
 
     render() {

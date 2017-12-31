@@ -28,17 +28,6 @@ function logger({getState}) {
     }
 }
 
-/**
- * Saves currsent state to the localStorage
- */
-function saveState({getState}) {
-    return next => action => {
-        let returnValue = next(action);
-        localStorage.setItem(NAMESPACE, JSON.stringify(getState()));
-        return returnValue;
-    }
-}
-
 
 const initialState = JSON.parse(localStorage.getItem(NAMESPACE)) || {
     roles: [
@@ -59,11 +48,19 @@ const initialState = JSON.parse(localStorage.getItem(NAMESPACE)) || {
     ]
 }
 
-const store = createStore(RolesReducer, initialState, applyMiddleware(logger, saveState));
+const store = createStore(RolesReducer, initialState, applyMiddleware(logger));
+
+
+/**
+ * Saves currsent state to the localStorage
+ */
+function saveState() {
+    localStorage.setItem(NAMESPACE, JSON.stringify(this.getState()));
+}
+store.subscribe(saveState.bind(store));
+
 
 ReactDOM.render(
-    <Provider store={store}>
-      <App/>
-    </Provider>
-    ,    document.getElementById('root')
+    <Provider store={store}><App/></Provider>,
+    document.getElementById('root')
 );
