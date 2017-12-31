@@ -5,7 +5,6 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 class Roles_ extends React.Component {
-
     toRender() {
         return this.props.roles.map((role) => <li key = { role } > {role} </li>);
     }

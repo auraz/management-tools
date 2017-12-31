@@ -8,8 +8,8 @@ import RolesForm from './roles/RolesForm.jsx'
 import ErrorBoundary from './common/ErrorBoundary.jsx'
 
 
-// import PersonForm from './components/PersonForm.jsx'
-// import PersonList from './components/PersonList.jsx'
+import PersonForm from './person/PersonForm.jsx'
+import PersonList from './person/PersonList.jsx'
 import { TopNav, LeftNav } from './LayoutHelpers.jsx'
 
 const routes = [
@@ -21,7 +21,7 @@ const routes = [
     component: () => <h2>Teams</h2>
   },
   { path: '/people',
-    component: () => <h2>People</h2>
+    component: () => <div><h2>People</h2><PersonForm /><PersonList /></div>
   },
   { path: '/roles',
     component: () => <div><RolesForm/><Roles/></div>
@@ -37,33 +37,29 @@ export default class App extends React.Component {
   render() {
     return (
         <Router basename={basename}>
-        <ErrorBoundary>
-        <div>
-            <TopNav/>
-            <div className="container-fluid">
-                <div className="row">
-                    <LeftNav/>
-
-                    <main className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-                    <h1>Vision</h1>
-                    <section className="row text-center placeholders">
-                        <div className="col-6">
-                            {routes.map((route, index) => (
-                                  <Route
-                                    key={index}
-                                    path={route.path}
-                                    exact={route.exact}
-                                    component={route.component}
-                                  />
-                            ))}
-                        </div>
-                    </section>
-                    </main>
-
+            <ErrorBoundary>
+                <TopNav/>
+                <div className="container-fluid">
+                    <div className="row">
+                        <LeftNav/>
+                        <main className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+                        <h1>Vision</h1>
+                        <section className="row text-center placeholders">
+                            <div className="col-6">
+                                {routes.map((route, index) => (
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        component={route.component}
+                                    />
+                                ))}
+                            </div>
+                        </section>
+                        </main>
+                    </div>
                 </div>
-            </div>
-        </div>
-        </ErrorBoundary>
+            </ErrorBoundary>
         </Router>
         );
     }
