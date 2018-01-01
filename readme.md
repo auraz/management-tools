@@ -27,6 +27,14 @@ $ docker exec -it <container id> /bin/bash
 # Test
 curl -i localhost:35729
 
+# See container IDs
+$ docker ps
+
+# Go into postgres container
+$ docker exec -it [POSTGRES_CONTAINER_ID] /bin/bash
+root@[CONTAINER_ID] $ su - postgres
+root@[CONTAINER_ID] $ psql db
+
 
 ## Using Docker-compose
 
@@ -36,11 +44,15 @@ $ docker-compose up
 # remove
 $ docker-compose down
 
-# See container IDs
-$ docker ps
+# inspect
+#docker-compose run postgres bash
 
-# Go into postgres container
-$ docker exec -it [POSTGRES_CONTAINER_ID] /bin/bash
-root@[CONTAINER_ID] $ su - postgres
-root@[CONTAINER_ID] $ psql db
+
+## Access web application by
+http://0.0.0.0:80
+
+## Create tables and migrations using Sequilize
+sequelize init
+sequelize model:create --name Todo --attributes title:string
+sequelize db:migrate
 

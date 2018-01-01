@@ -2,14 +2,12 @@
 version: '2.1'
 services:
 
-  postgres:
-    image: "postgres:10.1"
-    expose:
-      - 5432
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      #POSTGRES_DB: default
+  psql:
+    build: ./server/psqldb
+    ports:
+      - "5433:5432" # expose ports - HOST:CONTAINE
+    healthcheck:
+      test: exit 0
 
   web:
     build: .
@@ -18,4 +16,10 @@ services:
     volumes:
      - .:/app  # mounting current dir inside volume, autochange
     depends_on:
-      - postgres
+      psql:
+        condition: service_healthy
+    links:
+      - psql
+    environment:
+      - DATABASE_URL=postgres://mtools:mtools@psql:5432/mtools
+
