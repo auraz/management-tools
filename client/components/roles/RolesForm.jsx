@@ -7,7 +7,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { saveRole } from './action.jsx';
 
-class RolesForm_ extends React.Component {
+class RolesForm_ extends React.PureComponent {
 
     render() {
         return (

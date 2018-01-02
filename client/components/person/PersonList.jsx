@@ -15,15 +15,6 @@ export default class PersonList extends React.Component {
             'key3': 'value3',
         }
 
-        // writing
-
-        localStorage.setItem('persons', JSON.stringify(inputpersons));
-
-        // reading
-
-        let persons = JSON.parse(localStorage.getItem('persons'))
-
-        // processing
 
         this.listItems = [];
 
