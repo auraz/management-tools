@@ -15,7 +15,4 @@ RUN yarn
 # Create app folder in root of a docker container image. Sync will be done by docker-compose.
 WORKDIR /app
 
-EXPOSE 8080
-EXPOSE 35729
-
 CMD [ "yarn", "start" ]
