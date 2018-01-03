@@ -12,7 +12,9 @@ import App from 'components/App.jsx';
 import RolesReducer from 'components/roles/reducer.jsx'
 
 import 'components/common/dashboard.css'; // WHY THIS SHOULD BE FIRST?
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/less/bootstrap.less"
+import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 const NAMESPACE = "MANAGMENT-TOOLS:v0"

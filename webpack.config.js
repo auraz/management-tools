@@ -41,7 +41,22 @@ module.exports = {
       {
         test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
         loader: 'url-loader'
-      }
+      },{
+            test: /\.less$/,
+            use: [
+                { loader: "style-loader" },
+                { loader: "css-loader" },
+                { loader: "less-loader" }
+            ]
+      },
+      {
+            test: /\.(scss|sass)$/i,
+            include: [
+                path.resolve(__dirname, 'node_modules'),
+                path.resolve(__dirname, 'node_modules/bootstrap/less'),
+            ],
+            loaders: ["css", "sass"]
+        },
     ],
   },
   plugins: [
