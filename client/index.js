@@ -1,6 +1,8 @@
 /*
     ./client/index.js
 */
+import 'bootstrap'
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
@@ -9,8 +11,8 @@ import { createStore, applyMiddleware } from 'redux'
 import App from 'components/App.jsx';
 import RolesReducer from 'components/roles/reducer.jsx'
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'components/common/dashboard.css';
+import 'components/common/dashboard.css'; // WHY THIS SHOULD BE FIRST?
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const NAMESPACE = "MANAGMENT-TOOLS:v0"
