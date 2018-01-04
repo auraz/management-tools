@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "mtools",
+    "password": "mtools",
+    "database": "mtools",
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "mtools",
+    "password": "mtools",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "mtools",
+    "password": "mtools",
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

@@ -1,5 +1,8 @@
 /*
     Render list of roles and for to add new role.
+
+    This is rendered on client or on server?
+    How deploy with docker?
 */
 import React from 'react';
 import { connect } from 'react-redux'
@@ -21,3 +24,5 @@ const mapStateToProps = (state) => {
 const Roles = connect(mapStateToProps)(Roles_)
 
 export default Roles
+
+

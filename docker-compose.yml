@@ -1,0 +1,25 @@
+# docker-compose up
+version: '2.1'
+services:
+
+  psql:
+    build: ./server/psqldb
+    ports:
+      - "5433:5432" # expose ports - HOST:CONTAINE
+    healthcheck:
+      test: exit 0
+
+  web:
+    build: .
+    ports:
+     - "80:8080"
+    volumes:
+     - .:/app  # mounting current dir inside volume, autochange
+    depends_on:
+      psql:
+        condition: service_healthy
+    links:
+      - psql
+    environment:
+      - DATABASE_URL=postgres://mtools:mtools@psql:5432/mtools
+

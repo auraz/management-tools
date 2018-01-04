@@ -15,8 +15,11 @@
     "jquery": "^3.2.1",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.4",
+    "lodash-webpack-plugin": "^0.11.4",
     "path": "^0.12.7",
     "popper.js": "^1.12.9",
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
     "react": "^16.2.0",
     "react-dnd": "^2.5.4",
     "react-dnd-html5-backend": "^2.5.4",
@@ -27,12 +30,14 @@
     "react-transition-group": "^2.2.1",
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
+    "sequelize": "^4.28.6",
+    "sequelize-cli": "^3.2.0",
     "style-loader": "^0.19.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   },
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server  --host 0.0.0.0 --port 8080"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
