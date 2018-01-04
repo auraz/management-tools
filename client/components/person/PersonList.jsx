@@ -19,8 +19,8 @@ export default class PersonList extends React.Component {
         this.listItems = [];
 
         // console.log(persons)
-        for (const key of Object.keys(persons)) {
-            this.listItems.push(key +  " -> " + persons[key])
+        for (const key of Object.keys(inputpersons)) {
+            this.listItems.push(key +  " -> " + inputpersons[key])
         }
         // console.log(this.listItems)
 
