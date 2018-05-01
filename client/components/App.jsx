@@ -2,8 +2,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import Roles from './roles/Roles.jsx'
+import RolesTable from './roles/RolesTable.jsx'
 import RolesForm from './roles/RolesForm.jsx'
 import ErrorBoundary from './common/ErrorBoundary.jsx'
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend'
 
 
 import SkillsTable from './skills/SkillsTable.jsx'
@@ -36,12 +39,12 @@ const routes = [
   {
     path: '/roles',
     title: "Roles",
-    component: () => <div className="row"><RolesForm/><Roles/></div>
+    component: () => <div className="row"><RolesForm /><RolesTable /></div>
   }
 ]
 
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
         <Router basename="">
@@ -67,3 +70,6 @@ export default class App extends React.Component {
         );
     }
 }
+
+
+export default DragDropContext(HTML5Backend)(App)
