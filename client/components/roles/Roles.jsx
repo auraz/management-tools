@@ -13,7 +13,7 @@ class Roles_ extends React.PureComponent {
     }
 
     render() {
-        return (<ul>{this.toRender()}</ul>)
+        return <ul className="col-8">{this.toRender()}</ul>
     }
 }
 

@@ -39,38 +39,37 @@ export class Table extends React.PureComponent {
 }
 
 
-export class TopNav extends React.PureComponent {
+export class TopNav extends React.Component {
     render() {
         return (
-            <nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <a className="navbar-brand" href="#">Dashboard</a>
                 <button
                     className="navbar-toggler navbar-toggler-right hidden-lg-up"
-                    type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"
+                    type="button" data-toggle="collapse" data-target="#top-navbar"
+                    aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation"
                 >
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <a className="navbar-brand" href="#">Dashboard</a>
-
-                <div className="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Settings</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Profile</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Help</a>
-                    </li>
-                </ul>
-                <form className="form-inline mt-2 mt-md-0">
-                    <input className="form-control mr-sm-2" type="text" placeholder="Search"></input>
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <div className="collapse navbar-collapse" id="top-navbar">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                            <NavLink to={'/'} className="nav-link" exact>Home</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to={'/settings'} className="nav-link">Settings</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to={'/profile'} className="nav-link">Profile</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to={'/help'} className="nav-link">Help</NavLink>
+                        </li>
+                    </ul>
+                    <form className="form-inline my-2 my-lg-0">
+                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </div>
             </nav>
         )
@@ -78,23 +77,18 @@ export class TopNav extends React.PureComponent {
 }
 
 
-export class LeftNav extends React.PureComponent {
+export class LeftNav extends React.Component {
     render() {
         return (
-            <nav className="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+            <nav className="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar navbar-light bg-light">
                 <ul className="nav nav-pills flex-column">
-                    <li className="nav-item">
-                        <NavLink to={'/'} className="nav-link" exact={true}>Overview</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink to={'/teams'} className="nav-link">Teams</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink to={'/people'} className="nav-link">People</NavLink>
-                    </li>
-                    <li className ="nav-item">
-                        <NavLink to={'/roles'} className="nav-link">Roles</NavLink>
-                    </li>
+                    {
+                        this.props.children && this.props.children.map((item, indx) => (
+                            <li className="nav-item">
+                                <NavLink to={item.path} className="nav-link" exact={item.exact}>{item.title}</NavLink>
+                            </li>
+                        ))
+                    }
                 </ul>
              </nav>
         )

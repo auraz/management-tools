@@ -11,11 +11,13 @@ class RolesForm_ extends React.PureComponent {
 
     render() {
         return (
-            <form onSubmit={this.props.handleSubmit}>
-                <label>
-                    <input type="text" value={this.props.value} />
-                </label>
-                <input type="submit" value="Add new Role" />
+            <form onSubmit={this.props.handleSubmit} className="col-sm-auto col-4">
+                <div className="input-group mb-3">
+                    <input type="text" className="form-control" placeholder="Role name" aria-label="Role name" value={this.props.value} />
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-secondary" type="submit">Add a new role</button>
+                    </div>
+                </div>
             </form>
         );
     }
