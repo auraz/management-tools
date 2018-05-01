@@ -4,12 +4,6 @@ Documentation
 var webpack = require("webpack");
 const path = require('path');
 
-if (typeof process.env.DOCKER === undefined) {
-  var GitBranch = { sync: () => "" } // mock git-branch module
-} else {
-  var GitBranch = require('git-branch');
-}
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: 'index.html',
@@ -47,24 +41,12 @@ module.exports = {
         "window.jQuery": "jquery",
         "Tether": 'tether',
         "JSON": 'JSON',
-        "git_branch": "git-branch",
         "_": "lodash",
     }),
     new CleanWebpackPlugin(["dist"]), // Remove old hashed js files on rebuilding.
-    new webpack.DefinePlugin({
-            'git': {
-                'branch': JSON.stringify(GitBranch.sync())  // Used in App.jsx to generalize output for gh-pages.
-            }
-        })
-    ],
     devServer: {
       historyApiFallback: true,
       host: '0.0.0.0',
       port: 8080
     }
-}
-
-if (GitBranch.sync().includes('gh-pages')) {
-    module.exports['output']['publicPath'] =  '/management-tools/dist' // Url in gh-pages is relative to repo.
-    process.stdout.write("\nUpdated config for gh-pages.\n");
 }

@@ -40,10 +40,6 @@ const routes = [
   }
 ]
 
-var basename = "";
-if (git.branch.includes('gh-pages')) {
-    basename = "/management-tools/dist" // Basename for gh-pages should be repo name + dist.
-}
 
 export default class App extends React.Component {
   render() {
