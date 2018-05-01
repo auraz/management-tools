@@ -36,7 +36,11 @@
     "webpack-dev-server": "^2.9.7"
   },
   "scripts": {
-    "start": "webpack-dev-server  --host 0.0.0.0 --port 8080"
+    "start": "webpack-dev-server  --host 0.0.0.0 --port 8080",
+    "watch": "webpack-dev-server  --host 0.0.0.0 --port 8080 --watch",
+    "build": "webpack",
+    "startlocaldb": "sudo su postgres; pg_ctl -D /Library/PostgreSQL/9.6/data/ start",
+    "stoplocaldb": "sudo su postgres; pg_ctl -D /Library/PostgreSQL/9.3/data/ stop"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

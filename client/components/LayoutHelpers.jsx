@@ -84,7 +84,7 @@ export class LeftNav extends React.Component {
                 <ul className="nav nav-pills flex-column">
                     {
                         this.props.children && this.props.children.map((item, indx) => (
-                            <li className="nav-item">
+                            <li key={indx} className="nav-item">
                                 <NavLink to={item.path} className="nav-link" exact={item.exact}>{item.title}</NavLink>
                             </li>
                         ))

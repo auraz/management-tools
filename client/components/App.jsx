@@ -44,7 +44,7 @@ const routes = [
 export default class App extends React.Component {
   render() {
     return (
-        <Router basename={basename}>
+        <Router basename="">
             <ErrorBoundary>
                 <TopNav/>
                 <div className="container-fluid">

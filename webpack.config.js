@@ -44,9 +44,13 @@ module.exports = {
         "_": "lodash",
     }),
     new CleanWebpackPlugin(["dist"]), // Remove old hashed js files on rebuilding.
-    devServer: {
-      historyApiFallback: true,
-      host: '0.0.0.0',
-      port: 8080
-    }
+  ],
+
+  devServer: {
+    historyApiFallback: true,
+    host: '0.0.0.0',
+    port: 8080
+  },
+ devtool: 'inline-source-map'
+
 }
