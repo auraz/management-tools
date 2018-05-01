@@ -1,18 +1,22 @@
 /* ./client/components/App.jsx */
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
-import Roles from './roles/Roles.jsx'
-import RolesTable from './roles/RolesTable.jsx'
-import RolesForm from './roles/RolesForm.jsx'
-import ErrorBoundary from './common/ErrorBoundary.jsx'
+
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'
 
-
 import SkillsTable from './skills/SkillsTable.jsx'
-import PersonForm from './person/PersonForm.jsx'
-import PersonList from './person/PersonList.jsx'
+import SkillForm from './skills/SkillForm.jsx'
+import PersonForm from './persons/PersonForm.jsx'
+import PersonsTable from './persons/PersonsTable.jsx'
+import RolesTable from './roles/RolesTable.jsx'
+import RoleForm from './roles/RoleForm.jsx'
+import TeamsTable from './teams/TeamsTable.jsx'
+import TeamForm from './teams/TeamForm.jsx'
+
+import ErrorBoundary from './common/ErrorBoundary.jsx'
 import { TopNav, LeftNav } from './LayoutHelpers.jsx'
+
 
 const routes = [
   {
@@ -24,22 +28,22 @@ const routes = [
   {
     path: '/teams',
     title: "Teams",
-    component: () => <div><h2>Teams</h2></div>
+    component: () => <div><h2>Teams<TeamForm /><TeamsTable /></h2></div>
   },
   {
     path: '/people',
     title: "People",
-    component: () => <div><h2>People</h2><PersonForm /><PersonList /></div>
+    component: () => <div><h2>People</h2><PersonForm /><PersonsTable /></div>
   },
   {
     path: '/skills',
     title: "Skills",
-    component: () => <div><h2>Skills</h2><SkillsTable /></div>
+    component: () => <div><h2>Skills</h2><SkillForm /><SkillsTable /></div>
   },
   {
     path: '/roles',
     title: "Roles",
-    component: () => <div className="row"><RolesForm /><RolesTable /></div>
+    component: () => <div className="row">Roles<RoleForm /><RolesTable /></div>
   }
 ]
 

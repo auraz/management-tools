@@ -11,7 +11,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 
 import App from 'components/App.jsx';
-import RolesReducer from 'components/roles/reducer.jsx'
+import RolesReducer from 'components/common/reducer.jsx'
 
 
 
@@ -32,6 +32,7 @@ function logger({getState}) {
 
 
 const initialState = JSON.parse(localStorage.getItem(NAMESPACE)) || {
+    // do not forget to localStorage.clear() after updating this list:
     roles: [
         "Developer",
         "DevOPS",
@@ -47,18 +48,24 @@ const initialState = JSON.parse(localStorage.getItem(NAMESPACE)) || {
         "Middle",
         "Senior",
         "Lead",
+    ],
+    persons: [
+        "Vlads",
+        "Indra",
+        "Koval"
+    ],
+    teams: [
+        "Web development",
+        "DevOPS"
     ]
 }
 
 const store = createStore(RolesReducer, initialState, applyMiddleware(logger));
 
-
-/**
- * Saves currsent state to the localStorage
- */
 function saveState() {
     localStorage.setItem(NAMESPACE, JSON.stringify(this.getState()));
 }
+
 store.subscribe(saveState.bind(store));
 
 

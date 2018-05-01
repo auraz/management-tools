@@ -5,7 +5,7 @@
 */
 import React from 'react';
 import { connect } from 'react-redux'
-import { saveRole } from './action.jsx';
+import { addX } from '../common/action.jsx'
 
 class RolesForm_ extends React.PureComponent {
 
@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleSubmit: (event) => {
             event.preventDefault();
-            dispatch(saveRole(event.target[0].value))
+            dispatch(addRole(event.target[0].value), "ADD_ROLE")
         }
     }
 }
