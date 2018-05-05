@@ -8,7 +8,7 @@ class PersonsTable extends BaseTable{
 }
 
 const mapStateToProps = (state) => {
-    return { rows:state.persons.map((role, idx) =>  ({id: idx, name: role, value: ""}))}
+    return { rows:Object.keys(state.persons).map((role, idx) =>  ({id: idx, name: role, value: ""}))}
 }
 
 export default connect(mapStateToProps)(PersonsTable)

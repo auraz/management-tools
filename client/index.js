@@ -20,8 +20,9 @@ import LocalStorage from 'lowdb/adapters/LocalStorage'
 const adapter = new LocalStorage('db')
 const db = low(adapter)
 
+// Should be valid, otherwise localStorage did not updated.
 db.defaults({
-        roles: [
+        "roles": [
             "Developer",
             "DevOPS",
             "QA",
@@ -32,37 +33,29 @@ db.defaults({
             "Team Coordinator",
             "Test 3"
         ],
-        grades: [
+        "grades": [
             "Junior",
             "Middle",
             "Senior",
-            "Lead",
+            "Lead"
         ],
-        persons: {
-            "Vladas": {
-                skills: {
-
-                }
-            },
-            "Indra":  {
-                skills: {
-
-                }
-            },
+        "persons": {
+            "Vladas": [
+                ["Communication", "Enough"],
+                ["Initiative", "Not Enough"]
+            ],
+            "Indra":  [],
             "Koval": [
                     ["Devops Architecture", "Enough"],
-                    ["Delivery in time", "Not Enough"],
-                ],
+                    ["Delivery in time", "Not Enough"]
+                ]
             },
-        teams: [
+        "teams": [
             "Web development",
             "DevOPS"
-        ],
-        vladas: [
-            "str": "communication",
-            "weak": "initiative"
         ]
 }).write()
+// localStorage.setItem('db', db.serialize(db.getState()))
 
 
 function logger({getState}) {
@@ -78,7 +71,7 @@ function logger({getState}) {
 }
 
 const store = createStore(RolesReducer, db.getState(), applyMiddleware(logger));
-let saveState = () => db.setState(this.getState())
+let saveState = () => db.setState(this.getState())  // why to dot write store.getState()?
 store.subscribe(saveState.bind(store));
 
 ReactDOM.render(
