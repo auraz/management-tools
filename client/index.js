@@ -20,7 +20,7 @@ import LocalStorage from 'lowdb/adapters/LocalStorage'
 const adapter = new LocalStorage('db')
 const db = low(adapter)
 
-// Should be valid, otherwise localStorage did not updated.
+// Should be valid JSON, otherwise localStorage did not updated.
 db.defaults({
         "roles": [
             "Developer",
@@ -55,7 +55,6 @@ db.defaults({
             "DevOPS"
         ]
 }).write()
-// localStorage.setItem('db', db.serialize(db.getState()))
 
 
 function logger({getState}) {
@@ -71,7 +70,8 @@ function logger({getState}) {
 }
 
 const store = createStore(RolesReducer, db.getState(), applyMiddleware(logger));
-let saveState = () => db.setState(this.getState())  // why to dot write store.getState()?
+// const store = createStore(TeamsReducer, db.getState('teams'), applyMiddleware(logger));
+let saveState = () => db.setState(store.getState())  // why to dot write store.getState()?
 store.subscribe(saveState.bind(store));
 
 ReactDOM.render(

@@ -1,22 +1,20 @@
 import React from "react"
 
-import Row from "./Row.jsx"
-import EditableRow from "./EditableRow.jsx"
 
-
-class BaseTable extends React.Component{
+class DragAndDropTable extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
-            rows: []
-        }
         this.moveRow = this.moveRow.bind(this);
+    }
+
+    componentWillMount() {
+        this.setState({rows: this.props.children})
     }
 
     moveRow(id, afterId) {
         let rows = this.state.rows.concat([])
-        let currentRow = rows.filter((r) => r.id === id)[0];
-        let afterRow = rows.filter((r) => r.id === afterId)[0];
+        let currentRow = rows.filter((r) => r.props.id === id)[0];
+        let afterRow = rows.filter((r) => r.props.id === afterId)[0];
         let currentRowIndex = rows.indexOf(currentRow);
         let afterRowIndex = rows.indexOf(afterRow);
         // remove the current row
@@ -27,18 +25,16 @@ class BaseTable extends React.Component{
     }
 
     render() {
-        let rows = this.state.rows.map((r) => {
-            return <Row key={r.id} id={r.id} moveRow={this.moveRow}>
-                <th>{r.name}</th>
-                <td><EditableRow value={r.value} /></td>
-            </Row>
-        });
         return (
             <table className="table table-striped">
-                <tbody>{rows}</tbody>
+                <tbody>{React.Children.map(this.state.rows, (child) => {
+                    return React.cloneElement(child, {
+                        moveRow: this.moveRow
+                    })
+                })}</tbody>
             </table>
         );
     }
 }
 
-export default BaseTable
+export default DragAndDropTable

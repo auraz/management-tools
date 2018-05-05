@@ -1,7 +1,7 @@
-import BaseTable from "../common/BaseTable.jsx"
+import DragAndDropTable from "../common/DragAndDropTable.jsx"
 import { connect } from 'react-redux'
 
-class PersonalSkillsTable extends BaseTable{
+class PersonalSkillsTable extends DragAndDropTable{
     componentWillMount() {
         this.setState({rows: this.props.rows})
     }

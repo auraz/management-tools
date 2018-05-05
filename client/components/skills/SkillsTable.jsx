@@ -1,7 +1,7 @@
-import BaseTable from "../common/BaseTable.jsx"
+import DragAndDropTable from "../common/DragAndDropTable.jsx"
 
 
-class SkillsTable extends BaseTable{
+class SkillsTable extends DragAndDropTable{
     componentWillMount() {
         this.setState(
             {rows: [
@@ -13,7 +13,6 @@ class SkillsTable extends BaseTable{
                 {id: 6, name: "Php", value: 3},
             ]}
         )
-        console.log(this.state) // why it is empty? while all works?
     }
 }
 
