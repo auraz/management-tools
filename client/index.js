@@ -13,9 +13,56 @@ import { createStore, applyMiddleware } from 'redux'
 import App from 'components/App.jsx';
 import RolesReducer from 'components/common/reducer.jsx'
 
+import low from 'lowdb'
+import LocalStorage from 'lowdb/adapters/LocalStorage'
 
 
-const NAMESPACE = "MANAGMENT-TOOLS:v0"
+const adapter = new LocalStorage('db')
+const db = low(adapter)
+
+db.defaults({
+        roles: [
+            "Developer",
+            "DevOPS",
+            "QA",
+            "Architect",
+            "Lead",
+            "Product Owner",
+            "Project Coordinator",
+            "Team Coordinator",
+            "Test 3"
+        ],
+        grades: [
+            "Junior",
+            "Middle",
+            "Senior",
+            "Lead",
+        ],
+        persons: {
+            "Vladas": {
+                skills: {
+
+                }
+            },
+            "Indra":  {
+                skills: {
+
+                }
+            },
+            "Koval": [
+                    ["Devops Architecture", "Enough"],
+                    ["Delivery in time", "Not Enough"],
+                ],
+            },
+        teams: [
+            "Web development",
+            "DevOPS"
+        ],
+        vladas: [
+            "str": "communication",
+            "weak": "initiative"
+        ]
+}).write()
 
 
 function logger({getState}) {
@@ -30,63 +77,9 @@ function logger({getState}) {
     }
 }
 
-
-const initialState = JSON.parse(localStorage.getItem(NAMESPACE)) || {
-    // do not forget to localStorage.clear() after updating this list:
-    // byt sometimes it just works
-    roles: [
-        "Developer",
-        "DevOPS",
-        "QA",
-        "Architect",
-        "Lead",
-        "Product Owner",
-        "Project Coordinator",
-        "Team Coordinator",
-        "Test 3"
-    ],
-    grades: [
-        "Junior",
-        "Middle",
-        "Senior",
-        "Lead",
-    ],
-    persons: {
-        "Vladas": {
-            skills: {
-
-            }
-        },
-        "Indra":  {
-            skills: {
-
-            }
-        },
-        "Koval": [
-                ["Devops Architecture", "Enough"],
-                ["Delivery in time", "Not Enough"],
-            ],
-        },
-    teams: [
-        "Web development",
-        "DevOPS"
-    ],
-    vladas: [
-        "str": "communication",
-        "weak": "initiative"
-    ]
-}
-
-const store = createStore(RolesReducer, initialState, applyMiddleware(logger));
-
-function saveState() {
-    console.log(localStorage, "fdsfsdf")
-    localStorage.setItem(NAMESPACE, JSON.stringify(this.getState()));
-    console.log(localStorage, "fdsfsdf")
-}
-
+const store = createStore(RolesReducer, db.getState(), applyMiddleware(logger));
+let saveState = () => db.setState(this.getState())
 store.subscribe(saveState.bind(store));
-
 
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,
