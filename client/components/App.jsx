@@ -9,6 +9,7 @@ import SkillsTable from './skills/SkillsTable.jsx'
 import SkillForm from './skills/SkillForm.jsx'
 import PersonForm from './persons/PersonForm.jsx'
 import PersonsTable from './persons/PersonsTable.jsx'
+import PersonalSkillsTable from './persons/PersonalSkillsTable.jsx'
 import RolesTable from './roles/RolesTable.jsx'
 import RoleForm from './roles/RoleForm.jsx'
 import TeamsTable from './teams/TeamsTable.jsx'
@@ -44,6 +45,11 @@ const routes = [
     path: '/roles',
     title: "Roles",
     component: () => <div className="row">Roles<RoleForm /><RolesTable /></div>
+  },
+  {
+    path: '/test',
+    title: "Koval",
+    component: () => <div><h2>Koval</h2><PersonalSkillsTable /></div>
   }
 ]
 

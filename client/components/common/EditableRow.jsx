@@ -46,7 +46,7 @@ class EditableRow extends React.Component{
         if (this.state.editMode) {
             return <div tabIndex="-1">
                 <select type="number" value={this.state.draft || this.state.value} onChange={this.handleChange}>
-                    {[0,1,2,3,4,5,6,7,8,9].map((i) => <option value={i} key={i}>{i}</option>)}
+                    {["Enough", "Not Enough"].map((i) => <option value={i} key={i}>{i}</option>)}
                 </select>&nbsp;
                 <small>
                     <a href="#" onClick={this.handleSave}>Save</a>&nbsp;

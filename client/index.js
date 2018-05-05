@@ -33,6 +33,7 @@ function logger({getState}) {
 
 const initialState = JSON.parse(localStorage.getItem(NAMESPACE)) || {
     // do not forget to localStorage.clear() after updating this list:
+    // byt sometimes it just works
     roles: [
         "Developer",
         "DevOPS",
@@ -42,6 +43,7 @@ const initialState = JSON.parse(localStorage.getItem(NAMESPACE)) || {
         "Product Owner",
         "Project Coordinator",
         "Team Coordinator",
+        "Test 3"
     ],
     grades: [
         "Junior",
@@ -49,21 +51,38 @@ const initialState = JSON.parse(localStorage.getItem(NAMESPACE)) || {
         "Senior",
         "Lead",
     ],
-    persons: [
-        "Vlads",
-        "Indra",
-        "Koval"
-    ],
+    persons: {
+        "Vladas": {
+            skills: {
+
+            }
+        },
+        "Indra":  {
+            skills: {
+
+            }
+        },
+        "Koval": [
+                ["Devops Architecture", "Enough"],
+                ["Delivery in time", "Not Enough"],
+            ],
+        },
     teams: [
         "Web development",
         "DevOPS"
+    ],
+    vladas: [
+        "str": "communication",
+        "weak": "initiative"
     ]
 }
 
 const store = createStore(RolesReducer, initialState, applyMiddleware(logger));
 
 function saveState() {
+    console.log(localStorage, "fdsfsdf")
     localStorage.setItem(NAMESPACE, JSON.stringify(this.getState()));
+    console.log(localStorage, "fdsfsdf")
 }
 
 store.subscribe(saveState.bind(store));
