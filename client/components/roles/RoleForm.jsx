@@ -1,8 +1,3 @@
-/*
-    Roles form
-
-    Q1. this.state.value not works. this.props.value works. Why?
-*/
 import React from 'react';
 import { connect } from 'react-redux'
 import { addX } from '../common/action.jsx'
@@ -27,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleSubmit: (event) => {
             event.preventDefault();
-            dispatch(addRole(event.target[0].value), "ADD_ROLE")
+            dispatch(addX(event.target[0].value, "ADD_ROLE"))
         }
     }
 }

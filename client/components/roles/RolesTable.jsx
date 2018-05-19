@@ -13,6 +13,7 @@ class RolesTable extends React.Component {
   }
 
   render() {
+    { console.log(this.state) }
     return <DragAndDropTable>
     {
       this.state.rows.map((r) => {

@@ -71,8 +71,10 @@ function logger({getState}) {
 }
 
 const store = createStore(appReducer, db.getState(), applyMiddleware(logger));
-// const store = createStore(TeamsReducer, db.getState('teams'), applyMiddleware(logger));
-let saveState = () => db.setState(store.getState())
+let saveState = () => {
+    db.setState(store.getState())
+    db.write() // TODO what is this async?
+}
 store.subscribe(saveState);
 
 ReactDOM.render(
