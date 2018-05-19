@@ -1,9 +1,12 @@
 import { connect } from 'react-redux'
 import React from "react"
+import {  Link  } from 'react-router-dom'
 
 import Row from "../common/Row.jsx"
 import EditableRow from "../common/EditableRow.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
+
+
 
 
 class TeamsTable extends React.Component {
@@ -13,7 +16,7 @@ class TeamsTable extends React.Component {
     {
       this.props.rows.map((r) => {
         return <Row key={r.id} id={r.id}>
-          <th>{r.name}</th>
+          <th><Link to={{ pathname: '/team/' + r.id }}>{r.name}</Link></th>
           <td><EditableRow value={r.value} /></td>
         </Row>
       })
@@ -24,7 +27,7 @@ class TeamsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { rows: state.teams.map((key, idx) =>  ({id: idx, name: key, value: ""}))}
+    return { rows: state.teams.map((key) =>  ({id: key.id, name: key.name, value: ""}))}
 }
 
 export default connect(mapStateToProps)(TeamsTable)

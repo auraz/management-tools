@@ -21,7 +21,7 @@ import fixture from 'components/common/fixture.jsx';
 const adapter = new LocalStorage('db')
 const db = low(adapter)
 
-// This is updated only when app is restarted.
+// This is updated only when localStorage.clear() is done.
 db.defaults(fixture).write()
 
 

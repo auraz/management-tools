@@ -26,7 +26,7 @@ class PersonsTable extends React.Component {
 const mapStateToProps = (state) => {
     // for persons_skills
     // return { rows:Object.keys(state.persons).map((key, idx) =>  ({id: idx, name: key, value: ""}))}
-    return { rows: state.persons.map((key, idx) =>  ({id: idx, name: key, value: ""}))}
+    return { rows: state.persons.map((key) =>  ({id: key.id, name: key.name, value: ""}))}
 }
 
 export default connect(mapStateToProps)(PersonsTable)

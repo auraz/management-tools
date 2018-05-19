@@ -24,7 +24,7 @@ class SkillsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-   return { rows: state.skills.map((key, idx) =>  ({id: idx, name: key, value: ""}))}
+   return { rows: state.skills.map((key) =>  ({id: key.id, name: key.name, value: ""}))}
 }
 
 export default connect(mapStateToProps)(SkillsTable)

@@ -1,6 +1,5 @@
-/* ./client/components/App.jsx */
 import React from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'
@@ -14,6 +13,7 @@ import RolesTable from './roles/RolesTable.jsx'
 import RoleForm from './roles/RoleForm.jsx'
 import TeamsTable from './teams/TeamsTable.jsx'
 import TeamForm from './teams/TeamForm.jsx'
+import TeamView from './teams/TeamView.jsx'
 
 import ErrorBoundary from './common/ErrorBoundary.jsx'
 import { TopNav, LeftNav } from './LayoutHelpers.jsx'
@@ -28,6 +28,7 @@ const routes = [
   },
   {
     path: '/teams',
+    exact: true,
     title: "Teams",
     component: () => <div><h2>Teams</h2><TeamForm /><TeamsTable /></div>
   },
@@ -47,10 +48,15 @@ const routes = [
     component: () => <div><h2>Roles</h2><RoleForm /><RolesTable /></div>
   },
   {
-    path: '/test',
-    title: "Koval",
-    component: () => <div><h2>Koval</h2><PersonalSkillsTable /></div>
+    path: '/team/:id',
+    title: "Team",
+    component: TeamView
   }
+  // {
+  //   path: '/test',
+  //   title: "Koval",
+  //   component: () => <div><h2>Koval</h2><PersonalSkillsTable /></div>
+  // },
 ]
 
 
