@@ -1,10 +1,31 @@
-import DragAndDropTable from "../common/DragAndDropTable.jsx"
 import { connect } from 'react-redux'
+import React from "react"
 
-class PersonsTable extends DragAndDropTable{
-    componentWillMount() {
-        this.setState({rows: this.props.rows})
+import Row from "../common/Row.jsx"
+import EditableRow from "../common/EditableRow.jsx"
+import DragAndDropTable from "../common/DragAndDropTable.jsx"
+
+
+class PersonsTable extends React.Component {
+  componentWillMount() {
+    this.setState({
+      rows: this.props.rows
+    })
+  }
+
+  render() {
+    return <DragAndDropTable>
+    {
+      this.state.rows.map((r) => {
+        return <Row key={r.id} id={r.id}>
+          <th>{r.name}</th>
+          <td><EditableRow value={r.value} /></td>
+        </Row>
+      })
     }
+    </DragAndDropTable>
+  }
+
 }
 
 const mapStateToProps = (state) => {

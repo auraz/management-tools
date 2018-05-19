@@ -27,7 +27,9 @@ class DragAndDropTable extends React.Component{
     render() {
         return (
             <table className="table table-striped">
+
                 <tbody>{React.Children.map(this.state.rows, (child) => {
+                    {/*debugger;*/}
                     return React.cloneElement(child, {
                         moveRow: this.moveRow
                     })

@@ -1,8 +1,3 @@
-/*
-    Roles form
-
-    Q1. this.state.value not works. this.props.value works. Why?
-*/
 import React from 'react';
 import { connect } from 'react-redux'
 import { addX } from '../common/action.jsx'
