@@ -14,7 +14,6 @@ class RolesTable extends React.Component {
          this.props.rows.map((r) => {
           return <Row key={r.id} id={r.id}>
             <th>{r.name}</th>
-            <td><EditableRow value={r.value} /></td>
           </Row>
         })
       }
@@ -24,7 +23,7 @@ class RolesTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { rows: state.roles.map((key, idx) =>  ({id: idx, name: key, value: ""}))}
+    return { rows: state.roles.map((key) =>  ({id: key.id, name: key.name}))}
 }
 
 export default connect(mapStateToProps)(RolesTable)
