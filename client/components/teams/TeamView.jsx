@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import React from "react"
+import { Link } from 'react-router-dom'
 
 
 import Row from "../common/Row.jsx"
@@ -30,7 +31,7 @@ class TeamView extends React.Component {
       {
       this.filter_by_team(this.props.rows).map((r) => {
         return <Row key={r.id} id={r.id}>
-             <th>{r.name}</th>
+             <th><Link to={{ pathname: '/person/' + r.person_id }}>{r.name}</Link></th>
           <td><EditableRow value={r.value} /></td>
         </Row>
       })
@@ -48,6 +49,7 @@ const mapStateToProps = (state) => {
       rows: state.persons_teams.map((key) =>  ({
         id: key.id,
         team_id: key.team_id,
+        person_id: key.person_id,
         name: get_person_name_by_id(state, key.person_id),
         value: ""
       }))

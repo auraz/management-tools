@@ -27,7 +27,8 @@ let fixture = {
     { id: 7, name: "Communication" },
     { id: 8, name: "Initiative" },
     { id: 9, name: "Devops Architecture" },
-    { id: 10, name: "Delivery in time" }
+    { id: 10, name: "Delivery in time" },
+    { id: 11, name: "Architecture" }
   ],
   "teams": [
     { id: 1, name: "Web development"},
@@ -44,6 +45,23 @@ let fixture = {
     { id: 4, name:"Lead"           }
   ],
   "persons_skills": [
+      { id: 1, person_id: 1, skill_id: 1, level_id: 1 },
+      { id: 2, person_id: 1, skill_id: 4, level_id: 2 },
+      { id: 3, person_id: 1, skill_id: 5, level_id: 2 },
+      { id: 5, person_id: 1, skill_id: 7, level_id: 1 },
+      { id: 6, person_id: 1, skill_id: 8, level_id: 1 },
+      { id: 7, person_id: 1, skill_id: 10, level_id: 2 },
+      { id: 8, person_id: 1, skill_id: 11, level_id: 2 },
+
+      { id: 9, person_id:  2, skill_id: 1, level_id: 1 },
+      { id: 10, person_id: 2, skill_id: 4, level_id: 2 },
+      { id: 11, person_id: 2, skill_id: 7, level_id: 2 },
+      { id: 12, person_id: 2, skill_id: 8, level_id: 2 },
+      { id: 13, person_id: 2, skill_id: 9, level_id: 2 },
+      { id: 14, person_id: 2, skill_id: 11, level_id: 1 },
+
+      { id: 15, person_id: 3, skill_id: 9, level_id: 1 },
+      { id: 16, person_id: 3, skill_id: 10, level_id: 2 }
   ],
   "persons_teams": [
     { id: 1, person_id: 1, team_id: 1 },

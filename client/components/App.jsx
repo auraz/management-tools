@@ -6,11 +6,14 @@ import HTML5Backend from 'react-dnd-html5-backend'
 
 import SkillsTable from './skills/SkillsTable.jsx'
 import SkillForm from './skills/SkillForm.jsx'
+
 import PersonForm from './persons/PersonForm.jsx'
 import PersonsTable from './persons/PersonsTable.jsx'
-import PersonalSkillsTable from './persons/PersonalSkillsTable.jsx'
+import PersonView from './persons/PersonView.jsx'
+
 import RolesTable from './roles/RolesTable.jsx'
 import RoleForm from './roles/RoleForm.jsx'
+
 import TeamsTable from './teams/TeamsTable.jsx'
 import TeamForm from './teams/TeamForm.jsx'
 import TeamView from './teams/TeamView.jsx'
@@ -51,12 +54,12 @@ const routes = [
     path: '/team/:id',
     title: "Team",
     component: TeamView
+  },
+  {
+    path: '/person/:id',
+    title: "Person",
+    component: PersonView
   }
-  // {
-  //   path: '/test',
-  //   title: "Koval",
-  //   component: () => <div><h2>Koval</h2><PersonalSkillsTable /></div>
-  // },
 ]
 
 
