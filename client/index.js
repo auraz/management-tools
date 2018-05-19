@@ -22,39 +22,51 @@ const db = low(adapter)
 
 // Should be valid JSON, otherwise localStorage did not updated.
 db.defaults({
-        "roles": [
-            "Developer",
-            "DevOPS",
-            "QA",
-            "Architect",
-            "Lead",
-            "Product Owner",
-            "Project Coordinator",
-            "Team Coordinator",
-            "Test 3"
-        ],
-        "grades": [
-            "Junior",
-            "Middle",
-            "Senior",
-            "Lead"
-        ],
-        "persons": {
-            "Vladas": [
-                ["Communication", "Enough"],
-                ["Initiative", "Not Enough"]
-            ],
-            "Indra":  [],
-            "Koval": [
-                    ["Devops Architecture", "Enough"],
-                    ["Delivery in time", "Not Enough"]
-                ]
-            },
-        "teams": [
-            "Web development",
-            "DevOPS"
-        ],
-        "skills": ["Javascript", "Python", "Django", "React", "Redux", "Php"]
+  "roles": [
+    "Developer",
+    "DevOPS",
+    "QA",
+    "Architect",
+    "Lead",
+    "Product Owner",
+    "Project Coordinator",
+    "Team Coordinator",
+  ],
+  "grades": [
+      "Junior",
+      "Middle",
+      "Senior",
+      "Lead"
+  ],
+  "persons": [
+      "Vladas",
+      "Indra",
+      "Alex Koval"
+  ],
+  "persons_skills": {
+    "Vladas": [
+      ["Communication", "Enough"],
+      ["Initiative", "Not Enough"]
+    ],
+    "Indra":  [
+    ],
+    "Koval": [
+      ["Devops Architecture", "Enough"],
+      ["Delivery in time", "Not Enough"]
+    ]
+  },
+  "teams": [
+    "Web development",
+    "DevOPS"
+  ],
+  "skills": [
+    "Javascript",
+    "Python",
+    "Django",
+    "React",
+    "Redux",
+    "Php"
+  ]
 }).write()
 
 

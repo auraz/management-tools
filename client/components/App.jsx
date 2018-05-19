@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/teams',
     title: "Teams",
-    component: () => <div><h2>Teams<TeamForm /><TeamsTable /></h2></div>
+    component: () => <div><h2>Teams</h2><TeamForm /><TeamsTable /></div>
   },
   {
     path: '/persons',
@@ -44,7 +44,7 @@ const routes = [
   {
     path: '/roles',
     title: "Roles",
-    component: () => <div className="row">Roles<RoleForm /><RolesTable /></div>
+    component: () => <div><h2>Roles</h2><RoleForm /><RolesTable /></div>
   },
   {
     path: '/test',
