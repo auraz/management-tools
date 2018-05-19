@@ -8,21 +8,16 @@ import DragAndDropTable from "../common/DragAndDropTable.jsx"
 
 class RolesTable extends React.Component {
 
-  componentWillMount() {
-    this.setState({rows: this.props.rows})
-  }
-
   render() {
-    { console.log(this.state) }
     return <DragAndDropTable>
-    {
-      this.state.rows.map((r) => {
-        return <Row key={r.id} id={r.id}>
-          <th>{r.name}</th>
-          <td><EditableRow value={r.value} /></td>
-        </Row>
-      })
-    }
+      {
+         this.props.rows.map((r) => {
+          return <Row key={r.id} id={r.id}>
+            <th>{r.name}</th>
+            <td><EditableRow value={r.value} /></td>
+          </Row>
+        })
+      }
     </DragAndDropTable>
   }
 

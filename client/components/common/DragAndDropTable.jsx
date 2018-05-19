@@ -7,10 +7,6 @@ class DragAndDropTable extends React.Component{
         this.moveRow = this.moveRow.bind(this);
     }
 
-    componentWillMount() {
-        this.setState({rows: this.props.children})
-    }
-
     moveRow(id, afterId) {
         let rows = this.state.rows.concat([])
         let currentRow = rows.filter((r) => r.props.id === id)[0];
@@ -27,9 +23,7 @@ class DragAndDropTable extends React.Component{
     render() {
         return (
             <table className="table table-striped">
-
-                <tbody>{React.Children.map(this.state.rows, (child) => {
-                    {/*debugger;*/}
+                <tbody>{React.Children.map(this.props.children, (child) => {
                     return React.cloneElement(child, {
                         moveRow: this.moveRow
                     })
