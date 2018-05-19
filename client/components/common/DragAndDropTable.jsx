@@ -8,7 +8,7 @@ class DragAndDropTable extends React.Component{
     }
 
     moveRow(id, afterId) {
-        let rows = this.state.rows.concat([])
+        let rows = this.props.children
         let currentRow = rows.filter((r) => r.props.id === id)[0];
         let afterRow = rows.filter((r) => r.props.id === afterId)[0];
         let currentRowIndex = rows.indexOf(currentRow);
@@ -32,5 +32,6 @@ class DragAndDropTable extends React.Component{
         );
     }
 }
+
 
 export default DragAndDropTable
