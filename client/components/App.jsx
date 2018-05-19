@@ -32,8 +32,8 @@ const routes = [
     component: () => <div><h2>Teams<TeamForm /><TeamsTable /></h2></div>
   },
   {
-    path: '/people',
-    title: "People",
+    path: '/persons',
+    title: "Persons",
     component: () => <div><h2>People</h2><PersonForm /><PersonsTable /></div>
   },
   {

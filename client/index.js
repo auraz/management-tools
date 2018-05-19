@@ -11,7 +11,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 
 import App from 'components/App.jsx';
-import RolesReducer from 'components/common/reducer.jsx'
+import appReducer from 'components/common/reducer.jsx'
 
 import low from 'lowdb'
 import LocalStorage from 'lowdb/adapters/LocalStorage'
@@ -53,7 +53,8 @@ db.defaults({
         "teams": [
             "Web development",
             "DevOPS"
-        ]
+        ],
+        "skills": ["Javascript", "Python", "Django", "React", "Redux", "Php"]
 }).write()
 
 
@@ -69,10 +70,10 @@ function logger({getState}) {
     }
 }
 
-const store = createStore(RolesReducer, db.getState(), applyMiddleware(logger));
+const store = createStore(appReducer, db.getState(), applyMiddleware(logger));
 // const store = createStore(TeamsReducer, db.getState('teams'), applyMiddleware(logger));
-let saveState = () => db.setState(store.getState())  // why to dot write store.getState()?
-store.subscribe(saveState.bind(store));
+let saveState = () => db.setState(store.getState())
+store.subscribe(saveState);
 
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,
