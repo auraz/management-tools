@@ -7,16 +7,11 @@ import DragAndDropTable from "../common/DragAndDropTable.jsx"
 
 
 class PersonsTable extends React.Component {
-  componentWillMount() {
-    this.setState({
-      rows: this.props.rows
-    })
-  }
 
   render() {
     return <DragAndDropTable>
     {
-      this.state.rows.map((r) => {
+      this.props.rows.map((r) => {
         return <Row key={r.id} id={r.id}>
           <th>{r.name}</th>
           <td><EditableRow value={r.value} /></td>
@@ -29,7 +24,7 @@ class PersonsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { rows:Object.keys(state.persons).map((role, idx) =>  ({id: idx, name: role, value: ""}))}
+    return { rows:Object.keys(state.persons).map((key, idx) =>  ({id: idx, name: key, value: ""}))}
 }
 
 export default connect(mapStateToProps)(PersonsTable)

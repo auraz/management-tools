@@ -8,23 +8,10 @@ import DragAndDropTable from "../common/DragAndDropTable.jsx"
 
 class SkillsTable extends React.Component {
 
-  componentWillMount() {
-    this.setState(
-      {rows: [
-        {id: 1, name: "Javascript", value: 9},
-        {id: 2, name: "Python", value: 7},
-        {id: 3, name: "Django", value: 7},
-        {id: 4, name: "React", value: 7},
-        {id: 5, name: "Redux", value: 5},
-        {id: 6, name: "Php", value: 3},
-      ]}
-    )
-  }
-
   render() {
     return <DragAndDropTable>
     {
-      this.state.rows.map((r) => {
+      this.props.rows.map((r) => {
         return <Row key={r.id} id={r.id}>
           <th>{r.name}</th>
           <td><EditableRow value={r.value} /></td>
@@ -34,7 +21,10 @@ class SkillsTable extends React.Component {
     </DragAndDropTable>
   }
 
-
 }
 
-export default SkillsTable
+const mapStateToProps = (state) => {
+   return { rows: state.skills.map((key, idx) =>  ({id: idx, name: key, value: ""}))}
+}
+
+export default connect(mapStateToProps)(SkillsTable)
