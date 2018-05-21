@@ -30,7 +30,7 @@ class PersonView extends React.Component {
       this.filter_by_person(this.props.rows).map((r) => {
         return <Row key={r.id} id={r.id}>
              <th>{r.skill_name}</th>
-          <td><EditableRow value={r.level} /></td>
+          <td><EditableRow value={r.level} {...this.props} person_id={r.person_id} skill_id={r.skill_id} /></td>
         </Row>
       })
     }

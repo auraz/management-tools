@@ -1,6 +1,8 @@
 import React from "react"
+import { connect } from 'react-redux'
+import { addX } from './action.jsx'
 
-class EditableRow extends React.Component{
+class EditableRow_ extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -21,6 +23,7 @@ class EditableRow extends React.Component{
             draft: null,
             editMode: false,
         });
+        this.props.handleSaveRow(this.props.person_id, this.props.skill_id, this.state.draft);
         event.preventDefault();
     }
 
@@ -46,7 +49,7 @@ class EditableRow extends React.Component{
         if (this.state.editMode) {
             return <div tabIndex="-1">
                 <select type="number" value={this.state.draft || this.state.value} onChange={this.handleChange}>
-                    {["Enough", "Not Enough"].map((i) => <option value={i} key={i}>{i}</option>)}
+                    {["Good", "Need Improve"].map((i, idx) => <option value={idx+1} key={i}>{i}</option>)}
                 </select>&nbsp;
                 <small>
                     <a href="#" onClick={this.handleSave}>Save</a>&nbsp;
@@ -59,4 +62,18 @@ class EditableRow extends React.Component{
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleSaveRow: (person_id, skill_id, level_id) => {
+            // value is { person_id: 1, skill_id: 2, level_id: 3 }
+            dispatch(addX( { person_id: person_id, skill_id: skill_id, level_id: level_id }, "UPDATE_SKILL_LEVEL"))
+        }
+    }
+}
+
+const EditableRow = connect(null, mapDispatchToProps)(EditableRow_)
+
 export default EditableRow
+
+
+
