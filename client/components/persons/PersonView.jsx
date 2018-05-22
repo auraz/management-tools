@@ -35,7 +35,7 @@ class PersonView extends React.Component {
             this.filter_by_person(this.props.strength_rows).map((r) => {
               return <Row key={r.id} id={r.id}>
                    <th>{r.param_name}</th>
-                <td><EditableParamRow value={r.level} {...this.props} person_id={r.person_id} param_id={r.param_id} param_tabl="strengths" /></td>
+                <td><EditableParamRow value={r.level} {...this.props} person_id={r.person_id} param_id={r.param_id} param_table="strengths" formMode="textInput"/></td>
               </Row>
             })
             }
@@ -47,7 +47,7 @@ class PersonView extends React.Component {
             this.filter_by_person(this.props.weakness_rows).map((r) => {
               return <Row key={r.id} id={r.id}>
                    <th>{r.param_name}</th>
-                <td><EditableParamRow value={r.level} {...this.props} person_id={r.person_id} param_id={r.param_id} param_tabl="weaknesses" /></td>
+                <td><EditableParamRow value={r.level} {...this.props} person_id={r.person_id} param_id={r.param_id} param_table="weaknesses" formMode="textInput"/></td>
               </Row>
             })
           }
