@@ -2,10 +2,10 @@ import { connect } from 'react-redux'
 import React from "react"
 
 import Row from "../common/Row.jsx"
-import EditableRow from "../common/EditableRow.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
-
 import { get_skill_name_by_id, get_level_name_by_id } from "../common/db_helpers.jsx"
+
+import EditablePersonSkillsRow from "./EditablePersonSkillsRow.jsx"
 
 
 class PersonView extends React.Component {
@@ -30,7 +30,7 @@ class PersonView extends React.Component {
       this.filter_by_person(this.props.rows).map((r) => {
         return <Row key={r.id} id={r.id}>
              <th>{r.skill_name}</th>
-          <td><EditableRow value={r.level} {...this.props} person_id={r.person_id} skill_id={r.skill_id} /></td>
+          <td><EditablePersonSkillsRow value={r.level} {...this.props} person_id={r.person_id} skill_id={r.skill_id} /></td>
         </Row>
       })
     }

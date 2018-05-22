@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 import Row from "../common/Row.jsx";
 import EditableRow from "../common/EditableRow.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";

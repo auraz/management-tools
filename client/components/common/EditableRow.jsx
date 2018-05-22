@@ -23,7 +23,7 @@ class EditableRow_ extends React.Component{
             draft: null,
             editMode: false,
         });
-        this.props.handleSaveRow(this.props.person_id, this.props.skill_id, this.state.draft);
+        this.props.handleSaveRow(...this.props.customSave(parseInt(this.state.draft)));
         event.preventDefault();
     }
 
@@ -64,9 +64,8 @@ class EditableRow_ extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleSaveRow: (person_id, skill_id, level_id) => {
-            // value is { person_id: 1, skill_id: 2, level_id: 3 }
-            dispatch(addX( { person_id: person_id, skill_id: skill_id, level_id: level_id }, "UPDATE_SKILL_LEVEL"))
+        handleSaveRow: (payload, action) => {
+            dispatch(addX(payload, action))
         }
     }
 }
