@@ -6,7 +6,9 @@ import DragAndDropTable from "../common/DragAndDropTable.jsx"
 import { get_skill_name_by_id, get_level_name_by_id, get_param_name_by_id } from "../common/db_helpers.jsx"
 
 import EditablePersonSkillsRow from "./EditablePersonSkillsRow.jsx"
-import EditableParamRow from "./EditableParamRow.jsx"
+import EditableParamRow from "../parameters/EditableParamRow.jsx"
+import AddParameterAndAddToPersonForm from "../parameters/AddParameterAndAddToPersonForm.jsx"
+import AddSkillAndAddToPersonForm from "../skills/AddSkillAndAddToPersonForm.jsx"
 
 
 class PersonView extends React.Component {
@@ -40,6 +42,7 @@ class PersonView extends React.Component {
             })
             }
           </DragAndDropTable>
+          <AddParameterAndAddToPersonForm {...this.props} param_table="strengths" persons_param_table="persons_strengths" person_id={this.state.person_id} />
           </td>
           <td>
             <DragAndDropTable>
@@ -52,6 +55,7 @@ class PersonView extends React.Component {
             })
           }
           </DragAndDropTable>
+          <AddParameterAndAddToPersonForm {...this.props} param_table="weaknesses" persons_param_table="persons_weaknesses" person_id={this.state.person_id} />
           </td></tr>
         </tbody>
       </table>
@@ -67,6 +71,7 @@ class PersonView extends React.Component {
       })
     }
     </DragAndDropTable>
+    <AddSkillAndAddToPersonForm {...this.props} person_id={this.state.person_id} />
     </div>
   )
   }

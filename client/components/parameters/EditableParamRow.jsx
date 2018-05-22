@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import React from "react"
 import EditableRow from "../common/EditableRow.jsx";
 
-class EditablePersonRow extends React.Component{
+class EditableParamRow extends React.Component{
 
   constructor(props) {
     super(props);
@@ -16,7 +16,7 @@ class EditablePersonRow extends React.Component{
   customSave(name) {
     return  [
       { id: this.state.param_id, name: name, param_table: this.state.param_table },
-      "UPDATE_PARAM_NAME"
+      "UPDATE_PARAMETER_NAME"
     ]
   }
 
@@ -26,4 +26,4 @@ class EditablePersonRow extends React.Component{
 
 }
 
-export default EditablePersonRow
+export default EditableParamRow
