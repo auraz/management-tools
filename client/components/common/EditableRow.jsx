@@ -46,7 +46,7 @@ class EditableRow_ extends React.Component {
   }
 
   renderInput() {
-    if (this.props.formMode === "undefined") {
+    if (this.props.formMode === undefined) {
       return (
         <select
           type="number"
