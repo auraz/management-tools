@@ -3,6 +3,17 @@ import {combineReducers} from "redux";
 import * as constants from './action.jsx';
 
 
+function updatePersonName(state, data) {
+  let persons = state.persons;
+  let output = persons.filter(
+    el => !(el.id == data.person_id)
+  )
+  output.push(
+    { id: data.person_id, name: data.person_name },
+  );
+  return {...state, "persons": output}
+}
+
 function updateSkillLevel(state, data) {
   let persons_skills = state.persons_skills;
   let output = persons_skills.filter(
@@ -22,6 +33,7 @@ function appReducer(state, action) {
     case constants.ADD_SKILL: return {...state, "skills": [...state.skills, action.payload],}
     case constants.ADD_TEAM: return {...state, "teams": [...state.teams, action.payload],}
     case constants.UPDATE_SKILL_LEVEL: return updateSkillLevel(state, action.payload)
+    case constants.UPDATE_PERSON_NAME: return updatePersonName(state, action.payload)
     default: return state
   }
 }

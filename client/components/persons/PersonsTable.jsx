@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 
 
 import Row from "../common/Row.jsx";
-import EditableRow from "../common/EditableRow.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
+
+import EditablePersonRow from "./EditablePersonRow.jsx"
 
 class PersonsTable extends React.Component {
   render() {
@@ -18,7 +19,7 @@ class PersonsTable extends React.Component {
                 <Link to={{ pathname: "/person/" + r.id }}>{r.name}</Link>
               </th>
               <td>
-                <EditableRow value={r.value} />
+                <EditablePersonRow value={""} {...this.props} person_id={r.id} formMode="textInput" />
               </td>
             </Row>
           );
@@ -32,7 +33,7 @@ const mapStateToProps = state => {
   // for persons_skills
   // return { rows:Object.keys(state.persons).map((key, idx) =>  ({id: idx, name: key, value: ""}))}
   return {
-    rows: state.persons.map(key => ({ id: key.id, name: key.name, value: "" }))
+    rows: state.persons.map(key => ({ id: key.id, name: key.name}))
   };
 };
 

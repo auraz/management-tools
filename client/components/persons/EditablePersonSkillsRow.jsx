@@ -15,7 +15,7 @@ class EditablePersonSkillsRow extends React.Component{
 
   customSave(level_id) {
     return  [
-      { person_id: this.state.person_id, skill_id: this.state.skill_id, level_id: level_id },
+      { person_id: this.state.person_id, skill_id: this.state.skill_id, level_id: parseInt(level_id) },
       "UPDATE_SKILL_LEVEL"
     ]
   }
