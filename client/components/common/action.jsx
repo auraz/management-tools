@@ -7,6 +7,7 @@ export const UPDATE_PERSON_NAME = "UPDATE_PERSON_NAME";
 export const UPDATE_ROLE_NAME = "UPDATE_ROLE_NAME";
 export const UPDATE_SKILL_NAME = "UPDATE_SKILL_NAME";
 export const UPDATE_TEAM_NAME = "UPDATE_TEAM_NAME";
+export const UPDATE_PARAM_NAME = "UPDATE_PARAM_NAME";
 
 export function addX(params, type){
     return {

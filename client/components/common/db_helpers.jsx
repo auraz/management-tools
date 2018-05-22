@@ -10,3 +10,7 @@ export function get_skill_name_by_id(state, id) {
 export function get_level_name_by_id(state, id) {
   return state.levels.find(el => el.id == id).name;
 }
+
+export function get_param_name_by_id(state, id, table_name) {
+  return state[table_name].find(el => el.id == id).name;
+}

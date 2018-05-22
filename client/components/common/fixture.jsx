@@ -67,7 +67,29 @@ let fixture = {
     { id: 1, person_id: 1, team_id: 1 },
     { id: 2, person_id: 2, team_id: 1 },
     { id: 3, person_id: 3, team_id: 2 }
+  ],
+  "persons_strengths": [
+    { id: 1, person_id: 1, param_id: 1 },
+    { id: 2, person_id: 2, param_id: 2 },
+    { id: 3, person_id: 3, param_id: 3 }
+  ],
+  "persons_weaknesses": [
+    { id: 1, person_id: 1, param_id: 1 },
+    { id: 2, person_id: 2, param_id: 2 },
+    { id: 3, person_id: 3, param_id: 3 }
+  ],
+  "weaknesses": [
+    { id: 1, name: "Architecture" },
+    { id: 2, name: "No lean approach" },
+    { id: 3, name: "Stubborn sometimes" }
+  ],
+  "strengths": [
+    { id: 1, name: "Openness" },
+    { id: 2, name: "Deep thinking" },
+    { id: 3, name: "Experience" }
   ]
+
 }
+
 
 export default fixture
