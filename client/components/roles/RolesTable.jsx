@@ -2,8 +2,9 @@ import { connect } from 'react-redux'
 import React from "react"
 
 import Row from "../common/Row.jsx"
-import EditableRow from "../common/EditableRow.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
+
+import EditableRoleRow from "./EditableRoleRow.jsx"
 
 
 class RolesTable extends React.Component {
@@ -14,6 +15,9 @@ class RolesTable extends React.Component {
          this.props.rows.map((r) => {
           return <Row key={r.id} id={r.id}>
             <th>{r.name}</th>
+            <td>
+              <EditableRoleRow value={""} {...this.props} role_id={r.id} formMode="textInput" />
+            </td>
           </Row>
         })
       }

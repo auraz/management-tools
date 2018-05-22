@@ -2,8 +2,9 @@ import { connect } from 'react-redux'
 import React from "react"
 
 import Row from "../common/Row.jsx"
-import EditableRow from "../common/EditableRow.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
+
+import EditablSkillRow from "./EditableSkillRow.jsx"
 
 
 class SkillsTable extends React.Component {
@@ -14,7 +15,9 @@ class SkillsTable extends React.Component {
       this.props.rows.map((r) => {
         return <Row key={r.id} id={r.id}>
           <th>{r.name}</th>
-          <td><EditableRow value={r.value} /></td>
+          <td>
+            <EditablSkillRow value={""} {...this.props} skill_id={r.id} formMode="textInput" />
+          </td>
         </Row>
       })
     }

@@ -2,20 +2,20 @@ import { connect } from 'react-redux'
 import React from "react"
 import EditableRow from "../common/EditableRow.jsx";
 
-class EditablePersonRow extends React.Component{
+class EditableTeamRow extends React.Component{
 
   constructor(props) {
     super(props);
     this.state = {
-      person_id: this.props.person_id,
+      role_id: this.props.role_id,
     }
     this.customSave = this.customSave.bind(this);
   }
 
   customSave(name) {
     return  [
-      { id: this.state.person_id, name: name },
-      "UPDATE_PERSON_NAME"
+      { id: this.state.role_id, name: name },
+      "UPDATE_ROLE_NAME"
     ]
   }
 
@@ -25,4 +25,4 @@ class EditablePersonRow extends React.Component{
 
 }
 
-export default EditablePersonRow
+export default EditableTeamRow

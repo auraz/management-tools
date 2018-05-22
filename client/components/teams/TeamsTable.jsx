@@ -3,8 +3,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Row from "../common/Row.jsx";
-import EditableRow from "../common/EditableRow.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
+
+import EditableTeamRow from "./EditableTeamRow.jsx";
+
 
 class TeamsTable extends React.Component {
   render() {
@@ -17,8 +19,10 @@ class TeamsTable extends React.Component {
                 <Link to={{ pathname: "/team/" + r.id }}>
                 { r.name  }
                 </Link>
-                 <EditableRow value={""} />
               </th>
+              <td>
+                <EditableTeamRow value={""} {...this.props} team_id={r.id} formMode="textInput" />
+              </td>
             </Row>
           );
         })}
