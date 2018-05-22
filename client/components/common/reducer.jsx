@@ -28,10 +28,10 @@ function updateSkillLevel(state, data) {
 
 function appReducer(state, action) {
   switch (action.type) {
-    case constants.ADD_PERSON: return {...state, "persons": [...state.persons, action.payload],}
-    case constants.ADD_ROLE: return {...state, "roles": [...state.roles, action.payload],}
-    case constants.ADD_SKILL: return {...state, "skills": [...state.skills, action.payload],}
-    case constants.ADD_TEAM: return {...state, "teams": [...state.teams, action.payload],}
+    case constants.ADD_PERSON: return {...state, "persons": [...state.persons, { id: state.persons.length+1, name: action.payload} ]}
+    case constants.ADD_ROLE: return {...state, "roles": [...state.roles, { id: state.roles.length+1, name: action.payload} ]}
+    case constants.ADD_SKILL: return {...state, "skills": [...state.skills, { id: state.skills.length+1, name: action.payload} ]}
+    case constants.ADD_TEAM: return {...state, "teams": [...state.teams, { id: state.teams.length+1, name: action.payload} ]}
     case constants.UPDATE_SKILL_LEVEL: return updateSkillLevel(state, action.payload)
     case constants.UPDATE_PERSON_NAME: return updateModelName(state, 'persons', action.payload)
     case constants.UPDATE_ROLE_NAME: return updateModelName(state, 'roles', action.payload)
