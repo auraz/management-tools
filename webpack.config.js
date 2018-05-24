@@ -3,6 +3,7 @@ Documentation
 */
 var webpack = require("webpack");
 const path = require('path');
+var ProgressBar = require('react-progressbar.js')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -42,6 +43,7 @@ module.exports = {
         "Tether": 'tether',
         "JSON": 'JSON',
         "_": "lodash",
+        "ProgressBar": 'react-progressbar.js',
     }),
     new CleanWebpackPlugin(["dist"]), // Remove old hashed js files on rebuilding.
   ],
