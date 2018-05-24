@@ -23,32 +23,36 @@ import { TopNav, LeftNav } from './LayoutHelpers.jsx'
 
 
 const routes = [
-  {
-    path: '/',
-    exact: true,
-    title: "Overview",
-    component: () => <h2>Overview</h2>
-  },
+  // {
+  //   path: '/',
+  //   exact: true,
+  //   title: "Overview",
+  //   component: () => <h2>Overview</h2>
+  // },
   {
     path: '/teams',
     exact: true,
     title: "Teams",
-    component: () => <div><h2>Teams</h2><TeamForm /><TeamsTable /></div>
+    component: () => <div><h2>Teams</h2><TeamForm /><TeamsTable /></div>,
+    type: 'LeftNav'
   },
   {
     path: '/persons',
     title: "Persons",
-    component: () => <div><h2>People</h2><PersonForm /><PersonsTable /></div>
+    component: () => <div><h2>People</h2><PersonForm /><PersonsTable /></div>,
+    type: 'LeftNav'
   },
   {
     path: '/skills',
     title: "Skills",
-    component: () => <div><h2>Skills</h2><SkillForm /><SkillsTable /></div>
+    component: () => <div><h2>Skills</h2><SkillForm /><SkillsTable /></div>,
+    type: 'LeftNav'
   },
   {
     path: '/roles',
     title: "Roles",
-    component: () => <div><h2>Roles</h2><RoleForm /><RolesTable /></div>
+    component: () => <div><h2>Roles</h2><RoleForm /><RolesTable /></div>,
+    type: 'LeftNav'
   },
   {
     path: '/team/:id',
@@ -64,6 +68,7 @@ const routes = [
 
 
 class App extends React.Component {
+
   render() {
     return (
         <Router basename="">
@@ -71,7 +76,7 @@ class App extends React.Component {
                 <TopNav/>
                 <div className="container-fluid">
                     <div className="row">
-                        <LeftNav>{routes}</LeftNav>
+                        <LeftNav>{routes.filter(e => e.type=='LeftNav')}</LeftNav>
                         <main className="col-sm-9 col-md-10 pt-3">
                             {routes.map((route, index) => (
                                 <Route
