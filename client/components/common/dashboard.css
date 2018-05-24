@@ -69,3 +69,11 @@ h1 {
 .progress {
   width: 300px;
 }
+
+.person-progress {
+  margin-left: 30px;
+}
+
+.person-progress-div{
+  margin-top: 20px;
+}
