@@ -38,12 +38,7 @@ module.exports = {
     HtmlWebpackPluginConfig,
     new  webpack.ProvidePlugin({
         $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery",
-        "Tether": 'tether',
-        "JSON": 'JSON',
         "_": "lodash",
-        "ProgressBar": 'react-progressbar.js',
     }),
     new CleanWebpackPlugin(["dist"]), // Remove old hashed js files on rebuilding.
   ],

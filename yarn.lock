@@ -1771,6 +1771,18 @@ defaults@^1.0.3:
   dependencies:
     clone "^1.0.2"
 
+defiant.js@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/defiant.js/-/defiant.js-1.4.4.tgz#313f3fd9e1c57c4c9d93bc464b40f7bb1bd3de0d"
+  dependencies:
+    x10 "git://github.com/hbi99/x10.js.git"
+
+defiant@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/defiant/-/defiant-1.4.5.tgz#8cc60dc865bd243a2d88afbe957eb3180e454f8c"
+  dependencies:
+    x10.js "^0.1.3"
+
 define-properties@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.2.tgz#83a73f2fea569898fb737193c8f873caf6d45c94"
@@ -3472,6 +3484,10 @@ jsesc@~0.5.0:
 json-loader@^0.5.4, json-loader@^0.5.7:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/json-loader/-/json-loader-0.5.7.tgz#dca14a70235ff82f0ac9a3abeb60d337a365185d"
+
+json-odm@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/json-odm/-/json-odm-0.2.4.tgz#0ded936cb089ff727c9fb85b53c41cae37dc2ed4"
 
 json-parse-better-errors@^1.0.0, json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   version "1.0.2"
@@ -7215,6 +7231,14 @@ write@^0.2.1:
   resolved "https://registry.yarnpkg.com/write/-/write-0.2.1.tgz#5fc03828e264cea3fe91455476f7a3c566cb0757"
   dependencies:
     mkdirp "^0.5.1"
+
+x10.js@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/x10.js/-/x10.js-0.1.3.tgz#d1d782122d6d322be915cb51fdaab1498ddcd1a5"
+
+"x10@git://github.com/hbi99/x10.js.git":
+  version "0.1.3"
+  resolved "git://github.com/hbi99/x10.js.git#5389ae6dd914527e53c83c1b1f7f77c8b5f82ca6"
 
 xdg-basedir@^3.0.0:
   version "3.0.0"

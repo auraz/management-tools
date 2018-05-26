@@ -15,6 +15,10 @@ class TeamsTable extends React.Component {
     return { width: team_health(this.props.persons_teams, this.props.persons_skills, team_id) }
   }
 
+  listRoles(team_id) {
+    return this.props.persons_teams.map((e, i) => <li className="list-group-item" key={i}>{e.id}</li>)
+  }
+
   render() {
     return (
       <DragAndDropTable>
@@ -25,15 +29,22 @@ class TeamsTable extends React.Component {
                 <Link to={{ pathname: "/team/" + r.id }}>
                 { r.name  }
                 </Link>
-              </th>
-              <td>
                 <EditableTeamRow value={""} {...this.props} team_id={r.id} formMode="textInput" />
-              </td>
+              </th>
               <td>
                 <div className="progress">
                     <div className="progress-bar bg-success" style={this.divStyle(r.id)}></div>
                 </div>
-              </td>
+                <a className="" data-toggle="collapse" href="#collapseRoles" role="button" aria-expanded="false" aria-controls="collapseRoles">Team roles
+                </a>
+                <div className="collapse" id="collapseRoles">
+                  <div className="card card-body">
+                    <ul className="list-group list-group-flush">
+                      { this.listRoles(r.id) }
+                    </ul>
+                  </div>
+                </div>
+                </td>
             </Row>
           );
         })}
