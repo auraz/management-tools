@@ -18,6 +18,9 @@ import LocalStorage from 'lowdb/adapters/LocalStorage'
 
 import fixture from 'components/common/fixture.jsx';
 
+import { initDb } from 'components/common/orm.jsx'
+
+
 const adapter = new LocalStorage('db')
 const db = low(adapter)
 
@@ -43,6 +46,8 @@ let saveState = () => {
     db.write() // TODO what is this async?
 }
 store.subscribe(saveState);
+
+initDb();
 
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,

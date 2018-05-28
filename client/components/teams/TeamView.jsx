@@ -1,60 +1,43 @@
-import { connect } from 'react-redux'
 import React from "react"
 import { Link } from 'react-router-dom'
 
-
 import Row from "../common/Row.jsx"
-import EditableRow from "../common/EditableRow.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
 
-import { get_person_name_by_id } from "../common/db_helpers.jsx"
+import { fetchTeam, fetchTeams, fetchPersonsInTeam } from "../common/dbActions"
 
 
 class TeamView extends React.Component {
 
   constructor(props) {
     super(props);
+    let team_id = parseInt(this.props.match.params.id)
     this.state = {
-      team_id: this.props.match.params.id,
+      team_id:team_id,
+      teams: fetchTeams(),
+      team_name: fetchTeam(team_id).name,
+      persons_in_team: fetchPersonsInTeam(team_id)
     }
-  }
-
-  filter_by_team(rows) {
-    return rows.filter(row => row.team_id == this.state.team_id)
   }
 
   render() {
     return (
       <div>
-      <h2>{ this.props.teams.find(el => el.id == this.state.team_id).name }</h2>
-      <DragAndDropTable>
-      {
-      this.filter_by_team(this.props.rows).map((r) => {
-        return <Row key={r.id} id={r.id}>
-             <th><Link to={{ pathname: '/person/' + r.person_id }}>{r.name}</Link></th>
-          <td><EditableRow value={r.value} /></td>
-        </Row>
-      })
-    }
-    </DragAndDropTable>
+        <h2>{ this.state.team_name }</h2>
+        <DragAndDropTable>
+        {
+          this.state.persons_in_team.map((r) => {
+            return <Row key={r.person_id} id={r.person_id}>
+                 <th><Link to={{ pathname: '/person/' + r.person_id }}>{r.name}</Link></th>
+            </Row>
+          })
+        }
+        </DragAndDropTable>
     </div>
-  )
+    )
   }
 
 }
 
-const mapStateToProps = (state) => {
-    return {
-      teams: state.teams,
-      rows: state.persons_teams.map((key) =>  ({
-        id: key.id,
-        team_id: key.team_id,
-        person_id: key.person_id,
-        name: get_person_name_by_id(state, key.person_id),
-        value: ""
-      }))
-    }
-}
 
-export default connect(mapStateToProps)(TeamView)
-
+export default TeamView
