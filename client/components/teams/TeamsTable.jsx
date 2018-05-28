@@ -39,7 +39,7 @@ class TeamsTable extends React.Component {
             <Row key={r.id} id={r.id}>
               <th>
                 <Link to={{ pathname: "/team/" + r.id }}>{ r.name }</Link>
-                <EditableTeamRow value={""} team_id={r.id} formMode="textInput" action={this.setState}/>
+                <EditableTeamRow value={""} team_id={r.id} formMode="textInput" action={ () => {this.setState() } } />
               </th>
               <td>
                 <div className="progress">

@@ -17,7 +17,7 @@ export function fetchPersonsInTeam(team_id) {
 }
 
 
-export function udpateModelName(model, data) {
-  let payload = alasql(`UPDATE ${model} SET name=${data.name} WHERE id=${data.id}`);
+export function updateModelName(model, id, name) {
+  let payload = alasql(`UPDATE DB.${model} SET name=${name} WHERE id=${id}`);
   return payload
 }

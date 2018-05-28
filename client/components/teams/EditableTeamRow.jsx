@@ -1,7 +1,7 @@
 import React from "react"
 import EditableRow from "../common/EditableRow.jsx";
 
-import { updateModelName } from "../common/dbActions.jsx"
+import { updateModelName } from "../common/dbActions"
 
 class EditableRoleRow extends React.Component{
 
@@ -14,8 +14,9 @@ class EditableRoleRow extends React.Component{
   }
 
   customSave(name) {
-    udpateModelName('teams',  { id: this.state.team_id, name: name })
+    updateModelName('teams', this.state.team_id, name )
     this.props.action()
+
   }
 
   render() {

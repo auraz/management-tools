@@ -23,7 +23,8 @@ class EditableRow_ extends React.Component {
       draft: null,
       editMode: false
     });
-    this.props.handleSaveRow(...this.props.customSave(this.state.draft));
+    // this.props.handleSaveRow(...this.props.customSave(this.state.draft));
+    this.props.customSave(this.state.draft);
     event.preventDefault();
   }
 
@@ -97,9 +98,9 @@ class EditableRow_ extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleSaveRow: (payload, action) => {
-      dispatch(addX(payload, action));
-    }
+    // handleSaveRow: (payload, action) => {
+    //   dispatch(addX(payload, action));
+    // }
   };
 };
 
