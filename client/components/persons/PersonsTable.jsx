@@ -18,7 +18,7 @@ class PersonsTable extends React.Component {
                 <Link to={{ pathname: "/person/" + r.id }}>{r.name}</Link>
               </th>
               <td>
-                <EditableParamRow value={""} model="persons" id={r.id} formMode="textInput" action={() => {this.setState()}} />
+                <EditableRow value="" model="persons" id={r.id} formMode="textInput" />
               </td>
             </Row>
           );
