@@ -25,16 +25,16 @@ export function initDb() {
   })
 
   alasql("CREATE TABLE IF NOT EXISTS DB.persons_teams (id INT IDENTITY, person_id INT, team_id INT)");
-  alasql(`INSERT INTO DB.persons_teams (name) VALUES (1, 1), (2, 1), (3, 2)`)
+  alasql(`INSERT INTO DB.persons_teams (person_id, team_id) VALUES (1, 1), (2, 1), (3, 2)`)
 
   alasql("CREATE TABLE IF NOT EXISTS DB.persons_skills (id INT IDENTITY, person_id INT, skill_id INT, level_id INT)");
-  alasql(`INSERT INTO DB.persons_skills (name) VALUES (1, 1, 1), (1, 4, 2), (1, 5, 2), (1, 7, 2), (2, 1, 1), (2, 4, 2), (3, 9, 1), (3, 10, 2)`)
+  alasql(`INSERT INTO DB.persons_skills (person_id, skill_id, level_id) VALUES (1, 1, 1), (1, 4, 2), (1, 5, 2), (1, 7, 2), (2, 1, 1), (2, 4, 2), (3, 9, 1), (3, 10, 2)`)
 
   alasql("CREATE TABLE IF NOT EXISTS DB.persons_strengths (id INT IDENTITY, person_id INT, param_id INT)");
-  alasql(`INSERT INTO DB.persons_strengths (name) VALUES (1, 1), (2, 2), (3, 3)`)
+  alasql(`INSERT INTO DB.persons_strengths (person_id, param_id) VALUES (1, 1), (2, 2), (3, 3)`)
 
   alasql("CREATE TABLE IF NOT EXISTS DB.persons_weaknesses (id INT IDENTITY, person_id INT, param_id INT)");
-  alasql(`INSERT INTO DB.persons_weaknesses (name) VALUES (1, 1), (2, 2), (3, 3)`)
+  alasql(`INSERT INTO DB.persons_weaknesses (person_id, param_id) VALUES (1, 1), (2, 2), (3, 3)`)
 }
 
 
