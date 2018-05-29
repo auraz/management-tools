@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import Row from "../common/Row.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
-import EditableParamRow from "../common/EditableParamRow.jsx";
+import EditableParamRow from "../common/EditableRow.jsx";
 
 
 class PersonsTable extends React.Component {

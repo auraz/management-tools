@@ -3,7 +3,7 @@ import React from "react"
 
 import Row from "../common/Row.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
-import EditableParamRow from "../common/EditableParamRow.jsx";
+import EditableRow from "../common/EditableRow.jsx";
 
 import { fetchModelAll, fetchPersonsInTeam } from "../common/models"
 
@@ -17,7 +17,7 @@ class SkillsTable extends React.Component {
         return <Row key={r.id} id={r.id}>
           <th>{r.name}</th>
           <td>
-            <EditableParamRow value={""} id={r.id} models="skills" formMode="textInput" action={() => {this.setState()}}/>
+            <EditableRow value="" id={r.id} model="skills" formMode="textInput" />
           </td>
         </Row>
       })

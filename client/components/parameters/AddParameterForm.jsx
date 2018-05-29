@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { addX } from '../common/action.jsx'
 
 
 class ParameterForm_ extends React.PureComponent {
@@ -23,7 +22,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleSubmit: (event, param_table) => {
             event.preventDefault();
-            dispatch(addX({param_table: param_table, name: event.target[0].value}, "ADD_PARAMETER"))
+            dispatch({
+              payload: {param_table: param_table, name: event.target[0].value},
+              type: "ADD_PARAMETER"
+            })
         }
     }
 }

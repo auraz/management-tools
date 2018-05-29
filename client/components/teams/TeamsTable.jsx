@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 import Row from "../common/Row.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
-import EditableParamRow from "../common/EditableParamRow.jsx";
-import { team_health } from "../common/db_helpers"
+import EditableRow from "../common/EditableRow.jsx";
+// import { team_health } from "../common/db_helpers"
 import { fetchModelAll, fetchPersonsInTeam } from "../common/models"
 
 
@@ -37,7 +37,7 @@ class TeamsTable extends React.Component {
             <Row key={r.id} id={r.id}>
               <th>
                 <Link to={{ pathname: "/team/" + r.id }}>{ r.name }</Link>
-                <EditableParamRow value={""} id={r.id} model="teams" formMode="textInput" action={() => {this.setState()}} />
+                <EditableRow  id={r.id} model="teams" value="" formMode="textInput" />
               </th>
               <td>
                 <div className="progress">

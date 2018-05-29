@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addX } from "./action.jsx";
+
 
 class EditableRow_ extends React.Component {
   constructor(props) {
@@ -23,8 +23,8 @@ class EditableRow_ extends React.Component {
       draft: null,
       editMode: false
     });
-    // this.props.handleSaveRow(...this.props.customSave(this.state.draft));
-    this.props.customSave(this.state.draft);
+
+    this.props.handleSaveRow({model: this.props.model, id: this.props.id, name: this.state.draft});
     event.preventDefault();
   }
 
@@ -98,9 +98,7 @@ class EditableRow_ extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // handleSaveRow: (payload, action) => {
-    //   dispatch(addX(payload, action));
-    // }
+    handleSaveRow: (payload) => dispatch({ payload: payload, type: "UPDATE_PARAM" })
   };
 };
 

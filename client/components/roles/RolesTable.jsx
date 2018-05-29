@@ -3,7 +3,7 @@ import React from "react"
 
 import Row from "../common/Row.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
-import EditableParamRow from "../common/EditableParamRow.jsx";
+import EditableRow from "../common/EditableRow.jsx";
 
 
 class RolesTable extends React.Component {
@@ -15,7 +15,7 @@ class RolesTable extends React.Component {
           return <Row key={r.id} id={r.id}>
             <th>{r.name}</th>
             <td>
-              <EditableParamRow value={""} model="roles" id={r.id} formMode="textInput" action={() => {this.setState()}} />
+              <EditableRow value="" model="roles" id={r.id} formMode="textInput" />
             </td>
           </Row>
         })

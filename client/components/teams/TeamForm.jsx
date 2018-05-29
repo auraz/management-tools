@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { addX } from '../common/action.jsx'
+
 
 class TeamsForm_ extends React.PureComponent {
 
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleSubmit: (event) => {
             event.preventDefault();
-            dispatch(addX(event.target[0].value, "ADD_TEAM"))
+            dispatch({payload: event.target[0].value, type: "ADD_TEAM"})
         }
     }
 }

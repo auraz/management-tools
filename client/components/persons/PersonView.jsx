@@ -3,7 +3,7 @@ import React from "react"
 
 import Row from "../common/Row.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
-import { get_skill_name_by_id, get_level_name_by_id, get_param_name_by_id, person_health } from "../common/db_helpers.jsx"
+// import { get_skill_name_by_id, get_level_name_by_id, get_param_name_by_id, person_health } from "../common/db_helpers.jsx"
 
 import EditablePersonSkillsRow from "./EditablePersonSkillsRow.jsx"
 import EditableParamRow from "../parameters/EditableParamRow.jsx"

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { addX } from '../common/action.jsx'
 
 
 class AddParameterAndAddToPersonForm_ extends React.PureComponent {
@@ -28,10 +27,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleSubmit: (event, param_table, persons_param_table, person_id) => {
             event.preventDefault();
-            dispatch(addX(
-              {param_table: param_table, persons_param_table: persons_param_table, person_id: person_id, name: event.target[0].value},
-              "ADD_PARAMETER_TO_PERSON")
-            )
+            dispatch({
+              payload: {param_table: param_table, persons_param_table: persons_param_table, person_id: person_id, name: event.target[0].value},
+              type: "ADD_PARAMETER_TO_PERSON"
+            })
         }
     }
 }

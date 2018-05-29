@@ -78,23 +78,29 @@ function addSkillToPerson(state, data){
 }
 
 function addPerson(state, name) {
-  models.insertPerson(name);
+  models.insertBaseModel('persons', name);
   return {...state, "persons": models.fetchModelAll('persons')}
 }
 
 function addRole(state, name) {
-  models.insertRole(name);
+  models.insertBaseModel('roles', name);
   return {...state, "roles": models.fetchModelAll('roles')}
 }
 
 function addSkill(state, name) {
-  models.insertSkill(name);
+  models.insertBaseModel('skills', name);
   return {...state, "skills": models.fetchModelAll('skills')}
 }
 
 function addTeam(state, name) {
-  models.insertTeam(name);
+  models.insertBaseModel('teams', name);
   return {...state, "teams": models.fetchModelAll('teams')}
+}
+
+function updateParam(state, payload) {
+  models.updateModelName(payload.model, payload.id, payload.name)
+  state[payload.model] = models.fetchModelAll(payload.model)
+  return {...state}
 }
 
 function appReducer(state, action) {
@@ -103,6 +109,7 @@ function appReducer(state, action) {
     case constants.ADD_ROLE: return addRole(state, action.payload)
     case constants.ADD_SKILL: return addSkill(state, action.payload)
     case constants.ADD_TEAM: return addTeam(state, action.payload)
+    case constants.UPDATE_PARAM: return updateParam(state, action.payload)
     case constants.UPDATE_SKILL_LEVEL: return updateSkillLevel(state, action.payload)
     case constants.UPDATE_PERSON_NAME: return updateModelName(state, 'persons', action.payload)
     case constants.UPDATE_ROLE_NAME: return updateModelName(state, 'roles', action.payload)
