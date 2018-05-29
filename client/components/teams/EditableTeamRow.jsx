@@ -1,7 +1,7 @@
 import React from "react"
 import EditableRow from "../common/EditableRow.jsx";
 
-import { updateModelName } from "../common/dbActions"
+import { updateModelName } from "../common/models"
 
 class EditableRoleRow extends React.Component{
 

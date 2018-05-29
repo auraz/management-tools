@@ -13,19 +13,8 @@ import { createStore, applyMiddleware } from 'redux'
 import App from 'components/App.jsx';
 import appReducer from 'components/common/reducer.jsx'
 
-import low from 'lowdb'
-import LocalStorage from 'lowdb/adapters/LocalStorage'
+import { initDb, fetchModelAll } from 'components/common/models.jsx'
 
-import fixture from 'components/common/fixture.jsx';
-
-import { initDb } from 'components/common/orm.jsx'
-
-
-const adapter = new LocalStorage('db')
-const db = low(adapter)
-
-// This is updated only when localStorage.clear() is done.
-db.defaults(fixture).write()
 
 
 function logger({getState}) {
@@ -40,14 +29,17 @@ function logger({getState}) {
     }
 }
 
-const store = createStore(appReducer, db.getState(), applyMiddleware(logger));
-let saveState = () => {
-    db.setState(store.getState())
-    db.write() // TODO what is this async?
-}
-store.subscribe(saveState);
-
 initDb();
+
+
+const store = createStore(appReducer, {}, applyMiddleware(logger));
+// let saveState = () => {
+//     db.setState(store.getState())
+//     db.write() // TODO what is this async?
+// }
+// store.subscribe(saveState);
+
+
 
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,

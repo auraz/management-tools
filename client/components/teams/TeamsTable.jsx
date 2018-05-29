@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Row from "../common/Row.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
 import { team_health } from "../common/db_helpers"
-import { fetchModelAll, fetchPersonsInTeam } from "../common/dbActions"
+import { fetchModelAll, fetchPersonsInTeam } from "../common/models"
 
 import EditableTeamRow from "./EditableTeamRow.jsx";
 

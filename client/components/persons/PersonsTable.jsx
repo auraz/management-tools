@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import Row from "../common/Row.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
-import { fetchModel } from "../common/dbActions"
+import { fetchModel } from "../common/models"
 
 import EditablePersonRow from "./EditablePersonRow.jsx"
 

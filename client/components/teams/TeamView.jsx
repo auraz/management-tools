@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Row from "../common/Row.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
 
-import { fetchModel, fetchModelAll, fetchPersonsInTeam } from "../common/dbActions"
+import { fetchModel, fetchModelAll, fetchPersonsInTeam } from "../common/models"
 
 
 class TeamView extends React.Component {

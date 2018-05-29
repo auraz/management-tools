@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import { insertTeam, fetchModelAll } from "./dbActions";
+import { insertTeam, fetchModelAll } from "./models";
 
 import * as constants from './action.jsx';
 
