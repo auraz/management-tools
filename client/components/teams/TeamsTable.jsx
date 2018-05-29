@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Row from "../common/Row.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
 import { team_health } from "../common/db_helpers"
-import { fetchTeams, fetchPersonsInTeam } from "../common/dbActions"
+import { fetchModelAll, fetchPersonsInTeam } from "../common/dbActions"
 
 import EditableTeamRow from "./EditableTeamRow.jsx";
 
@@ -16,7 +16,6 @@ class TeamsTable extends React.Component {
     super(props);
     this.state = {
       // team_id: this.props.match.params.id,
-      teams: fetchTeams(),
       // team_name: fetchTeam(this.state.team_id).name,
       // persons_in_team: fetchPersonsInTeam(this.state.team_id)
     }
@@ -34,7 +33,7 @@ class TeamsTable extends React.Component {
   render() {
     return (
       <DragAndDropTable>
-        {this.state.teams.map( r => {
+        {this.props.teams.map( r => {
           return (
             <Row key={r.id} id={r.id}>
               <th>
@@ -63,5 +62,8 @@ class TeamsTable extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+   return { teams: state.teams }
+}
 
-export default TeamsTable;
+export default connect(mapStateToProps)(TeamsTable)

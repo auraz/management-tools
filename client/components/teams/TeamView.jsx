@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Row from "../common/Row.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
 
-import { fetchTeam, fetchTeams, fetchPersonsInTeam } from "../common/dbActions"
+import { fetchModel, fetchModelAll, fetchPersonsInTeam } from "../common/dbActions"
 
 
 class TeamView extends React.Component {
@@ -14,8 +14,8 @@ class TeamView extends React.Component {
     let team_id = parseInt(this.props.match.params.id)
     this.state = {
       team_id:team_id,
-      teams: fetchTeams(),
-      team_name: fetchTeam(team_id).name,
+      teams: fetchModelAll('teams'),
+      team_name: fetchModel('teams', team_id).name,
       persons_in_team: fetchPersonsInTeam(team_id)
     }
   }
