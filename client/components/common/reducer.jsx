@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import { insertTeam, fetchModelAll } from "./models";
+import  * as models from "./models";
 
 import * as constants from './action.jsx';
 
@@ -77,16 +77,31 @@ function addSkillToPerson(state, data){
   return {...state}
 }
 
-function addTeam(state, team_name) {
-  insertTeam(team_name);
-  return {...state, "teams": fetchModelAll('teams')}
+function addPerson(state, name) {
+  models.insertPerson(name);
+  return {...state, "persons": models.fetchModelAll('persons')}
+}
+
+function addRole(state, name) {
+  models.insertRole(name);
+  return {...state, "roles": models.fetchModelAll('roles')}
+}
+
+function addSkill(state, name) {
+  models.insertSkill(name);
+  return {...state, "skills": models.fetchModelAll('skills')}
+}
+
+function addTeam(state, name) {
+  models.insertTeam(name);
+  return {...state, "teams": models.fetchModelAll('teams')}
 }
 
 function appReducer(state, action) {
   switch (action.type) {
-    case constants.ADD_PERSON: return {...state, "persons": [...state.persons, { id: state.persons.length+1, name: action.payload} ]}
-    case constants.ADD_ROLE: return {...state, "roles": [...state.roles, { id: state.roles.length+1, name: action.payload} ]}
-    case constants.ADD_SKILL: return {...state, "skills": [...state.skills, { id: state.skills.length+1, name: action.payload} ]}
+    case constants.ADD_PERSON: return addPerson(state, action.payload)
+    case constants.ADD_ROLE: return addRole(state, action.payload)
+    case constants.ADD_SKILL: return addSkill(state, action.payload)
     case constants.ADD_TEAM: return addTeam(state, action.payload)
     case constants.UPDATE_SKILL_LEVEL: return updateSkillLevel(state, action.payload)
     case constants.UPDATE_PERSON_NAME: return updateModelName(state, 'persons', action.payload)

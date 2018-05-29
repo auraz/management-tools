@@ -3,8 +3,9 @@ import React from "react"
 
 import Row from "../common/Row.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
+import EditableParamRow from "../common/EditableParamRow.jsx";
 
-import EditablSkillRow from "./EditableSkillRow.jsx"
+import { fetchModelAll, fetchPersonsInTeam } from "../common/models"
 
 
 class SkillsTable extends React.Component {
@@ -12,11 +13,11 @@ class SkillsTable extends React.Component {
   render() {
     return <DragAndDropTable>
     {
-      this.props.rows.map((r) => {
+      this.props.skills.map((r) => {
         return <Row key={r.id} id={r.id}>
           <th>{r.name}</th>
           <td>
-            <EditablSkillRow value={""} {...this.props} skill_id={r.id} formMode="textInput" />
+            <EditableParamRow value={""} id={r.id} models="skills" formMode="textInput" action={() => {this.setState()}}/>
           </td>
         </Row>
       })
@@ -27,7 +28,7 @@ class SkillsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-   return { rows: state.skills.map((key) =>  ({id: key.id, name: key.name, value: ""}))}
+   return { skills: state.skills }
 }
 
 export default connect(mapStateToProps)(SkillsTable)

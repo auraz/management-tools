@@ -1,22 +1,21 @@
-import { connect } from 'react-redux'
 import React from "react"
-import EditableRow from "../common/EditableRow.jsx";
+import EditableRow from "./EditableRow.jsx";
+import { updateModelName } from "./models"
+
 
 class EditableTeamRow extends React.Component{
 
   constructor(props) {
     super(props);
     this.state = {
-      role_id: this.props.role_id,
+      id: this.props.id,
     }
     this.customSave = this.customSave.bind(this);
   }
 
   customSave(name) {
-    return  [
-      { id: this.state.role_id, name: name },
-      "UPDATE_ROLE_NAME"
-    ]
+    updateModelName(this.props.model, this.state.id, name)
+    this.props.action()
   }
 
   render() {

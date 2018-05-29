@@ -3,8 +3,7 @@ import React from "react"
 
 import Row from "../common/Row.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
-
-import EditableRoleRow from "./EditableRoleRow.jsx"
+import EditableParamRow from "../common/EditableParamRow.jsx";
 
 
 class RolesTable extends React.Component {
@@ -12,11 +11,11 @@ class RolesTable extends React.Component {
   render() {
     return <DragAndDropTable>
       {
-         this.props.rows.map((r) => {
+         this.props.roles.map((r) => {
           return <Row key={r.id} id={r.id}>
             <th>{r.name}</th>
             <td>
-              <EditableRoleRow value={""} {...this.props} role_id={r.id} formMode="textInput" />
+              <EditableParamRow value={""} model="roles" id={r.id} formMode="textInput" action={() => {this.setState()}} />
             </td>
           </Row>
         })
@@ -27,7 +26,7 @@ class RolesTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { rows: state.roles.map((key) =>  ({id: key.id, name: key.name}))}
+    return { roles: state.roles }
 }
 
 export default connect(mapStateToProps)(RolesTable)

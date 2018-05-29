@@ -16,7 +16,6 @@ import appReducer from 'components/common/reducer.jsx'
 import { initDb, fetchModelAll } from 'components/common/models.jsx'
 
 
-
 function logger({getState}) {
     return next => action => {
         console.log('will dispatch', action);
@@ -30,17 +29,13 @@ function logger({getState}) {
 }
 
 initDb();
-
-
-const store = createStore(appReducer, {}, applyMiddleware(logger));
-// let saveState = () => {
-//     db.setState(store.getState())
-//     db.write() // TODO what is this async?
-// }
-// store.subscribe(saveState);
-
-
-
+let initialState = {
+    teams: fetchModelAll('teams'),
+    persons: fetchModelAll('persons'),
+    skills: fetchModelAll('skills'),
+    roles: fetchModelAll('roles')
+}
+const store = createStore(appReducer, initialState, applyMiddleware(logger));
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,
     document.getElementById('root')
