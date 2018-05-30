@@ -37,8 +37,6 @@ export function initDb() {
   alasql(`INSERT INTO DB.persons_weaknesses (person_id, param_id) VALUES (1, 1), (2, 2), (3, 3)`)
 }
 
-
-
 export function fetchModel(model, id) {
   return alasql(`SELECT * FROM DB.${model} WHERE id=${id}`)[0];
 }
@@ -48,7 +46,15 @@ export function fetchModelAll(model) {
 }
 
 export function fetchPersonsInTeam(team_id) {
-  return alasql(`SELECT person_id, name FROM DB.persons_teams JOIN DB.persons ON persons_teams.person_id = persons.id WHERE team_id=${team_id}`);
+  return alasql(`SELECT person_id as id, name FROM DB.persons_teams JOIN DB.persons ON persons_teams.person_id = persons.id WHERE team_id=${team_id}`);
+}
+
+export function fetchPersonParam(param_model, person_id) {
+  return alasql(`SELECT param_id as id, name FROM DB.persons_${param_model} JOIN DB.${param_model} ON persons_${param_model}.param_id = ${param_model}.id WHERE person_id=${person_id}`);
+}
+
+export function fetchPersonSkills(person_id) {
+  return alasql(`SELECT ps.skill_id as skill_id, l.name as level_name, s.name as skill_name FROM DB.persons_skills ps JOIN DB.persons p ON ps.person_id = p.id JOIN DB.skills s ON s.id=ps.skill_id JOIN DB.levels l ON l.id=ps.level_id WHERE person_id=${person_id}`);
 }
 
 export function updateModelName(model, id, name) {
