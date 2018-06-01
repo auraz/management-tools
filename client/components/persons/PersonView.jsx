@@ -41,7 +41,7 @@ class PersonView extends React.Component {
       </DragAndDropTable>
       /*            <AddParameterAndAddToPersonForm {...this.props} param_table="strengths" persons_param_table="persons_strengths" person_id={this.state.person_id} />*/
       )
-  }
+    }
 
   constructor(props) {
     super(props);
@@ -51,6 +51,7 @@ class PersonView extends React.Component {
   }
 
   render() {
+
     return (
       <div>
       <h2>{ fetchModel('persons', this.state.person_id).name }</h2>
@@ -86,10 +87,10 @@ class PersonView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-      teams: state.teams,
-      persons: state.persons,
-      // weaknesses: state.weaknesses,
-      // strength: state.strengths
+      // teams: state.teams,
+      // persons: state.persons,
+      weaknesses: state.weaknesses,
+      strengths: state.strengths // This is pretty cool trick, we do not use this, but it updates and reads from db.
       // skills_rows: state.persons_skills.map((key) =>  ({
       //   id: key.id,
       //   skill_id: key.skill_id,

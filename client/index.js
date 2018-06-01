@@ -33,7 +33,8 @@ let initialState = {
     teams: fetchModelAll('teams'),
     persons: fetchModelAll('persons'),
     skills: fetchModelAll('skills'),
-    roles: fetchModelAll('roles')
+    roles: fetchModelAll('roles'),
+    strengths: fetchModelAll('strengths')
 }
 const store = createStore(appReducer, initialState, applyMiddleware(logger));
 ReactDOM.render(
