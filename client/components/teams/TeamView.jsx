@@ -27,8 +27,8 @@ class TeamView extends React.Component {
         <DragAndDropTable>
         {
           this.state.persons_in_team.map((r) => {
-            return <Row key={r.person_id} id={r.person_id}>
-                 <th><Link to={{ pathname: '/person/' + r.person_id }}>{r.name}</Link></th>
+            return <Row key={r.id} id={r.id}>
+                 <th><Link to={{ pathname: '/person/' + r.id }}>{r.name}</Link></th>
             </Row>
           })
         }

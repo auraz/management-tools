@@ -3,24 +3,10 @@ import  * as models from "./models";
 import * as constants from './actions.jsx';
 
 
-function addPerson(state, name) {
-  models.insertBaseModel('persons', name);
-  return {...state, "persons": models.fetchModelAll('persons')}
-}
-
-function addRole(state, name) {
-  models.insertBaseModel('roles', name);
-  return {...state, "roles": models.fetchModelAll('roles')}
-}
-
-function addSkill(state, name) {
-  models.insertBaseModel('skills', name);
-  return {...state, "skills": models.fetchModelAll('skills')}
-}
-
-function addTeam(state, name) {
-  models.insertBaseModel('teams', name);
-  return {...state, "teams": models.fetchModelAll('teams')}
+function addData(state, name, table_name) {
+  models.insertBaseModel(table_name, name);
+  state[table_name] = models.fetchModelAll(table_name)
+  return {...state}
 }
 
 function updateParam(state, payload) {
@@ -29,12 +15,28 @@ function updateParam(state, payload) {
   return {...state}
 }
 
+function addSkillPerson(state, payload) {
+  models.attachSkillPerson(payload.skill_id, payload.person_id)
+  state.persons_skills = models.fetchModelAll('persons_skills') // no need in state, just update some value
+  return {...state}
+}
+
+function addParamPerson(state, payload) {
+  models.attachParamPerson(payload.param_model, payload.param_id, payload.person_id)
+  var model = "persons_" + payload.param_model;
+  state[model] = models.fetchModelAll(model) // no need in state, just update some value
+  return {...state}
+}
+
+
 function appReducer(state, action) {
   switch (action.type) {
-    case constants.ADD_PERSON: return addPerson(state, action.payload)
-    case constants.ADD_ROLE: return addRole(state, action.payload)
-    case constants.ADD_SKILL: return addSkill(state, action.payload)
-    case constants.ADD_TEAM: return addTeam(state, action.payload)
+    case constants.ADD_PERSON: return addData(state, action.payload, 'persons')
+    case constants.ADD_ROLE: return addData(state, action.payload, 'roles')
+    case constants.ADD_SKILL: return addData(state, action.payload, 'skills')
+    case constants.ADD_TEAM: return addData(state, action.payload, 'teams')
+    case constants.ADD_PARAM: return addData(state, action.payload, 'params')
+
     case constants.UPDATE_PARAM: return updateParam(state, action.payload)
     case constants.UPDATE_SKILL_LEVEL: return updateSkillLevel(state, action.payload)
     case constants.UPDATE_PERSON_NAME: return updateModelName(state, 'persons', action.payload)
@@ -42,9 +44,9 @@ function appReducer(state, action) {
     case constants.UPDATE_TEAM_NAME: return updateModelName(state, 'teams', action.payload)
     case constants.UPDATE_SKILL_NAME: return updateModelName(state, 'skills', action.payload)
     case constants.UPDATE_PARAMETER_NAME: return updateParamName(state, action.payload)
-    case constants.ADD_PARAMETER: return addParam(state, action.payload)
-    case constants.ADD_PARAMETER_TO_PERSON: return addParamToPerson(state, action.payload)
-    case constants.ADD_SKILL_TO_PERSON: return addSkillToPerson(state, action.payload)
+
+    case constants.ADD_PARAM_PERSON: return addParamPerson(state, action.payload)
+    case constants.ADD_SKILL_PERSON: return addSkillPerson(state, action.payload)
     default: return state
   }
 }

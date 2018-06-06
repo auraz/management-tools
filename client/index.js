@@ -34,7 +34,7 @@ let initialState = {
     persons: fetchModelAll('persons'),
     skills: fetchModelAll('skills'),
     roles: fetchModelAll('roles'),
-    strengths: fetchModelAll('strengths')
+    params: fetchModelAll('params')
 }
 const store = createStore(appReducer, initialState, applyMiddleware(logger));
 ReactDOM.render(

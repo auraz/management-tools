@@ -5,8 +5,7 @@ let fixture = {
   "skills": [ "Javascript" , "Python" , "Django" , "React" , "Redux" , "Php" , "Communication" , "Initiative" , "Devops Architecture" , "Delivery in time" , "Architecture" ],
   "teams": [ "Web development", "DevOPS" ],
   "levels": [ "Good" ,"Need Improve" ],
-  "weaknesses": ["Architecture" , "No lean approach" , "Stubborn sometimes" ],
-  "strengths": [ "Openness" , "Deep thinking" , "Experience" ]
+  "params": ["Architecture" , "No lean approach" , "Stubborn sometimes", "Openness" , "Deep thinking" , "Experience" ],
 }
 
 export function initDb() {
@@ -16,7 +15,7 @@ export function initDb() {
 
   alasql('CREATE  DATABASE  DB');
 
-  let baseTables = ['roles', 'persons', 'skills', 'teams', 'levels', 'weaknesses', 'strengths']
+  let baseTables = ['roles', 'persons', 'skills', 'teams', 'levels', 'params']
 
   baseTables.forEach((table_name) => {
     alasql(`CREATE TABLE IF NOT EXISTS DB.${table_name} (id INT IDENTITY, name STRING)`);
@@ -31,7 +30,7 @@ export function initDb() {
   alasql(`INSERT INTO DB.persons_skills (person_id, skill_id, level_id) VALUES (1, 1, 1), (1, 4, 2), (1, 5, 2), (1, 7, 2), (2, 1, 1), (2, 4, 2), (3, 9, 1), (3, 10, 2)`)
 
   alasql("CREATE TABLE IF NOT EXISTS DB.persons_strengths (id INT IDENTITY, person_id INT, param_id INT)");
-  alasql(`INSERT INTO DB.persons_strengths (person_id, param_id) VALUES (1, 1), (2, 2), (3, 3)`)
+  alasql(`INSERT INTO DB.persons_strengths (person_id, param_id) VALUES (1, 4), (2, 5), (3, 6)`)
 
   alasql("CREATE TABLE IF NOT EXISTS DB.persons_weaknesses (id INT IDENTITY, person_id INT, param_id INT)");
   alasql(`INSERT INTO DB.persons_weaknesses (person_id, param_id) VALUES (1, 1), (2, 2), (3, 3)`)
@@ -49,8 +48,8 @@ export function fetchPersonsInTeam(team_id) {
   return alasql(`SELECT person_id as id, name FROM DB.persons_teams JOIN DB.persons ON persons_teams.person_id = persons.id WHERE team_id=${team_id}`);
 }
 
-export function fetchPersonParam(param_model, person_id) {
-  return alasql(`SELECT param_id as id, name FROM DB.persons_${param_model} JOIN DB.${param_model} ON persons_${param_model}.param_id = ${param_model}.id WHERE person_id=${person_id}`);
+export function fetchPersonParam(param_type, person_id) {
+  return alasql(`SELECT param_id as id, name FROM DB.persons_${param_type} JOIN DB.params ON persons_${param_type}.param_id = params.id WHERE person_id=${person_id}`);
 }
 
 export function fetchPersonSkills(person_id) {
@@ -64,6 +63,15 @@ export function updateModelName(model, id, name) {
 export function insertBaseModel(model, name) {
   return alasql(`INSERT INTO DB.${model} VALUE {name:?}`, name);
 }
+
+export function attachSkillPerson(skill_id, person_id) {
+  return alasql("INSERT INTO DB.persons_skills VALUE {person_id:?, skill_id:?, level_id:1}", [person_id, skill_id]);
+}
+
+export function attachParamPerson(param_type, param_id, person_id) {
+  return alasql(`INSERT INTO DB.persons_${param_type} VALUE {param_id:?, person_id:?}`, [param_id, person_id]);
+}
+
 
 
 export function person_health(persons_skills, person_id) {

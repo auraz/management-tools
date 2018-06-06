@@ -18,6 +18,9 @@ import TeamsTable from './teams/TeamsTable.jsx'
 import TeamForm from './teams/TeamForm.jsx'
 import TeamView from './teams/TeamView.jsx'
 
+import ParamTable from './parameters/ParamTable.jsx'
+import ParamForm from './parameters/ParamForm.jsx'
+
 import ErrorBoundary from './common/ErrorBoundary.jsx'
 import { TopNav, LeftNav } from './LayoutHelpers.jsx'
 
@@ -52,6 +55,12 @@ const routes = [
     path: '/roles',
     title: "Roles",
     component: () => <div><h2>Roles</h2><RoleForm /><RolesTable /></div>,
+    type: 'LeftNav'
+  },
+  {
+    path: '/params',
+    title: "Parameters",
+    component: () => <div><h2>Parameters</h2><ParamForm /><ParamTable /></div>,
     type: 'LeftNav'
   },
   {
