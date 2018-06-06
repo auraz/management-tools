@@ -6,7 +6,7 @@ import Row from "../common/Row.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
 import EditableRow from "../common/EditableRow.jsx";
 // import { team_health } from "../common/db_helpers"
-import { fetchModelAll, fetchPersonsInTeam } from "../common/models"
+import { fetchModelAll, fetchPersonsInTeam, fetchTeamsRoles } from "../common/models"
 
 
 class TeamsTable extends React.Component {
@@ -26,7 +26,7 @@ class TeamsTable extends React.Component {
   }
 
   listRoles(team_id) {
-    return this.props.persons_teams.map((e, i) => <li className="list-group-item" key={i}>{e.id}</li>)
+    return fetchTeamsRoles(team_id).map((r) => <li className="list-group-item" key={r.id}>{r.name}</li>)
   }
 
   render() {
@@ -43,12 +43,12 @@ class TeamsTable extends React.Component {
                 <div className="progress">
                     <div className="progress-bar bg-success" style={this.divStyle(r.id)}></div>
                 </div>
-                <a className="" data-toggle="collapse" href="#collapseRoles" role="button" aria-expanded="false" aria-controls="collapseRoles">Team roles
+                <a className="" data-toggle="collapse" href={"#collapseRoles_" + r.id} role="button" aria-expanded="false" aria-controls="collapseRoles">Team roles
                 </a>
-                <div className="collapse" id="collapseRoles">
+                <div className="collapse" id={"collapseRoles_" + r.id} >
                   <div className="card card-body">
                     <ul className="list-group list-group-flush">
-                      {/*{ this.listRoles(r.id) }*/}
+                     { this.listRoles(r.id) }
                     </ul>
                   </div>
                 </div>

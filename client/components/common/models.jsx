@@ -34,6 +34,9 @@ export function initDb() {
 
   alasql("CREATE TABLE IF NOT EXISTS DB.persons_weaknesses (id INT IDENTITY, person_id INT, param_id INT)");
   alasql(`INSERT INTO DB.persons_weaknesses (person_id, param_id) VALUES (1, 1), (2, 2), (3, 3)`)
+
+  alasql("CREATE TABLE IF NOT EXISTS DB.teams_roles (id INT IDENTITY, team_id INT, role_id INT)");
+  alasql(`INSERT INTO DB.teams_roles (team_id, role_id) VALUES (1, 1), (1, 3), (2, 2)`)
 }
 
 export function fetchModel(model, id) {
@@ -54,6 +57,10 @@ export function fetchPersonParam(param_type, person_id) {
 
 export function fetchPersonSkills(person_id) {
   return alasql(`SELECT ps.skill_id as skill_id, l.name as level_name, s.name as skill_name FROM DB.persons_skills ps JOIN DB.persons p ON ps.person_id = p.id JOIN DB.skills s ON s.id=ps.skill_id JOIN DB.levels l ON l.id=ps.level_id WHERE person_id=${person_id}`);
+}
+
+export function fetchTeamsRoles(team_id) {
+  return alasql(`SELECT tr.role_id as id, r.name as name FROM DB.teams_roles tr JOIN DB.roles r ON tr.role_id = r.id WHERE team_id=${team_id}`);
 }
 
 export function updateModelName(model, id, name) {
