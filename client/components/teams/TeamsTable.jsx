@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import React from "react";
 import { Link } from "react-router-dom";
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import Row from "../common/Row.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
@@ -51,6 +53,15 @@ class TeamsTable extends React.Component {
                      { this.listRoles(r.id) }
                     </ul>
                   </div>
+                  <Select name="form-field-name" value={''}
+                    onChange={(target) => this.props.addTeamRole(target, r.id)}
+                    options={ fetchModelAll('roles').filter(
+                        (y) => !fetchTeamsRoles(r.id).map(t => t.id).includes(y.id)
+                      ).map(
+                        (t) => ({ value: t.id, label: t.name })
+                      )
+                    }
+                    />
                 </div>
                 </td>
             </Row>
@@ -65,4 +76,12 @@ const mapStateToProps = (state) => {
    return { teams: state.teams }
 }
 
-export default connect(mapStateToProps)(TeamsTable)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addTeamRole: (target, team_id) => {
+            dispatch({payload: { role_id: target.value, team_id: parseInt(team_id) }, type: "ADD_TEAM_ROLE"})
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamsTable)
