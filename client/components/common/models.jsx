@@ -79,7 +79,9 @@ export function attachParamPerson(param_type, param_id, person_id) {
   return alasql(`INSERT INTO DB.persons_${param_type} VALUE {param_id:?, person_id:?}`, [param_id, person_id]);
 }
 
-
+export function attachTeamRole(role_id, team_id) {
+  return alasql("INSERT INTO DB.teams_roles VALUE {role_id:?, team_id:?}", [role_id, team_id]);
+}
 
 export function person_health(persons_skills, person_id) {
   let person_skills = persons_skills.filter(el => el.person_id == person_id)

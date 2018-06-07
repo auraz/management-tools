@@ -28,6 +28,12 @@ function addParamPerson(state, payload) {
   return {...state}
 }
 
+function addTeamRole(state, payload) {
+  models.attachTeamRole(payload.role_id, payload.team_id)
+  state.teams_roles = models.fetchModelAll('teams_roles') // no need in state, just update some value
+  return {...state}
+}
+
 
 function appReducer(state, action) {
   switch (action.type) {
@@ -47,6 +53,7 @@ function appReducer(state, action) {
 
     case constants.ADD_PARAM_PERSON: return addParamPerson(state, action.payload)
     case constants.ADD_SKILL_PERSON: return addSkillPerson(state, action.payload)
+    case constants.ADD_TEAM_ROLE: return addTeamRole(state, action.payload)
     default: return state
   }
 }

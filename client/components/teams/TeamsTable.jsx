@@ -73,7 +73,7 @@ class TeamsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-   return { teams: state.teams }
+  return { fake_update: state, teams: state.teams }
 }
 
 const mapDispatchToProps = (dispatch) => {
