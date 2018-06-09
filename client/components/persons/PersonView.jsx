@@ -41,7 +41,7 @@ class PersonView extends React.Component {
         })
         }
         </DragAndDropTable>
-        <h3> Attach param </h3>
+        <h4> Add parameter </h4>
         <Select name="form-field-name" value={''}
             onChange={(target) => this.props.addPersonParam(param_type, target, this.state.person_id)}
             options={models.fetchModelAll("params").filter(
@@ -55,9 +55,9 @@ class PersonView extends React.Component {
     }
 
 
-    skillsTable() {
-      return (<div>
-        <h3>Skills</h3>
+    skillsBlock() {
+      return (<div className="row">
+         <div className="col-sm"><h5>Skills</h5>
         <DragAndDropTable>
         {
         models.fetchPersonSkills(this.state.person_id).map((r) => {
@@ -68,7 +68,8 @@ class PersonView extends React.Component {
         })
         }
         </DragAndDropTable>
-        <h3> Attach skill </h3>
+        </div>
+        <div className="col-sm">Add skills
         <Select name="form-field-name" value={''}
           onChange={(target) => this.props.addPersonSkill(target, this.state.person_id)}
           options={models.fetchModelAll('skills').filter(
@@ -77,12 +78,13 @@ class PersonView extends React.Component {
               (r) => ({ value: r.id, label: r.name })
           )}
         />
+        </div>
       </div>)
     }
 
-    rolesTable() {
-      return (<div>
-        <h3>Roles</h3>
+    rolesBlock() {
+      return ( <div className="row">
+         <div className="col-sm"><h5>Fit for roles</h5>
         <DragAndDropTable>
         {
         models.fetchPersonsRoles(this.state.person_id).map((r) => {
@@ -93,7 +95,8 @@ class PersonView extends React.Component {
         })
         }
         </DragAndDropTable>
-        <h3> Attach role </h3>
+        </div>
+        <div className="col-sm">Add role
         <Select name="form-field-name" value={''}
           onChange={(target) => this.props.addPersonRole(target, this.state.person_id)}
           options={models.fetchModelAll('roles').filter(
@@ -102,6 +105,7 @@ class PersonView extends React.Component {
               (r) => ({ value: r.id, label: r.name })
           )}
         />
+        </div>
       </div>)
     }
 
@@ -114,27 +118,40 @@ class PersonView extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-      <h2>{ models.fetchModel('persons', this.state.person_id).name }</h2>
-      <table>
-        <tbody>
-          <tr>
-            <th>Strenth</th><th>Weakness</th><th>{ this.progress(this.state.person_id) }</th>
-          </tr>
-          <tr>
-            <td>{ this.paramsTable("strengths") } </td>
-            <td>{ this.paramsTable("weaknesses") }</td>
-          </tr>
-        </tbody>
-      </table>
-      { this.skillsTable() }
-      <br/>
-      { this.rolesTable() }
-
-
-    </div>
-  )
+    return (<div className="container">
+      <div className="row">
+        <div className="col-sm">
+        <h2>{ models.fetchModel('persons', this.state.person_id).name }</h2>
+        </div>
+        <div className="col-sm">
+          { this.progress(this.state.person_id) }
+        </div>
+      </div>
+      <hr/>
+      <div className="row">
+        <div className="col-sm">
+          { this.rolesBlock() }
+        </div>
+        <div className="col-sm">
+          { this.rolesBlock() }
+        </div>
+      </div>
+      <hr/>
+      <div className="row"><div className="col-xs-12">
+          { this.skillsBlock() }
+      </div></div>
+      <hr/>
+      <div className="row">
+        <div className="col-sm">
+          <p>Strenth</p>
+          { this.paramsTable("strengths") }
+        </div>
+        <div className="col-sm">
+          <p>Weakness</p>
+          { this.paramsTable("weaknesses") }
+        </div>
+      </div>
+    </div>)
   }
 
 }

@@ -42,6 +42,7 @@ function addPersonRole(state, payload) {
 
 function deleteRowFromModel(state, payload) {
   models.deleteRowFromModel(payload.model, payload.id)
+  state[payload.model] =  models.fetchModelAll(payload.model)
   return {...state}
 }
 

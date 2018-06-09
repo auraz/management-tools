@@ -32,7 +32,7 @@ class SkillsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-   return { state: state, skills: state.skills }
+   return { skills: state.skills }
 }
 
 export default connect(mapStateToProps)(SkillsTable)

@@ -3,7 +3,7 @@ let fixture = {
   "roles": [ "Developer", "DevOPS", "QA", "Architect", "Lead", "Product_Owner", "Project_Coordinator" , "Team_Coordinator"],
   "persons": [ "Vladas" , "Indra" ,"Alex Koval" ],
   "skills": [ "Javascript" , "Python" , "Django" , "React" , "Redux" , "Php" , "Communication" , "Initiative" , "Devops Architecture" , "Delivery in time" , "Architecture" ],
-  "teams": [ "Web development", "DevOPS" ],
+  "teams": ["Web development", "DevOPS" ],
   "levels": [ "Good" ,"Need Improve" ],
   "params": ["Architecture" , "No lean approach" , "Stubborn sometimes", "Openness" , "Deep thinking" , "Experience" ],
 }
@@ -95,7 +95,6 @@ export function attachPersonRole(role_id, person_id) {
 }
 
 export function deleteRowFromModel(model, id) {
-  debugger;
   return alasql(`DELETE FROM DB.${model} WHERE id=?`, id);
 }
 

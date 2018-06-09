@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom'
+import { MemoryRouter as Router, Route } from 'react-router-dom'
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Row from "../common/Row.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
 
-import { fetchModel, fetchModelAll, fetchPersonsInTeam } from "../common/models"
+import { fetchModel, fetchModelAll, fetchPersonsInTeam, fetchTeamsRoles } from "../common/models"
 
 
 class TeamView extends React.Component {
@@ -21,6 +21,12 @@ class TeamView extends React.Component {
     }
   }
 
+   listRoles(team_id) {
+    return fetchTeamsRoles(team_id).map((r) => <li className="list-group-item" key={r.id}>{r.name}</li>)
+  }
+
+
+
   render() {
     return (
       <div>
@@ -30,6 +36,14 @@ class TeamView extends React.Component {
           this.state.persons_in_team.map((r) => {
             return <Row key={r.id} id={r.id}>
                  <th><Link to={{ pathname: '/person/' + r.id }}>{r.name}</Link></th>
+                 <th>
+                  <div className="card card-body">
+                    <ul className="list-group list-group-flush">
+                     { this.listRoles(this.state.team_id) }
+                    </ul>
+                  </div>
+                  </th>
+
             </Row>
           })
         }
