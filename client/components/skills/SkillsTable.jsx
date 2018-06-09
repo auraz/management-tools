@@ -4,6 +4,7 @@ import React from "react"
 import Row from "../common/Row.jsx"
 import DragAndDropTable from "../common/DragAndDropTable.jsx"
 import EditableRow from "../common/EditableRow.jsx";
+import DeleteControl from "../common/DeleteControl.jsx";
 
 import { fetchModelAll, fetchPersonsInTeam } from "../common/models"
 
@@ -16,9 +17,12 @@ class SkillsTable extends React.Component {
       this.props.skills.map((r) => {
         return <Row key={r.id} id={r.id}>
           <th>{r.name}</th>
-          <td>
+          <th>
             <EditableRow value="" id={r.id} model="skills" formMode="textInput" />
-          </td>
+          </th>
+          <th>
+            <DeleteControl id={r.id} model="skills" /> {/* Should be cascade deletion */}
+          </th>
         </Row>
       })
     }
@@ -28,7 +32,7 @@ class SkillsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-   return { skills: state.skills }
+   return { state: state, skills: state.skills }
 }
 
 export default connect(mapStateToProps)(SkillsTable)

@@ -34,6 +34,18 @@ function addTeamRole(state, payload) {
   return {...state}
 }
 
+function addPersonRole(state, payload) {
+  models.attachPersonRole(payload.role_id, payload.person_id)
+  state.persons_roles = models.fetchModelAll('persons_roles') // no need in state, just update some value
+  return {...state}
+}
+
+function deleteRowFromModel(state, payload) {
+  models.deleteRowFromModel(payload.model, payload.id)
+  return {...state}
+}
+
+
 
 function appReducer(state, action) {
   switch (action.type) {
@@ -54,6 +66,11 @@ function appReducer(state, action) {
     case constants.ADD_PARAM_PERSON: return addParamPerson(state, action.payload)
     case constants.ADD_SKILL_PERSON: return addSkillPerson(state, action.payload)
     case constants.ADD_TEAM_ROLE: return addTeamRole(state, action.payload)
+    case constants.ADD_PERSON_ROLE: return addPersonRole(state, action.payload)
+
+    case constants.DELETE_ROW_FROM_MODEL: return deleteRowFromModel(state, action.payload)
+
+
     default: return state
   }
 }

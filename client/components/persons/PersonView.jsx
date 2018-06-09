@@ -54,6 +54,58 @@ class PersonView extends React.Component {
       )
     }
 
+
+    skillsTable() {
+      return (<div>
+        <h3>Skills</h3>
+        <DragAndDropTable>
+        {
+        models.fetchPersonSkills(this.state.person_id).map((r) => {
+          return <Row key={r.skill_id} id={r.skill_id}>
+               <th>{r.skill_name}</th>
+            <td><EditablePersonSkillsRow value={r.level_name} {...this.props} person_id={r.person_id} skill_id={r.skill_id} /></td>
+          </Row>
+        })
+        }
+        </DragAndDropTable>
+        <h3> Attach skill </h3>
+        <Select name="form-field-name" value={''}
+          onChange={(target) => this.props.addPersonSkill(target, this.state.person_id)}
+          options={models.fetchModelAll('skills').filter(
+                (r) => !models.fetchPersonSkills(this.state.person_id).map(s => s.skill_id).includes(r.id)
+              ).map(
+              (r) => ({ value: r.id, label: r.name })
+          )}
+        />
+      </div>)
+    }
+
+    rolesTable() {
+      return (<div>
+        <h3>Roles</h3>
+        <DragAndDropTable>
+        {
+        models.fetchPersonsRoles(this.state.person_id).map((r) => {
+          return <Row key={r.id} id={r._id}>
+               <th>{r.name}</th>
+            <td> <EditableRow value="" id={r.id} model="roles" formMode="textInput" /></td>
+          </Row>
+        })
+        }
+        </DragAndDropTable>
+        <h3> Attach role </h3>
+        <Select name="form-field-name" value={''}
+          onChange={(target) => this.props.addPersonRole(target, this.state.person_id)}
+          options={models.fetchModelAll('roles').filter(
+                (r) => !models.fetchPersonsRoles(this.state.person_id).map(s => s.id).includes(r.id)
+              ).map(
+              (r) => ({ value: r.id, label: r.name })
+          )}
+        />
+      </div>)
+    }
+
+
   constructor(props) {
     super(props);
     this.state = {
@@ -76,26 +128,10 @@ class PersonView extends React.Component {
           </tr>
         </tbody>
       </table>
-      <h3>Skills</h3>
-      <DragAndDropTable>
-      {
-      models.fetchPersonSkills(this.state.person_id).map((r) => {
-        return <Row key={r.skill_id} id={r.skill_id}>
-             <th>{r.skill_name}</th>
-          <td><EditablePersonSkillsRow value={r.level_name} {...this.props} person_id={r.person_id} skill_id={r.skill_id} /></td>
-        </Row>
-      })
-    }
-    </DragAndDropTable>
-    <h3> Attach skill </h3>
-    <Select name="form-field-name" value={''}
-        onChange={(target) => this.props.addPersonSkill(target, this.state.person_id)}
-        options={models.fetchModelAll('skills').filter(
-            (r) => !models.fetchPersonSkills(this.state.person_id).map(s => s.skill_id).includes(r.id)
-          ).map(
-          (r) => ({ value: r.id, label: r.name })
-        )}
-    />
+      { this.skillsTable() }
+      <br/>
+      { this.rolesTable() }
+
 
     </div>
   )
@@ -114,6 +150,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         addPersonParam: (param_type, target, person_id) => {
           dispatch({payload: { param_model: param_type, param_id: target.value, person_id: parseInt(person_id) }, type: "ADD_PARAM_PERSON"})
+        },
+
+        addPersonRole: (target, person_id) => {
+          dispatch({payload: { role_id: target.value, person_id: parseInt(person_id) }, type: "ADD_PERSON_ROLE"})
         }
     }
 }
