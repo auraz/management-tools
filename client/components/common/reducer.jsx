@@ -17,26 +17,31 @@ function updateParam(state, payload) {
 
 function addSkillPerson(state, payload) {
   models.attachSkillPerson(payload.skill_id, payload.person_id)
-  state.persons_skills = models.fetchModelAll('persons_skills') // no need in state, just update some value
+  state.persons_skills = models.fetchModelAll('persons_skills')
   return {...state}
 }
 
 function addParamPerson(state, payload) {
   models.attachParamPerson(payload.param_model, payload.param_id, payload.person_id)
   var model = "persons_" + payload.param_model;
-  state[model] = models.fetchModelAll(model) // no need in state, just update some value
+  state[model] = models.fetchModelAll(model)
   return {...state}
 }
 
 function addTeamRole(state, payload) {
   models.attachTeamRole(payload.role_id, payload.team_id)
-  state.teams_roles = models.fetchModelAll('teams_roles') // no need in state, just update some value
+  state.teams_roles = models.fetchModelAll('teams_roles')
   return {...state}
 }
 
 function addPersonRole(state, payload) {
   models.attachPersonRole(payload.role_id, payload.person_id)
-  state.persons_roles = models.fetchModelAll('persons_roles') // no need in state, just update some value
+  state.persons_roles = models.fetchModelAll('persons_roles')
+  return {...state}
+}
+function addPersonTeam(state, payload) {
+  models.attachPersonTeam(payload.person_id, payload.team_id)
+  state.persons_teams = models.fetchModelAll('persons_teams')
   return {...state}
 }
 
@@ -68,6 +73,7 @@ function appReducer(state, action) {
     case constants.ADD_SKILL_PERSON: return addSkillPerson(state, action.payload)
     case constants.ADD_TEAM_ROLE: return addTeamRole(state, action.payload)
     case constants.ADD_PERSON_ROLE: return addPersonRole(state, action.payload)
+    case constants.ADD_PERSON_TEAM: return addPersonTeam(state, action.payload)
 
     case constants.DELETE_ROW_FROM_MODEL: return deleteRowFromModel(state, action.payload)
 

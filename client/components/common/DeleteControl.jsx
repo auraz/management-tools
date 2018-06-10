@@ -8,9 +8,7 @@ class DeleteControl extends React.Component {
       return (
         <div tabIndex="-1">
           <small>
-            <a href="#" onClick={(t) => this.props.handleDelete(t, { id: this.props.id, model: this.props.model })}>
-              Remove
-            </a>
+            <a href="#" onClick={(t) => this.props.handleDelete(t, { id: this.props.id, model: this.props.model })}>Delete</a>
           </small>
         </div>
       );

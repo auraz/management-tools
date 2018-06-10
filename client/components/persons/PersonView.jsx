@@ -41,7 +41,7 @@ class PersonView extends React.Component {
         })
         }
         </DragAndDropTable>
-        <h4> Add parameter </h4>
+        <h5> Add </h5>
         <Select name="form-field-name" value={''}
             onChange={(target) => this.props.addPersonParam(param_type, target, this.state.person_id)}
             options={models.fetchModelAll("params").filter(
@@ -82,7 +82,7 @@ class PersonView extends React.Component {
       </div>)
     }
 
-    rolesBlock() {
+    allRolesBlock() {
       return ( <div className="row">
          <div className="col-sm"><h5>Fit for roles</h5>
         <DragAndDropTable>
@@ -109,6 +109,20 @@ class PersonView extends React.Component {
       </div>)
     }
 
+    teamRolesBlock() {
+      return ( <div className="row">
+         <div className="col-sm"><h5>Role in teams</h5>
+        <DragAndDropTable>
+        {
+        models.fetchPersonsTeamsRoles(this.state.person_id, 1).map((r) => {
+          return <Row key={r.id} id={r._id}><th>{r.name}</th></Row>
+        })
+        }
+        </DragAndDropTable>
+        </div>
+      </div>)
+    }
+
 
   constructor(props) {
     super(props);
@@ -130,10 +144,10 @@ class PersonView extends React.Component {
       <hr/>
       <div className="row">
         <div className="col-sm">
-          { this.rolesBlock() }
+          { this.allRolesBlock() }
         </div>
         <div className="col-sm">
-          { this.rolesBlock() }
+          { this.teamRolesBlock() }
         </div>
       </div>
       <hr/>

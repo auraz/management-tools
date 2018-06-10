@@ -40,6 +40,9 @@ export function initDb() {
 
  alasql("CREATE TABLE IF NOT EXISTS DB.persons_roles (id INT IDENTITY, person_id INT, role_id INT)");
   alasql(`INSERT INTO DB.persons_roles (person_id, role_id) VALUES (1, 1), (1, 3), (2, 2)`)
+
+  alasql("CREATE TABLE IF NOT EXISTS DB.persons_teams_roles (id INT IDENTITY, person_id INT, role_id INT, team_id INT)");
+  alasql(`INSERT INTO DB.persons_teams_roles (person_id, role_id, team_id) VALUES (1, 1, 1), (1, 2, 1), (2, 3, 2), (2, 4, 2)`)
 }
 
 export function fetchModel(model, id) {
@@ -70,6 +73,10 @@ export function fetchPersonsRoles(person_id) {
   return alasql(`SELECT tr.role_id as id, r.name as name FROM DB.persons_roles tr JOIN DB.roles r ON tr.role_id = r.id WHERE person_id=${person_id}`);
 }
 
+export function fetchPersonsTeamsRoles(person_id, team_id) {
+    return alasql(`SELECT ptr.role_id as id, r.name as name FROM DB.persons_teams_roles ptr JOIN DB.roles r ON ptr.role_id = r.id WHERE person_id=${person_id} AND team_id=${team_id}`);
+}
+
 export function updateModelName(model, id, name) {
   return alasql(`UPDATE DB.${model} SET name='${name}' WHERE id=${id}`);
 }
@@ -92,6 +99,10 @@ export function attachTeamRole(role_id, team_id) {
 
 export function attachPersonRole(role_id, person_id) {
   return alasql("INSERT INTO DB.persons_roles VALUE {role_id:?, person_id:?}", [role_id, person_id]);
+}
+
+export function attachPersonTeam(person_id, team_id) {
+  return alasql("INSERT INTO DB.persons_teams VALUE {person_id:?, team_id:?}", [person_id, team_id]);
 }
 
 export function deleteRowFromModel(model, id) {

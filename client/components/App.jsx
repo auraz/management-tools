@@ -26,12 +26,12 @@ import { TopNav, LeftNav } from './LayoutHelpers.jsx'
 
 
 const routes = [
-  // {
-  //   path: '/',
-  //   exact: true,
-  //   title: "Overview",
-  //   component: () => <h2>Overview</h2>
-  // },
+  {
+    path: '/',
+    exact: true,
+    title: "Teams",
+    component: () => <div><h2>Teams</h2><TeamsTable /><TeamForm /></div>,
+  },
   {
     path: '/teams',
     exact: true,
