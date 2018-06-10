@@ -1,48 +1,96 @@
 // Should be valid JSON, otherwise localStorage did not updated.
 let fixture = {
-  "roles": [ "Developer", "DevOPS", "QA", "Architect", "Lead", "Product_Owner", "Project_Coordinator" , "Team_Coordinator"],
-  "persons": [ "Vladas" , "Indra" ,"Alex Koval" ],
-  "skills": [ "Javascript" , "Python" , "Django" , "React" , "Redux" , "Php" , "Communication" , "Initiative" , "Devops Architecture" , "Delivery in time" , "Architecture" ],
+  "roles": [
+    "Junior Front-end Developer", "Middle Front-end Developer", "Senior Front-end Developer",
+    "Junior Back-end Developer", "Middle Back-end Developer", "Senior Back-end Developer",
+    "Junior DevOps", "Middle DevOps", "Senior DevOps",
+    "Junior QA", "Middle QA", "Senior QA",
+    "Junior Architect", "Middle Architect", "Senior Architect",
+    "Team Lead",
+    "Junior Product Owner", "Middle Product Owner", "Senior Product Owner",
+    "Project Coordinator" , "Team Coordinator", "Tech Lead"
+  ],
+  "persons": [ "Vladas" , "Indra" ,"Alex Koval", "Luky", "Oleksii", "Aldian", "Swiridow", "Elva", "Matt" ],
+  "skills": [ "Javascript" , "Python" , "Django" , "React" , "Redux" , "Php" , "Communication" , "Initiative" , "Devops Architecture" , "Delivery in time" , "Architecture", "Testing", "Manual testing", "Integration testing", "Prototyping", "Communication", "Databases" ],
   "teams": ["Web development", "DevOPS" ],
   "levels": [ "Good" ,"Need Improve" ],
   "params": ["Architecture" , "No lean approach" , "Stubborn sometimes", "Openness" , "Deep thinking" , "Experience" ],
 }
 
+
+
+
+
 export function initDb() {
-  // alasql('DROP DATABASE DB');
-  // alasql('CREATE localStorage DATABASE IF NOT EXISTS DB');
-  // alasql('ATTACH localStorage DATABASE DB AS myDB');
+  // autoincrement does not work for locastorage
+  // alasql('DROP localStorage DATABASE LocalStorageDB');
+  // alasql('CREATE localStorage DATABASE IF NOT EXISTS LocalStorageDB');
+  // alasql('ATTACH localStorage DATABASE LocalStorageDB AS DB');
 
-  alasql('CREATE  DATABASE  DB');
+  // alasql('DROP localStorage DATABASE LocalStorageDB');
+  function f1(data) {
+    console.log(data)
+  }
 
-  let baseTables = ['roles', 'persons', 'skills', 'teams', 'levels', 'params']
+  function createTables() {
 
-  baseTables.forEach((table_name) => {
-    alasql(`CREATE TABLE IF NOT EXISTS DB.${table_name} (id INT IDENTITY, name STRING)`);
-    let insertBlock = "('" + fixture[table_name].join("'),('") + "')"
-    alasql(`INSERT INTO DB.${table_name} (name) VALUES ${insertBlock}`)
-  })
+    let baseTables = ['roles', 'persons', 'skills', 'teams', 'levels', 'params']
 
-  alasql("CREATE TABLE IF NOT EXISTS DB.persons_teams (id INT IDENTITY, person_id INT, team_id INT)");
-  alasql(`INSERT INTO DB.persons_teams (person_id, team_id) VALUES (1, 1), (2, 1), (3, 2)`)
+    // let baseTablesPromises = baseTables.map((table_name) => {
+    //   let insertBlock = "('" + fixture[table_name].join("'),('") + "')"
+    //   return alasql.promise([
+    //     `CREATE TABLE IF NOT EXISTS DB.${table_name} (id INT AUTO_INCREMENT, name STRING)`,
+    //     `INSERT INTO DB.${table_name} (name) VALUES ${insertBlock}`
+    //   ])
+    // })
+    // debugger;
+    baseTables.reduce(
+      (promiseChain, tableName) => promiseChain.then(
+          () => {
+            let insertBlock = "('" + fixture[tableName].join("'),('") + "')"
 
-  alasql("CREATE TABLE IF NOT EXISTS DB.persons_skills (id INT IDENTITY, person_id INT, skill_id INT, level_id INT)");
-  alasql(`INSERT INTO DB.persons_skills (person_id, skill_id, level_id) VALUES (1, 1, 1), (1, 4, 2), (1, 5, 2), (1, 7, 2), (2, 1, 1), (2, 4, 2), (3, 9, 1), (3, 10, 2)`)
+            let sql1= `CREATE TABLE IF NOT EXISTS DB.${tableName} (id INT IDENTITY, name STRING)`
+            let sql2 = `INSERT INTO DB.${tableName} (name) VALUES ${insertBlock}`
+            console.log(sql1, sql2)
+            return alasql.promise([ sql1, sql2 ])
+          }
+        ),
+      Promise.resolve() // initial value
+    ).then(console.log).catch(console.log)
 
-  alasql("CREATE TABLE IF NOT EXISTS DB.persons_strengths (id INT IDENTITY, person_id INT, param_id INT)");
-  alasql(`INSERT INTO DB.persons_strengths (person_id, param_id) VALUES (1, 4), (2, 5), (3, 6)`)
 
-  alasql("CREATE TABLE IF NOT EXISTS DB.persons_weaknesses (id INT IDENTITY, person_id INT, param_id INT)");
-  alasql(`INSERT INTO DB.persons_weaknesses (person_id, param_id) VALUES (1, 1), (2, 2), (3, 3)`)
+    // return;
+    alasql("CREATE TABLE IF NOT EXISTS DB.persons_teams (id INT IDENTITY, person_id INT, team_id INT)");
+    alasql(`INSERT INTO DB.persons_teams (person_id, team_id) VALUES (1, 1), (2, 1), (3, 2), (4, 1), (5, 1), (6, 1), (7, 2), (8, 1), (9, 1)`)
 
-  alasql("CREATE TABLE IF NOT EXISTS DB.teams_roles (id INT IDENTITY, team_id INT, role_id INT)");
-  alasql(`INSERT INTO DB.teams_roles (team_id, role_id) VALUES (1, 1), (1, 3), (2, 2)`)
+    alasql("CREATE TABLE IF NOT EXISTS DB.persons_skills (id INT IDENTITY, person_id INT, skill_id INT, level_id INT)");
+    alasql(`INSERT INTO DB.persons_skills (person_id, skill_id, level_id) VALUES (1, 1, 1), (1, 4, 2), (1, 5, 2), (1, 7, 2), (2, 1, 1), (2, 4, 2), (3, 9, 1), (3, 10, 2)`)
 
- alasql("CREATE TABLE IF NOT EXISTS DB.persons_roles (id INT IDENTITY, person_id INT, role_id INT)");
-  alasql(`INSERT INTO DB.persons_roles (person_id, role_id) VALUES (1, 1), (1, 3), (2, 2)`)
+    alasql("CREATE TABLE IF NOT EXISTS DB.persons_strengths (id INT IDENTITY, person_id INT, param_id INT)");
+    alasql(`INSERT INTO DB.persons_strengths (person_id, param_id) VALUES (1, 4), (2, 5), (3, 6)`)
 
-  alasql("CREATE TABLE IF NOT EXISTS DB.persons_teams_roles (id INT IDENTITY, person_id INT, role_id INT, team_id INT)");
-  alasql(`INSERT INTO DB.persons_teams_roles (person_id, role_id, team_id) VALUES (1, 1, 1), (1, 2, 1), (2, 3, 2), (2, 4, 2)`)
+    alasql("CREATE TABLE IF NOT EXISTS DB.persons_weaknesses (id INT IDENTITY, person_id INT, param_id INT)");
+    alasql(`INSERT INTO DB.persons_weaknesses (person_id, param_id) VALUES (1, 1), (2, 2), (3, 3)`)
+
+    alasql("CREATE TABLE IF NOT EXISTS DB.teams_roles (id INT IDENTITY, team_id INT, role_id INT)");
+    alasql(`INSERT INTO DB.teams_roles (team_id, role_id) VALUES (1, 3), (1, 6), (1, 11), (1, 12), (1, 15), (1, 16), (1, 19), (2, 9), (2, 15), (2, 16)`)
+
+   alasql("CREATE TABLE IF NOT EXISTS DB.persons_roles (id INT IDENTITY, person_id INT, role_id INT)");
+    alasql(`INSERT INTO DB.persons_roles (person_id, role_id) VALUES (1, 2), (1, 5), (1, 17), ` +
+      `(2, 2), (2, 6), (2, 14), (3, 1), (3, 6), (3, 8), (3, 14), (3, 16), (3, 17), ` +
+      `(4, 1), (4, 4), (5, 2), (5, 6), (5, 13), (6, 2), (6, 5), (6, 17), (7, 9), (8, 12), (8, 17), (9, 17)`)
+
+    alasql("CREATE TABLE IF NOT EXISTS DB.persons_teams_roles (id INT IDENTITY, person_id INT, role_id INT, team_id INT)");
+    alasql(`INSERT INTO DB.persons_teams_roles (person_id, role_id, team_id) VALUES (1, 1, 1), (1, 2, 1), (2, 3, 2), (2, 4, 2)`)
+  }
+
+
+  alasql.promise('CREATE INDEXEDDB DATABASE IF NOT EXISTS DB;')
+  .then( () => { console.log("Database created"); return alasql.promise('ATTACH INDEXEDDB DATABASE DB;') } )
+  .then( () => { console.log("Database attached"); return alasql.promise('USE DB;') } )
+  .then( () => { console.log("Database used"); createTables(); } )
+  .catch(f1)
+
 }
 
 export function fetchModel(model, id) {
