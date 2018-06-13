@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS teams (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE IF NOT EXISTS roles (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE IF NOT EXISTS persons (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE IF NOT EXISTS skills (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE IF NOT EXISTS levels (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE IF NOT EXISTS params (id SERIAL PRIMARY KEY, name CHAR(50));
+
+CREATE TABLE IF NOT EXISTS sons_teams (id SERIAL, person_id INT, team_id INT);
+CREATE TABLE IF NOT EXISTS persons_skills (id SERIAL, person_id INT, skill_id INT, level_id INT);
+CREATE TABLE IF NOT EXISTS persons_strengths (id SERIAL, person_id INT, param_id INT);
+CREATE TABLE IF NOT EXISTS persons_weaknesses (id SERIAL, person_id INT, param_id INT);
+CREATE TABLE IF NOT EXISTS teams_roles (id SERIAL, team_id INT, role_id INT);
+CREATE TABLE IF NOT EXISTS persons_roles (id SERIAL, person_id INT, role_id INT);
+CREATE TABLE IF NOT EXISTS persons_teams_roles (id SERIAL, person_id INT, role_id INT, team_id INT);
