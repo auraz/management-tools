@@ -19,3 +19,5 @@ export const ADD_PERSON_ROLE = "ADD_PERSON_ROLE"
 export const ADD_PERSON_TEAM = "ADD_PERSON_TEAM"
 
 export const DELETE_ROW_FROM_MODEL = "DELETE_ROW_FROM_MODEL"
+
+export const fetchInitialState = () => { return fetchInitState; }

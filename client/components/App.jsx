@@ -24,6 +24,8 @@ import ParamForm from './parameters/ParamForm.jsx'
 import ErrorBoundary from './common/ErrorBoundary.jsx'
 import { TopNav, LeftNav } from './LayoutHelpers.jsx'
 
+import { getInitialState } from '../common/models.jsx'
+
 
 const routes = [
   {
@@ -78,6 +80,11 @@ const routes = [
 
 class App extends React.Component {
 
+  componentWillMount() {
+    this.props.getInitialState();
+  }
+
+
   render() {
     return (
         <Router basename="">
@@ -104,5 +111,20 @@ class App extends React.Component {
     }
 }
 
+let initialState =
 
-export default DragDropContext(HTML5Backend)(App)
+const mapStateToProps = (state) => { state: state };
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getInitialState: () => {
+          return (dispatch)=> {
+
+          }
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(App));
+
+

@@ -9,6 +9,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk';
+
 
 import App from 'components/App.jsx';
 import appReducer from 'components/common/reducer.jsx'
@@ -28,15 +30,10 @@ function logger({getState}) {
     }
 }
 
-initDb();
-let initialState = {
-    teams: fetchModelAll('teams'),
-    persons: fetchModelAll('persons'),
-    skills: fetchModelAll('skills'),
-    roles: fetchModelAll('roles'),
-    params: fetchModelAll('params')
-}
-const store = createStore(appReducer, initialState, applyMiddleware(logger));
+initDb(); // this is async now!
+
+store.distach(fetchInitialState);
+const store = createStore(appReducer, {}, applyMiddleware(thunk, logger));
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,
     document.getElementById('root')

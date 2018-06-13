@@ -51,7 +51,23 @@ function deleteRowFromModel(state, payload) {
   return {...state}
 }
 
+// function initState(state, payload) {
+//   models.fetchModelAll('teams').then( (res) => state.teams = res)
+//   models.fetchModelAll('persons').then( (res) => state.teams = res)
+//   models.fetchModelAll('teams').then( (res) => state.teams = res)
+//   models.fetchModelAll('teams').then( (res) => state.teams = res)
+//   models.fetchModelAll('teams').then( (res) => state.teams = res)
+//   models.fetchModelAll('teams').then( (res) => state.teams = res)
+//   return {
+//     teams:
+//     persons: fetchModelAll('persons'),
+//     skills: fetchModelAll('skills'),
+//     roles: fetchModelAll('roles'),
+//     params: fetchModelAll('params')
+//   }
+// }
 
+// }
 
 function appReducer(state, action) {
   switch (action.type) {
@@ -76,6 +92,8 @@ function appReducer(state, action) {
     case constants.ADD_PERSON_TEAM: return addPersonTeam(state, action.payload)
 
     case constants.DELETE_ROW_FROM_MODEL: return deleteRowFromModel(state, action.payload)
+
+    case constants.INIT_STATE: return initState(state, action.payload)
 
 
     default: return state
