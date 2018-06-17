@@ -43,11 +43,11 @@ export function fixturesToDb() {
 let fetchModelAllAsync = async (model) => {
   const response = await axios.get(`http://localhost:3000/${model}`);
   console.log(response); console.log(response.data);
-  return response.data
+  return response.data // magic
 }
 
 export function fetchModelAll(model) {
-  return fetchModelAllAsync(model);
+  return fetchModelAllAsync(model)
 
 }
 

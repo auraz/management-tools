@@ -20,6 +20,7 @@ class TeamsTable extends React.Component {
       // team_id: this.props.match.params.id,
       // team_name: fetchTeam(this.state.team_id).name,
       // persons_in_team: fetchPersonsInTeam(this.state.team_id)
+      teams: null
     }
   }
 
@@ -32,10 +33,30 @@ class TeamsTable extends React.Component {
     return fetchTeamsRoles(team_id).map((r) => <li className="list-group-item" key={r.id}>{r.name}<DeleteControl id={r.index_id} model="teams_roles" /></li>)
   }
 
+  async componentDidMount() {
+    // this._asyncRequest = fetchModelAll('teams').then(
+    //   teamsFetched => {
+    //     this._asyncRequest = null;
+    //     this.setState({ 'teams': teamsFetched });
+    //   }
+    // );
+    this._asyncRequest = await fetchModelAll('teams')
+    this.setState({ 'teams': this._asyncRequest });
+  }
+
+   componentWillUnmount() {
+    if (this._asyncRequest) {
+      this._asyncRequest.cancel();
+    }
+  }
+
   render() {
+    if (this.state.teams === null) {
+      return <div>Fetching Teams</div>
+    }
     return (
       <DragAndDropTable>
-        {this.props.teams.map( r => {
+        {this.state.teams.map( r => {
           return (
             <Row key={r.id} id={r.id}>
               <th>
@@ -56,10 +77,10 @@ class TeamsTable extends React.Component {
                 <div className="collapse" id={"collapseRoles_" + r.id} >
                   <div className="card card-body">
                     <ul className="list-group list-group-flush">
-                     { this.listRoles(r.id) }
+{/*                     { this.listRoles(r.id) }*/}
                     </ul>
                   </div>
-                  <Select name="form-field-name" value={''}
+{/*                  <Select name="form-field-name" value={''}
                     onChange={(target) => this.props.addTeamRole(target, r.id)}
                     options={ fetchModelAll('roles').filter(
                         (y) => !fetchTeamsRoles(r.id).map(t => t.id).includes(y.id)
@@ -67,7 +88,7 @@ class TeamsTable extends React.Component {
                         (t) => ({ value: t.id, label: t.name })
                       )
                     }
-                    />
+                    />*/}
                 </div>
                 </th>
             </Row>
@@ -78,9 +99,9 @@ class TeamsTable extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { fake_update: state, teams: state.teams }
-}
+// const mapStateToProps = (state) => {
+//   return { fake_update: state, teams: state.teams }
+// }
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -90,4 +111,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeamsTable)
+export default connect(null, mapDispatchToProps)(TeamsTable)

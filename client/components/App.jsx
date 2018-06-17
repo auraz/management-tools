@@ -93,14 +93,14 @@ class App extends React.Component {
                     <div className="row">
                         <LeftNav>{routes.filter(e => e.type=='LeftNav')}</LeftNav>
                         <main className="col-sm-9 col-md-10 pt-3">
-                           {/* {routes.map((route, index) => (
+                            {routes.map((route, index) => (
                                 <Route
                                     key={index}
                                     path={route.path}
                                     exact={route.exact}
                                     component={route.component}
                                 />
-                            ))}*/}
+                            ))}
                         </main>
                     </div>
                 </div>

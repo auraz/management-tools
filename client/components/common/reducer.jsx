@@ -53,12 +53,13 @@ function deleteRowFromModel(state, payload) {
 
 function getInitialState() {
   models.fixturesToDb()
-  return {
-    'teams': models.fetchModelAll('teams'),
-    'persons': models.fetchModelAll('persons'),
-    'roles': models.fetchModelAll('roles'),
-    'skills': models.fetchModelAll('skills'),
-  }
+  // return {
+  //   'teams': models.fetchModelAll('teams'),
+  //   'persons': models.fetchModelAll('persons'),
+  //   'roles': models.fetchModelAll('roles'),
+  //   'skills': models.fetchModelAll('skills'),
+  // }
+  return {}
 }
 
 // function initState(state, payload) {
