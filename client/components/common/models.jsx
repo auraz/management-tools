@@ -1,5 +1,8 @@
-// Should be valid JSON, otherwise localStorage did not updated.
-let fixture = {
+import axios from 'axios';
+
+
+// Should be valid JSON
+let jsonFixture = {
   "roles": [
     "Junior Front-end Developer", "Middle Front-end Developer", "Senior Front-end Developer",
     "Junior Back-end Developer", "Middle Back-end Developer", "Senior Back-end Developer",
@@ -16,71 +19,35 @@ let fixture = {
   "levels": [ "Good" ,"Need Improve" ],
   "params": ["Architecture" , "No lean approach" , "Stubborn sometimes", "Openness" , "Deep thinking" , "Experience" ],
 }
+let baseTables = ['roles', 'persons', 'skills', 'teams', 'levels', 'params']
 
 
-export function initDb() {
-  // autoincrement does not work for locastorage
-  // alasql('DROP localStorage DATABASE LocalStorageDB');
-  // alasql('CREATE localStorage DATABASE IF NOT EXISTS LocalStorageDB');
-  // alasql('ATTACH localStorage DATABASE LocalStorageDB AS DB');
+export function fixturesToDb() {
+  let postFixtures = async (tablename) => {
+    let data = jsonFixture[tablename].map( e => ({'name': e }) )
 
-  // alasql('DROP localStorage DATABASE LocalStorageDB');
+    const r1 = await axios.delete(`http://localhost:3000/${tablename}`);
+    console.log(r1);
+    console.log(r1.data);
 
-
-  function createTables() {
-
-    let baseTables = ['roles', 'persons', 'skills', 'teams', 'levels', 'params']
-
-    // let baseTablesPromises = baseTables.map((table_name) => {
-    //   let insertBlock = "('" + fixture[table_name].join("'),('") + "')"
-    //   return alasql.promise([
-    //     `CREATE TABLE IF NOT EXISTS DB.${table_name} (id INT AUTO_INCREMENT, name STRING)`,
-    //     `INSERT INTO DB.${table_name} (name) VALUES ${insertBlock}`
-    //   ])
-    // })
-    // debugger;
-    // baseTables.reduce(
-    //   (promiseChain, tableName) => promiseChain.then(
-    //       () => {
-    //         // console.log(tableName)
-    //         let insertBlock = "('" + fixture[tableName].join("'),('") + "')";
-    //         let sql1 = `CREATE TABLE IF NOT EXISTS mydb.${tableName} (id INT IDENTITY, name STRING)`;
-    //         let sql2 = `INSERT INTO mydb.${tableName} (name) VALUES ${insertBlock}`;
-    //         // console.log(sql1, sql2)
-    //         return alasql.promise([sql1, sql2]).then(console.log(tableName))
-    //         // return  Promise.resolve()
-    //       }
-    //     ).catch(console.error),
-    //   Promise.resolve() // initial value
-    // ).then(console.log)
-
-    return alasql.promise([
-      "CREATE TABLE IF NOT EXISTS DB.persons_teams (id INT IDENTITY, person_id INT, team_id INT)",
-      `INSERT INTO DB.persons_teams (person_id, team_id) VALUES (1, 1), (2, 1), (3, 2), (4, 1), (5, 1), (6, 1), (7, 2), (8, 1), (9, 1)`,
-      "CREATE TABLE IF NOT EXISTS DB.persons_skills (id INT IDENTITY, person_id INT, skill_id INT, level_id INT)",
-      `INSERT INTO DB.persons_skills (person_id, skill_id, level_id) VALUES (1, 1, 1), (1, 4, 2), (1, 5, 2), (1, 7, 2), (2, 1, 1), (2, 4, 2), (3, 9, 1), (3, 10, 2)`,
-      "CREATE TABLE IF NOT EXISTS DB.persons_strengths (id INT IDENTITY, person_id INT, param_id INT)",
-      `INSERT INTO DB.persons_strengths (person_id, param_id) VALUES (1, 4), (2, 5), (3, 6)`,
-      "CREATE TABLE IF NOT EXISTS DB.persons_weaknesses (id INT IDENTITY, person_id INT, param_id INT)",
-      `INSERT INTO DB.persons_weaknesses (person_id, param_id) VALUES (1, 1), (2, 2), (3, 3)`,
-      "CREATE TABLE IF NOT EXISTS DB.teams_roles (id INT IDENTITY, team_id INT, role_id INT)",
-      `INSERT INTO DB.teams_roles (team_id, role_id) VALUES (1, 3), (1, 6), (1, 11), (1, 12), (1, 15), (1, 16), (1, 19), (2, 9), (2, 15), (2, 16)`,
-      "CREATE TABLE IF NOT EXISTS DB.persons_roles (id INT IDENTITY, person_id INT, role_id INT)",
-      `INSERT INTO DB.persons_roles (person_id, role_id) VALUES (1, 2), (1, 5), (1, 17), ` +
-      `(2, 2), (2, 6), (2, 14), (3, 1), (3, 6), (3, 8), (3, 14), (3, 16), (3, 17), ` +
-      `(4, 1), (4, 4), (5, 2), (5, 6), (5, 13), (6, 2), (6, 5), (6, 17), (7, 9), (8, 12), (8, 17), (9, 17)`,
-      "CREATE TABLE IF NOT EXISTS DB.persons_teams_roles (id INT IDENTITY, person_id INT, role_id INT, team_id INT)",
-      `INSERT INTO DB.persons_teams_roles (person_id, role_id, team_id) VALUES (1, 1, 1), (1, 2, 1), (2, 3, 2), (2, 4, 2)`
-    ]).then(console.log).catch(console.error)
+    const response = await axios.post(`http://localhost:3000/${tablename}`, data);
+    console.log(response);
+    console.log(response.data);
   }
+  // Do it only first time.
+  // baseTables.map( tableName => postFixtures(tableName))
+
+};
 
 
-  alasql.promise('CREATE INDEXEDDB DATABASE IF NOT EXISTS DB;')
-  .then( (t) => { console.log("Database created", t); return alasql.promise('ATTACH INDEXEDDB DATABASE DB;') } )
-  .then( (t) => { console.log("Database attached", t); return alasql.promise('USE DB;') } )
-  .then( (t) => { console.log("Database used", t); createTables(); } )
-  .catch( (t) => console.log("Database creation error", t))
+let fetchModelAllAsync = async (model) => {
+  const response = await axios.get(`http://localhost:3000/${model}`);
+  console.log(response); console.log(response.data);
+  return response.data
+}
 
+export function fetchModelAll(model) {
+  return fetchModelAllAsync(model);
 
 }
 
@@ -88,9 +55,9 @@ export function fetchModel(model, id) {
   return alasql(`SELECT * FROM DB.${model} WHERE id=${id}`)[0];
 }
 
-export function fetchModelAll(model) {
-  return alasql.promise(`SELECT * FROM DB.${model}`).then(console.log("Fetched ", model)).catch(console.error);
-}
+// export function fetchModelAll(model) {
+//   return alasql.promise(`SELECT * FROM DB.${model}`).then(console.log("Fetched ", model)).catch(console.error);
+// }
 
 export function fetchPersonsInTeam(team_id) {
   return alasql(`SELECT person_id as id, name FROM DB.persons_teams JOIN DB.persons ON persons_teams.person_id = persons.id WHERE team_id=${team_id}`);

@@ -51,6 +51,16 @@ function deleteRowFromModel(state, payload) {
   return {...state}
 }
 
+function getInitialState() {
+  models.fixturesToDb()
+  return {
+    'teams': models.fetchModelAll('teams'),
+    'persons': models.fetchModelAll('persons'),
+    'roles': models.fetchModelAll('roles'),
+    'skills': models.fetchModelAll('skills'),
+  }
+}
+
 // function initState(state, payload) {
 //   models.fetchModelAll('teams').then( (res) => state.teams = res)
 //   models.fetchModelAll('persons').then( (res) => state.teams = res)
@@ -93,7 +103,7 @@ function appReducer(state, action) {
 
     case constants.DELETE_ROW_FROM_MODEL: return deleteRowFromModel(state, action.payload)
 
-    case constants.INIT_STATE: return initState(state, action.payload)
+    case constants.INIT_STATE: return getInitialState(state, action.payload)
 
 
     default: return state

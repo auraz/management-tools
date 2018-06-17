@@ -15,7 +15,7 @@ import thunk from 'redux-thunk';
 import App from 'components/App.jsx';
 import appReducer from 'components/common/reducer.jsx'
 
-import { initDb, fetchModelAll } from 'components/common/models.jsx'
+import { fetchModelAll } from 'components/common/models.jsx'
 
 
 function logger({getState}) {
@@ -30,9 +30,6 @@ function logger({getState}) {
     }
 }
 
-initDb(); // this is async now!
-
-store.distach(fetchInitialState);
 const store = createStore(appReducer, {}, applyMiddleware(thunk, logger));
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,
