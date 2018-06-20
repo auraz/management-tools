@@ -29,8 +29,8 @@ function addParamPerson(state, payload) {
 }
 
 function addTeamRole(state, payload) {
-  models.attachTeamRole(payload.role_id, payload.team_id)
-  state.teams_roles = models.fetchModelAll('teams_roles')
+  let result =  models.attachTeamRole(payload.role_id, payload.team_id)
+  // state.teams_roles = async models.fetchModelAll('teams_roles')
   return {...state}
 }
 

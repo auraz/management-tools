@@ -42,22 +42,47 @@ export function fixturesToDb() {
 
 let fetchModelAllAsync = async (model) => {
   const response = await axios.get(`http://localhost:3000/${model}`);
-  console.log(response); console.log(response.data);
+  // console.log(response);
+  console.log("Fetched", model, response.data);
   return response.data // magic
 }
 
 export function fetchModelAll(model) {
   return fetchModelAllAsync(model)
-
 }
+
+// export function fetchTeamsRoles(team_id) {
+//   return alasql(`SELECT tr.role_id as id, r.name as name, tr.id as index_id FROM DB.teams_roles tr JOIN DB.roles r ON tr.role_id = r.id WHERE team_id=${team_id}`);
+// }
+
+let fetchTeamsRolesAsync = async (team_id) => {
+  const response = await axios.get(`http://localhost:3000/teams_roles?id=eq.${team_id}`);
+  console.log(response); console.log(response.data);
+  console.log("Fetched TeamsRoles", response.data);
+  return response.data // magic
+}
+
+export function fetchTeamsRoles(team_id) {
+  return fetchTeamsRolesAsync(team_id)
+}
+
+let attachTeamRoleAsync =  async (role_id, team_id) => {
+  const response = await axios.post(`http://localhost:3000/teams_roles`, {"role": role_id, "team": team_id});
+  console.log(response); console.log(response.data);
+  console.log("Fetched TeamsRoles", response.data);
+  return response.data // magic
+}
+
+export function attachTeamRole(role_id, team_id) {
+  return attachTeamRoleAsync(role_id, team_id)
+}
+
+
+
 
 export function fetchModel(model, id) {
   return alasql(`SELECT * FROM DB.${model} WHERE id=${id}`)[0];
 }
-
-// export function fetchModelAll(model) {
-//   return alasql.promise(`SELECT * FROM DB.${model}`).then(console.log("Fetched ", model)).catch(console.error);
-// }
 
 export function fetchPersonsInTeam(team_id) {
   return alasql(`SELECT person_id as id, name FROM DB.persons_teams JOIN DB.persons ON persons_teams.person_id = persons.id WHERE team_id=${team_id}`);
@@ -69,10 +94,6 @@ export function fetchPersonParam(param_type, person_id) {
 
 export function fetchPersonSkills(person_id) {
   return alasql(`SELECT ps.skill_id as skill_id, l.name as level_name, s.name as skill_name FROM DB.persons_skills ps JOIN DB.persons p ON ps.person_id = p.id JOIN DB.skills s ON s.id=ps.skill_id JOIN DB.levels l ON l.id=ps.level_id WHERE person_id=${person_id}`);
-}
-
-export function fetchTeamsRoles(team_id) {
-  return alasql(`SELECT tr.role_id as id, r.name as name, tr.id as index_id FROM DB.teams_roles tr JOIN DB.roles r ON tr.role_id = r.id WHERE team_id=${team_id}`);
 }
 
 export function fetchPersonsRoles(person_id) {
@@ -97,10 +118,6 @@ export function attachSkillPerson(skill_id, person_id) {
 
 export function attachParamPerson(param_type, param_id, person_id) {
   return alasql(`INSERT INTO DB.persons_${param_type} VALUE {param_id:?, person_id:?}`, [param_id, person_id]);
-}
-
-export function attachTeamRole(role_id, team_id) {
-  return alasql("INSERT INTO DB.teams_roles VALUE {role_id:?, team_id:?}", [role_id, team_id]);
 }
 
 export function attachPersonRole(role_id, person_id) {

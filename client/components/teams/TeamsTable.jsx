@@ -20,7 +20,9 @@ class TeamsTable extends React.Component {
       // team_id: this.props.match.params.id,
       // team_name: fetchTeam(this.state.team_id).name,
       // persons_in_team: fetchPersonsInTeam(this.state.team_id)
-      teams: null
+      teams: [],
+      roles: [],
+
     }
   }
 
@@ -30,28 +32,19 @@ class TeamsTable extends React.Component {
   }
 
   listRoles(team_id) {
-    return fetchTeamsRoles(team_id).map((r) => <li className="list-group-item" key={r.id}>{r.name}<DeleteControl id={r.index_id} model="teams_roles" /></li>)
+    return this.state.teams_roles.map((r) => <li className="list-group-item" key={r.id}>{r.name}<DeleteControl id={r.index_id} model="teams_roles" /></li>)
   }
 
   async componentDidMount() {
-    // this._asyncRequest = fetchModelAll('teams').then(
-    //   teamsFetched => {
-    //     this._asyncRequest = null;
-    //     this.setState({ 'teams': teamsFetched });
-    //   }
-    // );
-    this._asyncRequest = await fetchModelAll('teams')
-    this.setState({ 'teams': this._asyncRequest });
-  }
-
-   componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel();
-    }
+    let teams = await fetchModelAll('teams');
+    let roles = await fetchModelAll('roles');
+    let teams_roles = await fetchTeamsRoles(1);
+    this.setState({ 'teams': teams, 'roles': roles, 'teams_roles': teams_roles });
+    console.log(teams_roles)
   }
 
   render() {
-    if (this.state.teams === null) {
+    if (this.state.teams === []) {
       return <div>Fetching Teams</div>
     }
     return (
@@ -77,18 +70,18 @@ class TeamsTable extends React.Component {
                 <div className="collapse" id={"collapseRoles_" + r.id} >
                   <div className="card card-body">
                     <ul className="list-group list-group-flush">
-{/*                     { this.listRoles(r.id) }*/}
+                     { this.listRoles(r.id) }
                     </ul>
                   </div>
-{/*                  <Select name="form-field-name" value={''}
+                  <Select name="form-field-name" value={''}
                     onChange={(target) => this.props.addTeamRole(target, r.id)}
-                    options={ fetchModelAll('roles').filter(
-                        (y) => !fetchTeamsRoles(r.id).map(t => t.id).includes(y.id)
+                    options={ this.state.roles.filter(
+                        (y) => !this.state.teams_roles.map(t => t.id).includes(y.id)
                       ).map(
                         (t) => ({ value: t.id, label: t.name })
                       )
                     }
-                    />*/}
+                    />
                 </div>
                 </th>
             </Row>
