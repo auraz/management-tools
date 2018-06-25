@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { prepareTeamsRoles } from './utils.jsx'
 
 // Should be valid JSON
 let jsonFixture = {
@@ -55,22 +55,43 @@ export function fetchModelAll(model) {
 //   return alasql(`SELECT tr.role_id as id, r.name as name, tr.id as index_id FROM DB.teams_roles tr JOIN DB.roles r ON tr.role_id = r.id WHERE team_id=${team_id}`);
 // }
 
-let fetchTeamsRolesAsync = async (team_id) => {
-  const response = await axios.get(`http://localhost:3000/teams_roles?id=eq.${team_id}`);
+  /*
+  Returns:
+
+  [
+    {
+        "id": 8,
+        "roles": {
+            "id": 45,
+            "name": "Junior Front-end Developer                        "
+        },
+        "teams": {
+            "id": 9,
+            "name": "Web development                                   "
+        }
+    }
+]
+  */
+let fetchTeamsRolesAsync = async () => {
+  // console.log("Team id", team_id)
+  // const response = await axios.get(`http://localhost:3000/teams_roles?select=role&teams.id=eq.${team_id}`);
+  const response = await axios.get(`http://localhost:3000/teams_roles?select=id,roles(id,name),teams(id,name)`);
   console.log(response); console.log(response.data);
   console.log("Fetched TeamsRoles", response.data);
-  return response.data // magic
+  let preparedForState = prepareTeamsRoles(response.data)
+  // return response.data // magic
+  return preparedForState
 }
 
-export function fetchTeamsRoles(team_id) {
-  return fetchTeamsRolesAsync(team_id)
+export function fetchTeamsRoles() {
+  return fetchTeamsRolesAsync()
 }
 
 let attachTeamRoleAsync =  async (role_id, team_id) => {
   const response = await axios.post(`http://localhost:3000/teams_roles`, {"role": role_id, "team": team_id});
   console.log(response); console.log(response.data);
   console.log("Fetched TeamsRoles", response.data);
-  return response.data // magic
+  return parseInt(response.data.headers.location.split('.').pop()) // magic
 }
 
 export function attachTeamRole(role_id, team_id) {
