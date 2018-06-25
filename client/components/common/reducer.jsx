@@ -30,7 +30,7 @@ function addParamPerson(state, payload) {
 
 function addTeamRole(state, payload) {
   let result =  models.attachTeamRole(payload.role_id, payload.team_id)
-  // state.teams_roles = async models.fetchModelAll('teams_roles')
+  state.teams_roles = [{id: id, role: role_id, team: team_id}, ...state.teams_roles]
   return {...state}
 }
 
@@ -51,34 +51,24 @@ function deleteRowFromModel(state, payload) {
   return {...state}
 }
 
-function getInitialState() {
+async function getInitialState() {
   models.fixturesToDb()
-  // return {
-  //   'teams': models.fetchModelAll('teams'),
-  //   'persons': models.fetchModelAll('persons'),
-  //   'roles': models.fetchModelAll('roles'),
-  //   'skills': models.fetchModelAll('skills'),
-  // }
-  return {}
+  let teams = await models.fetchModelAll('teams')
+  let teamsRoles = await models.fetchModelAll('teams_roles')
+  return {
+    'teams': teams,
+    'teamsRoles': teamsRoles,
+    // 'persons': models.fetchModelAll('persons'),
+    // 'roles': await models.fetchModelAll('roles'),
+    // 'skills': models.fetchModelAll('skills'),
+  }
 }
 
-// function initState(state, payload) {
-//   models.fetchModelAll('teams').then( (res) => state.teams = res)
-//   models.fetchModelAll('persons').then( (res) => state.teams = res)
-//   models.fetchModelAll('teams').then( (res) => state.teams = res)
-//   models.fetchModelAll('teams').then( (res) => state.teams = res)
-//   models.fetchModelAll('teams').then( (res) => state.teams = res)
-//   models.fetchModelAll('teams').then( (res) => state.teams = res)
-//   return {
-//     teams:
-//     persons: fetchModelAll('persons'),
-//     skills: fetchModelAll('skills'),
-//     roles: fetchModelAll('roles'),
-//     params: fetchModelAll('params')
-//   }
-// }
+function fetchTeamsRoles(state, payload) {
+  // models.fetchTeamsRoles.then(res => this.setState('teamsRoles': res))
+  return state
+}
 
-// }
 
 function appReducer(state, action) {
   switch (action.type) {
@@ -105,6 +95,8 @@ function appReducer(state, action) {
     case constants.DELETE_ROW_FROM_MODEL: return deleteRowFromModel(state, action.payload)
 
     case constants.INIT_STATE: return getInitialState(state, action.payload)
+
+    case constants.FETCH_TEAMS_ROLES: return fetchTeamsRoles(state, action.payload)
 
 
     default: return state
