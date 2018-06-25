@@ -1,25 +1,46 @@
-# docker-compose up
-version: '2.1'
+version: '3.1'
+
 services:
 
-  psql:
-    build: ./server/psqldb
+  postgrest:
+  # https://github.com/suzel/docker-postgrest
+  # https://postgrest.org/en/v5.0/install.html#docker
+    image: postgrest/postgrest
     ports:
-      - "5433:5432" # expose ports - HOST:CONTAINE
-    healthcheck:
-      test: exit 0
-
-  web:
-    build: .
-    ports:
-     - "80:8080"
-    volumes:
-     - .:/app  # mounting current dir inside volume, autochange
-    depends_on:
-      psql:
-        condition: service_healthy
+      - "3000:3000"
     links:
-      - psql
+      - postgres:postgres
     environment:
-      - DATABASE_URL=postgres://mtools:mtools@psql:5432/mtools
+      PGRST_DB_URI: postgres://app_user:secret@postgres:5432/app_db
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: app_user #In production this role should not be the same as the one used for the connection
+    depends_on:
+      - postgres
 
+  # https://github.com/sosedoff/pgweb
+  pgweb:
+    image: sosedoff/pgweb
+    ports:
+      - "8081:8081"
+    links:
+      - postgres:postgres
+    environment:
+      - DATABASE_URL=postgres://app_user:secret@postgres:5432/app_db?sslmode=disable
+    depends_on:
+      - postgres
+
+  # https://hub.docker.com/_/postgres/
+  postgres:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - postgres-data:/Users/kry/Repos/postgresql/data
+      # - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres-data: {}

@@ -20,6 +20,9 @@ class TeamsTable extends React.Component {
       // team_id: this.props.match.params.id,
       // team_name: fetchTeam(this.state.team_id).name,
       // persons_in_team: fetchPersonsInTeam(this.state.team_id)
+      teams: [],
+      roles: [],
+
     }
   }
 
@@ -29,13 +32,24 @@ class TeamsTable extends React.Component {
   }
 
   listRoles(team_id) {
-    return fetchTeamsRoles(team_id).map((r) => <li className="list-group-item" key={r.id}>{r.name}<DeleteControl id={r.index_id} model="teams_roles" /></li>)
+    return this.state.teams_roles.map((r) => <li className="list-group-item" key={r.id}>{r.name}<DeleteControl id={r.index_id} model="teams_roles" /></li>)
+  }
+
+  async componentDidMount() {
+    let teams = await fetchModelAll('teams');
+    let roles = await fetchModelAll('roles');
+    let teams_roles = await fetchTeamsRoles(1);
+    this.setState({ 'teams': teams, 'roles': roles, 'teams_roles': teams_roles });
+    console.log(teams_roles)
   }
 
   render() {
+    if (this.state.teams === []) {
+      return <div>Fetching Teams</div>
+    }
     return (
       <DragAndDropTable>
-        {this.props.teams.map( r => {
+        {this.state.teams.map( r => {
           return (
             <Row key={r.id} id={r.id}>
               <th>
@@ -61,8 +75,8 @@ class TeamsTable extends React.Component {
                   </div>
                   <Select name="form-field-name" value={''}
                     onChange={(target) => this.props.addTeamRole(target, r.id)}
-                    options={ fetchModelAll('roles').filter(
-                        (y) => !fetchTeamsRoles(r.id).map(t => t.id).includes(y.id)
+                    options={ this.state.roles.filter(
+                        (y) => !this.state.teams_roles.map(t => t.id).includes(y.id)
                       ).map(
                         (t) => ({ value: t.id, label: t.name })
                       )
@@ -78,9 +92,9 @@ class TeamsTable extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { fake_update: state, teams: state.teams }
-}
+// const mapStateToProps = (state) => {
+//   return { fake_update: state, teams: state.teams }
+// }
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -90,4 +104,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeamsTable)
+export default connect(null, mapDispatchToProps)(TeamsTable)

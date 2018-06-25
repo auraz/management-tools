@@ -20,4 +20,5 @@ export const ADD_PERSON_TEAM = "ADD_PERSON_TEAM"
 
 export const DELETE_ROW_FROM_MODEL = "DELETE_ROW_FROM_MODEL"
 
-export const fetchInitialState = () => { return fetchInitState; }
+// export const fetchInitialState = () => { return fetchInitState; }
+export const INIT_STATE = "INIT_STATE";

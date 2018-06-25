@@ -1,5 +1,6 @@
 import React from 'react';
 import { MemoryRouter as Router, Route } from 'react-router-dom'
+import { connect } from "react-redux";
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'
@@ -23,8 +24,6 @@ import ParamForm from './parameters/ParamForm.jsx'
 
 import ErrorBoundary from './common/ErrorBoundary.jsx'
 import { TopNav, LeftNav } from './LayoutHelpers.jsx'
-
-import { getInitialState } from '../common/models.jsx'
 
 
 const routes = [
@@ -111,20 +110,14 @@ class App extends React.Component {
     }
 }
 
-let initialState =
-
-const mapStateToProps = (state) => { state: state };
-
 const mapDispatchToProps = (dispatch) => {
-    return {
-        getInitialState: () => {
-          return (dispatch)=> {
-
-          }
-        }
-    }
+  return {
+    getInitialState: () => dispatch({payload: {}, type: "INIT_STATE"})
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(App));
+App = DragDropContext(HTML5Backend)(App);
+
+export default connect(null, mapDispatchToProps)(App);
 
 

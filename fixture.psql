@@ -1,0 +1,23 @@
+# # psql -d app_db -U app_user
+
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
+GRANT ALL ON SCHEMA public TO app_user;
+GRANT ALL ON SCHEMA public TO public;
+ALTER SCHEMA public OWNER to app_user;
+
+CREATE TABLE teams (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE roles (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE persons (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE skills (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE levels (id SERIAL PRIMARY KEY, name CHAR(50));
+CREATE TABLE params (id SERIAL PRIMARY KEY, name CHAR(50));
+
+CREATE TABLE persons_teams (id SERIAL PRIMARY KEY, person int REFERENCES persons, team int REFERENCES teams);
+CREATE TABLE persons_skills (id SERIAL PRIMARY KEY, person int REFERENCES persons, skill int REFERENCES skills, level int REFERENCES levels);
+CREATE TABLE persons_strengths (id SERIAL PRIMARY KEY, person int REFERENCES persons, param int REFERENCES params);
+CREATE TABLE persons_weaknesses (id SERIAL PRIMARY KEY, person int REFERENCES persons, param int REFERENCES params);
+CREATE TABLE teams_roles (id SERIAL PRIMARY KEY, team int REFERENCES teams, role int REFERENCES roles);
+CREATE TABLE persons_roles (id SERIAL PRIMARY KEY, person int REFERENCES persons, role int REFERENCES roles);
+CREATE TABLE persons_teams_roles (id SERIAL PRIMARY KEY, person int REFERENCES persons, role int REFERENCES roles, team int REFERENCES teams);

@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "JSON": "^1.0.0",
+    "axios": "^0.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bootstrap": "4.0.0-beta.3",
     "clean-webpack-plugin": "^0.1.17",

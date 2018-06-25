@@ -29,8 +29,8 @@ function addParamPerson(state, payload) {
 }
 
 function addTeamRole(state, payload) {
-  models.attachTeamRole(payload.role_id, payload.team_id)
-  state.teams_roles = models.fetchModelAll('teams_roles')
+  let result =  models.attachTeamRole(payload.role_id, payload.team_id)
+  // state.teams_roles = async models.fetchModelAll('teams_roles')
   return {...state}
 }
 
@@ -49,6 +49,17 @@ function deleteRowFromModel(state, payload) {
   models.deleteRowFromModel(payload.model, payload.id)
   state[payload.model] =  models.fetchModelAll(payload.model)
   return {...state}
+}
+
+function getInitialState() {
+  models.fixturesToDb()
+  // return {
+  //   'teams': models.fetchModelAll('teams'),
+  //   'persons': models.fetchModelAll('persons'),
+  //   'roles': models.fetchModelAll('roles'),
+  //   'skills': models.fetchModelAll('skills'),
+  // }
+  return {}
 }
 
 // function initState(state, payload) {
@@ -93,7 +104,7 @@ function appReducer(state, action) {
 
     case constants.DELETE_ROW_FROM_MODEL: return deleteRowFromModel(state, action.payload)
 
-    case constants.INIT_STATE: return initState(state, action.payload)
+    case constants.INIT_STATE: return getInitialState(state, action.payload)
 
 
     default: return state
