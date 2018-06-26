@@ -10,7 +10,7 @@ class TeamsForm_ extends React.PureComponent {
                 <div className="input-group mb-3">
                     <input type="text" className="form-control" placeholder="Team name" aria-label="Team name" value={this.props.value} />
                     <div className="input-group-append">
-                        <button className="btn btn-outline-secondary" type="submit">Add a new team</button>
+                        <button className="btn btn-outline-secondary" type="submit">Add team</button>
                     </div>
                 </div>
             </form>

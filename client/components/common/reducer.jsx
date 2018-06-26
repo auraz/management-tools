@@ -51,16 +51,10 @@ function deleteRowFromModel(state, payload) {
   return {...state}
 }
 
-async function getInitialState() {
-  models.fixturesToDb()
-  let teams = await models.fetchModelAll('teams')
-  let teamsRoles = await models.fetchModelAll('teams_roles')
+
+function getInitialState() {
   return {
-    'teams': teams,
-    'teamsRoles': teamsRoles,
-    // 'persons': models.fetchModelAll('persons'),
-    // 'roles': await models.fetchModelAll('roles'),
-    // 'skills': models.fetchModelAll('skills'),
+    'loading': true,
   }
 }
 
@@ -69,6 +63,11 @@ function fetchTeamsRoles(state, payload) {
   return state
 }
 
+
+function f1(state, action) {
+  // debugger;
+  return {loading: false, teams: action.response.data }
+}
 
 function appReducer(state, action) {
   switch (action.type) {
@@ -94,9 +93,12 @@ function appReducer(state, action) {
 
     case constants.DELETE_ROW_FROM_MODEL: return deleteRowFromModel(state, action.payload)
 
-    case constants.INIT_STATE: return getInitialState(state, action.payload)
+    case constants.INIT_STATE: return {loading: true}
+    case constants.INIT_STATE_SUCCEEDED: return f1(state, action)
+    case constants.INIT_STATE_FAILED: return {loading: false, error: action.err}
 
     case constants.FETCH_TEAMS_ROLES: return fetchTeamsRoles(state, action.payload)
+
 
 
     default: return state

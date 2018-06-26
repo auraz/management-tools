@@ -15,7 +15,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 const CleanWebpackPlugin = require('clean-webpack-plugin') // Remove old hashed js files on rebuilding
 
 module.exports = {
-  entry: 'index.js',
+  entry: ['index.js'],
   context: __dirname + "/client", // Only for entry points, not for modules.
   resolve: {
     modules: ['node_modules', 'client', 'client/components'],

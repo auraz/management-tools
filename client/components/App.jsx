@@ -15,8 +15,7 @@ import PersonView from './persons/PersonView.jsx'
 import RolesTable from './roles/RolesTable.jsx'
 import RoleForm from './roles/RoleForm.jsx'
 
-import TeamsTable from './teams/TeamsTable.jsx'
-import TeamForm from './teams/TeamForm.jsx'
+import Teams from './teams/Teams.jsx'
 import TeamView from './teams/TeamView.jsx'
 
 import ParamTable from './parameters/ParamTable.jsx'
@@ -31,13 +30,13 @@ const routes = [
     path: '/',
     exact: true,
     title: "Teams",
-    component: () => <div><h2>Teams</h2><TeamsTable /><TeamForm /></div>,
+    component: () => <Teams/>,
   },
   {
     path: '/teams',
     exact: true,
     title: "Teams",
-    component: () => <div><h2>Teams</h2><TeamForm /><TeamsTable /></div>,
+    component: () => <Teams/>,
     type: 'LeftNav'
   },
   {
@@ -79,11 +78,6 @@ const routes = [
 
 class App extends React.Component {
 
-  componentWillMount() {
-    this.props.getInitialState();
-  }
-
-
   render() {
     return (
         <Router basename="">
@@ -110,14 +104,8 @@ class App extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getInitialState: () => dispatch({payload: {}, type: "INIT_STATE"})
-  }
-}
-
 App = DragDropContext(HTML5Backend)(App);
 
-export default connect(null, mapDispatchToProps)(App);
+export default App;
 
 

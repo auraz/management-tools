@@ -1,4 +1,4 @@
-import{ jsonQ } from 'jsonq'
+import jsonQ from 'jsonq'
 /*
 Extract roles per team from teams_roles resource embedding database query result.
 
@@ -20,10 +20,17 @@ Convert
 
 to
 
-
+  [
+    { team: 9, roles: [8] },
+    { team: 10, roles: [8, 9] },
+  ]
 */
 export function prepareTeamsRoles(data) {
   let teamsRoles = jsonQ(data);
-  let teamsIds =teamsROles.find('teams', () =>this.id );
+  let teamsIds = teamsRoles.find('teams').find('id').value()
   console.log(teamsIds);
+  return [
+    { team: 9, roles: [8] },
+    { team: 10, roles: [8, 9] },
+  ]
 }

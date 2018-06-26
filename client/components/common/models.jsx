@@ -47,8 +47,13 @@ let fetchModelAllAsync = async (model) => {
   return response.data // magic
 }
 
+// export function fetchModelAll(model) {
+//   return fetchModelAllAsync(model)
+// }
+
 export function fetchModelAll(model) {
-  return fetchModelAllAsync(model)
+  console.log('Fetching model')
+  return axios.get(`http://localhost:3000/${model}`);
 }
 
 // export function fetchTeamsRoles(team_id) {
