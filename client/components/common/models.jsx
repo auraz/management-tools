@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { prepareTeamsRoles } from './utils.jsx'
+
 
 // Should be valid JSON
 let jsonFixture = {
@@ -22,93 +22,32 @@ let jsonFixture = {
 let baseTables = ['roles', 'persons', 'skills', 'teams', 'levels', 'params']
 
 
+export const Models = {
+  all: (modelName) => axios.get(`http://localhost:3000/${modelName}`),
+  one: (modelName, id) => axios.get(`http://localhost:3000/${modelName}?id=eq${id}`),
+
+  // axios.get(`http://localhost:3000/teams_roles?select=role&teams.id=eq.${team_id}`);
+  TeamsRoles: () => {
+    return axios.get(`http://localhost:3000/teams_roles?select=id,roles(id,name),teams(id,name)`)
+  },
+  attachTeamRole: (role_id, team_id) => {
+    const reponse =  axios.post(`http://localhost:3000/teams_roles`, {"role": role_id, "team": team_id});
+    return parseInt(response.data.headers.location.split('.').pop())
+  }
+}
+
 export function fixturesToDb() {
   let postFixtures = async (tablename) => {
     let data = jsonFixture[tablename].map( e => ({'name': e }) )
 
     const r1 = await axios.delete(`http://localhost:3000/${tablename}`);
-    console.log(r1);
-    console.log(r1.data);
+    console.log(r1, r1.data);
 
     const response = await axios.post(`http://localhost:3000/${tablename}`, data);
-    console.log(response);
-    console.log(response.data);
+    console.log(response, response.data);
   }
-  // Do it only first time.
-  // baseTables.map( tableName => postFixtures(tableName))
-
+  // baseTables.map( tableName => postFixtures(tableName)) // Do it only first time
 };
-
-
-let fetchModelAllAsync = async (model) => {
-  const response = await axios.get(`http://localhost:3000/${model}`);
-  // console.log(response);
-  console.log("Fetched", model, response.data);
-  return response.data // magic
-}
-
-// export function fetchModelAll(model) {
-//   return fetchModelAllAsync(model)
-// }
-
-export function fetchModelAll(model) {
-  console.log('Fetching model')
-  return axios.get(`http://localhost:3000/${model}`);
-}
-
-// export function fetchTeamsRoles(team_id) {
-//   return alasql(`SELECT tr.role_id as id, r.name as name, tr.id as index_id FROM DB.teams_roles tr JOIN DB.roles r ON tr.role_id = r.id WHERE team_id=${team_id}`);
-// }
-
-  /*
-  Returns:
-
-  [
-    {
-        "id": 8,
-        "roles": {
-            "id": 45,
-            "name": "Junior Front-end Developer                        "
-        },
-        "teams": {
-            "id": 9,
-            "name": "Web development                                   "
-        }
-    }
-]
-  */
-let fetchTeamsRolesAsync = async () => {
-  // console.log("Team id", team_id)
-  // const response = await axios.get(`http://localhost:3000/teams_roles?select=role&teams.id=eq.${team_id}`);
-  const response = await axios.get(`http://localhost:3000/teams_roles?select=id,roles(id,name),teams(id,name)`);
-  console.log(response); console.log(response.data);
-  console.log("Fetched TeamsRoles", response.data);
-  let preparedForState = prepareTeamsRoles(response.data)
-  // return response.data // magic
-  return preparedForState
-}
-
-export function fetchTeamsRoles() {
-  return fetchTeamsRolesAsync()
-}
-
-let attachTeamRoleAsync =  async (role_id, team_id) => {
-  const response = await axios.post(`http://localhost:3000/teams_roles`, {"role": role_id, "team": team_id});
-  console.log(response); console.log(response.data);
-  console.log("Fetched TeamsRoles", response.data);
-  return parseInt(response.data.headers.location.split('.').pop()) // magic
-}
-
-export function attachTeamRole(role_id, team_id) {
-  return attachTeamRoleAsync(role_id, team_id)
-}
-
-
-
-
-export function fetchModel(model, id) {
-  return alasql(`SELECT * FROM DB.${model} WHERE id=${id}`)[0];
-}
 
 export function fetchPersonsInTeam(team_id) {
   return alasql(`SELECT person_id as id, name FROM DB.persons_teams JOIN DB.persons ON persons_teams.person_id = persons.id WHERE team_id=${team_id}`);
@@ -159,18 +98,4 @@ export function deleteRowFromModel(model, id) {
 }
 
 
-export function person_health(persons_skills, person_id) {
-  let person_skills = persons_skills.filter(el => el.person_id == person_id)
-  let total_good_skills = person_skills.filter(el => el.level_id == 1).length
-  let health = total_good_skills / person_skills.length;
-  return health;
-}
 
-
-export function team_health(persons_teams, persons_skills, team_id) {
-  let list_of_person_ids = persons_teams.filter(el => el.team_id == team_id).map(el => el.person_id)
-  let sum_reducer = (acc, cur) => acc + cur
-  let total_percentage = list_of_person_ids.map(e => person_health(persons_skills, e)).reduce(sum_reducer)
-  let team_health = Math.floor( (total_percentage / list_of_person_ids.length) * 100).toFixed(0) + "%"
-  return team_health
-}

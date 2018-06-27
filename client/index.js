@@ -3,22 +3,31 @@
 */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'components/common/dashboard.css';
-// import 'babel-polyfill'
 import 'bootstrap';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
+import { combineReducers } from 'redux'
+
+import App from 'components/App.jsx';
 
 import createSagaMiddleware from 'redux-saga'
 import { call, put, takeEvery, delay, all, race, fork, spawn, take, select } from 'redux-saga/effects'
 import createSagaMonitor from 'components/sagaMonitor.jsx'
 
-import App from 'components/App.jsx';
+import { watchInitState } from 'components/Sagas.jsx'
+import { watchTeamsRoles } from 'components/Teams/TeamSagas.jsx'
+
 import appReducer from 'components/common/reducer.jsx'
+import TeamReducer from 'components/teams/TeamReducer.jsx'
 
-import { watchInitState } from './components/Sagas.jsx'
 
+const reducers = combineReducers({
+  appReducer,
+  TeamReducer
+})
 
 
 function logger({getState}) {
@@ -32,6 +41,7 @@ function logger({getState}) {
         return returnValue;
     }
 }
+
 const config = {
   level: 'log',
   effectTrigger: true,
@@ -40,19 +50,17 @@ const config = {
 }
 
 const sagaMiddleware = createSagaMiddleware({sagaMonitor: createSagaMonitor(config)})
-const store = createStore(appReducer, {loading: false, teams: [], err: null}, applyMiddleware(logger, sagaMiddleware));
-
-
+const store = createStore(reducers, {},  applyMiddleware(logger, sagaMiddleware));
 
 function* rootSaga() {
   yield [
     watchInitState(),
+    watchTeamsRoles(),
   ]
 }
 
 sagaMiddleware.run(rootSaga)
-// const action = type => store.dispatch({type})
-store.dispatch({type: "INIT_STATE"})
+
 store.dispatch({type: "INIT_STATE"})
 
 ReactDOM.render(

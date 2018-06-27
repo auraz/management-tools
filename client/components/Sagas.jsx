@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { put, takeEvery, delay, call } from 'redux-saga/effects'
-import * as models from './common/models'
+import { put, takeEvery } from 'redux-saga/effects'
+import { Models } from './common/models'
 
 export function* watchInitState() {
   yield takeEvery('INIT_STATE', initState);
@@ -8,7 +7,7 @@ export function* watchInitState() {
 
 function* initState() {
   try {
-    const response = yield models.fetchModelAll('teams');
+    const response = yield Models.TeamsRoles();
     yield put({type: 'INIT_STATE_SUCCEEDED', response})
   }
   catch (err) {

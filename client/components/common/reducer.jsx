@@ -1,4 +1,3 @@
-import {combineReducers} from "redux";
 import  * as models from "./models";
 import * as constants from './actions.jsx';
 
@@ -52,23 +51,6 @@ function deleteRowFromModel(state, payload) {
 }
 
 
-function getInitialState() {
-  return {
-    'loading': true,
-  }
-}
-
-function fetchTeamsRoles(state, payload) {
-  // models.fetchTeamsRoles.then(res => this.setState('teamsRoles': res))
-  return state
-}
-
-
-function f1(state, action) {
-  // debugger;
-  return {loading: false, teams: action.response.data }
-}
-
 function appReducer(state, action) {
   switch (action.type) {
     case constants.ADD_PERSON: return addData(state, action.payload, 'persons')
@@ -94,14 +76,12 @@ function appReducer(state, action) {
     case constants.DELETE_ROW_FROM_MODEL: return deleteRowFromModel(state, action.payload)
 
     case constants.INIT_STATE: return {loading: true}
-    case constants.INIT_STATE_SUCCEEDED: return f1(state, action)
+    case constants.INIT_STATE_SUCCEEDED: return {loading: false, teams: action.response.data }
     case constants.INIT_STATE_FAILED: return {loading: false, error: action.err}
 
     case constants.FETCH_TEAMS_ROLES: return fetchTeamsRoles(state, action.payload)
 
-
-
-    default: return state
+    default: return state ? state :  {loading: false}
   }
 }
 

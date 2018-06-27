@@ -1,7 +1,5 @@
-import { connect } from "react-redux";
 import React from "react";
 
-import { fetchModelAll, fetchTeamsRoles } from "../common/models"
 import TeamsTable from './TeamsTable.jsx'
 import TeamForm from './TeamForm.jsx'
 
