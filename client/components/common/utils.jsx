@@ -1,4 +1,5 @@
 import jsonQ from 'jsonq'
+import _ from 'lodash'
 /*
 Extract roles per team from teams_roles resource embedding database query result.
 
@@ -18,22 +19,51 @@ Convert
     }
 ]
 
-to
+to Teams:
+  {
+    9: {
+      name: Web development,
+      roles: { id: 45, name: Junior Front-end Developer                        }
+    },
+    10: {
+      name: A,
+      roles: { id: 11, name: Y }
+    }
+  }
 
-  [
-    { team: 9, roles: [8] },
-    { team: 10, roles: [8, 9] },
+  via
+
+  [{
+    id: 9:
+    name: Web development,
+    roles: { id: 45, name: Junior Front-end Developer                        }
+  },{
+   id: 10
+   name: A,
+   roles: { id: 11, name: Y }
+  }
   ]
 */
 export function prepareTeamsRoles(data) {
-  let teamsRoles = jsonQ(data);
-  let teamsIds = teamsRoles.find('teams').find('id').value()
-  console.log(teamsIds);
-  return {
-    TeamsRoles: [
-    { team: 9, roles: [8] },
-    { team: 10, roles: [8, 9] }
-  ]}
+  let intermediate = {};
+  _.forEach(data, function(value) {
+    if (!_.has(intermediate, value.teams.id)) {
+        intermediate[value.teams.id] = { name: value.teams.name, roles: {} };
+        intermediate[value.teams.id].roles[value.roles.id] = value.roles.name;
+    }
+    else {
+      if (!_has(intermediate[value.teams.id].roles, value.roles.id)) {
+        intermediate[value.teams.id].roles[value.roles.id] = value.roles.name;
+      }
+    }
+  })
+  // Convert intermediate object to teams structure
+  let teams = [];
+  _.forOwn(intermediate, function(value, key) {
+    teams.push( { id: key, name: value.name, roles: value.roles})
+  } );
+
+  return teams
 }
 
 

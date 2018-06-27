@@ -53,15 +53,15 @@ const sagaMiddleware = createSagaMiddleware({sagaMonitor: createSagaMonitor(conf
 const store = createStore(reducers, {},  applyMiddleware(logger, sagaMiddleware));
 
 function* rootSaga() {
-  yield [
+  yield all([
     watchInitState(),
     watchTeamsRoles(),
-  ]
+  ])
 }
 
 sagaMiddleware.run(rootSaga)
 
-store.dispatch({type: "INIT_STATE"})
+// store.dispatch({type: "INIT_STATE"})
 
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,

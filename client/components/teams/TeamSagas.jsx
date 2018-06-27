@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeEvery, delay, call } from 'redux-saga/effects'
+import { put, takeEvery, delay, call, takeLatest } from 'redux-saga/effects'
 import { Models } from '../common/models'
 import { prepareTeamsRoles } from '../common/utils.jsx'
 
@@ -9,9 +9,9 @@ export function* watchTeamsRoles() {
 
 function* fetchTeamsRoles() {
   try {
-    const response = yield Models.all('teams_roles');
-    // const parsed = prepareTeamsRoles(response.data)
-    yield put({type: 'TEAMS_ROLES_SUCCEEDED', response})
+    const response = yield Models.TeamsRoles();
+    const parsed = prepareTeamsRoles(response.data)
+    yield put({type: 'TEAMS_ROLES_SUCCEEDED', 'data': parsed})
   }
   catch (err) {
     yield put({type: 'TEAMS_ROLES_FAILED', err})

@@ -10,7 +10,7 @@ import DeleteControl from "../common/DeleteControl.jsx";
 
 class TeamsTable extends React.Component {
 
-  componentWillMound() {
+  componentWillMount() {
     this.props.fetchTeamsRoles()
   }
 
@@ -45,12 +45,14 @@ class TeamsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { TeamsRoles: state.TeamsRoles }
+  return { TeamsRoles: state.TeamReducer.TeamsRoles }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    feachTeamsRoles: () => dispatch({type: "FETCH_TEAMS_ROLES"})
+    fetchTeamsRoles: () => {
+      dispatch({type: "FETCH_TEAMS_ROLES"})
+    }
   }
 }
 
