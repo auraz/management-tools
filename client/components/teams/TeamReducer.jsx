@@ -17,6 +17,11 @@ function TeamReducer(state, action) {
     case constants.TEAMS_ROLES_SUCCEEDED: return log(state, action, {loading: false, TeamsRoles: action.data })
     case constants.TEAMS_ROLES_FAILED: return log(state, action, {loading: false, TeamsRoles: action.parsed })
 
+    case constants.ADD_TEAM_ROLE: return log(state, action, state)
+    case constants.ADD_TEAM_ROLE_SUCCEEDED: return log(state, action, state)
+    case constants.ADD_TEAM_ROLE_FAILED: return log(state, action, state)
+
+
     default: return state ? state : {loading: false}
   }
 }

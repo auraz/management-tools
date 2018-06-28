@@ -7,8 +7,9 @@ export function* watchInitState() {
 
 function* initState() {
   try {
-    const response = yield Models.TeamsRoles();
-    yield put({type: 'INIT_STATE_SUCCEEDED', response})
+    const response = yield Models.all('roles');
+    const allRoles = response.data
+    yield put({type: 'INIT_STATE_SUCCEEDED', allRoles: allRoles})
   }
   catch (err) {
     yield put({type: 'INIT_STATE_FAILED', err})

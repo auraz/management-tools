@@ -48,11 +48,11 @@ export function prepareTeamsRoles(data) {
   _.forEach(data, function(value) {
     if (!_.has(intermediate, value.teams.id)) {
         intermediate[value.teams.id] = { name: value.teams.name, roles: [] };
-        intermediate[value.teams.id].roles.push({ id: [value.roles.id], name: value.roles.name});
+        intermediate[value.teams.id].roles.push({ id: value.roles.id, name: value.roles.name});
     }
     else {
-      if (!_has(intermediate[value.teams.id].roles, value.roles.id)) {
-        intermediate[value.teams.id].roles.push({ id: [value.roles.id], name: value.roles.name});
+      if (!_.has(intermediate[value.teams.id].roles, value.roles.id)) {
+        intermediate[value.teams.id].roles.push({ id: value.roles.id, name: value.roles.name});
       }
     }
   })

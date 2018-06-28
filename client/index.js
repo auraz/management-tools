@@ -18,7 +18,7 @@ import { call, put, takeEvery, delay, all, race, fork, spawn, take, select } fro
 import createSagaMonitor from 'components/sagaMonitor.jsx'
 
 import { watchInitState } from 'components/Sagas.jsx'
-import { watchTeamsRoles } from 'components/Teams/TeamSagas.jsx'
+import { watchTeamsRoles, watchAddTeamRole } from 'components/Teams/TeamSagas.jsx'
 
 import appReducer from 'components/common/reducer.jsx'
 import TeamReducer from 'components/teams/TeamReducer.jsx'
@@ -56,12 +56,13 @@ function* rootSaga() {
   yield all([
     watchInitState(),
     watchTeamsRoles(),
+    watchAddTeamRole(),
   ])
 }
 
 sagaMiddleware.run(rootSaga)
 
-// store.dispatch({type: "INIT_STATE"})
+store.dispatch({type: "INIT_STATE"})
 
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,

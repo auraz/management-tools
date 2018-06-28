@@ -27,12 +27,6 @@ function addParamPerson(state, payload) {
   return {...state}
 }
 
-function addTeamRole(state, payload) {
-  let result =  models.attachTeamRole(payload.role_id, payload.team_id)
-  state.teams_roles = [{id: id, role: role_id, team: team_id}, ...state.teams_roles]
-  return {...state}
-}
-
 function addPersonRole(state, payload) {
   models.attachPersonRole(payload.role_id, payload.person_id)
   state.persons_roles = models.fetchModelAll('persons_roles')
@@ -69,17 +63,15 @@ function appReducer(state, action) {
 
     case constants.ADD_PARAM_PERSON: return addParamPerson(state, action.payload)
     case constants.ADD_SKILL_PERSON: return addSkillPerson(state, action.payload)
-    case constants.ADD_TEAM_ROLE: return addTeamRole(state, action.payload)
+
     case constants.ADD_PERSON_ROLE: return addPersonRole(state, action.payload)
     case constants.ADD_PERSON_TEAM: return addPersonTeam(state, action.payload)
 
     case constants.DELETE_ROW_FROM_MODEL: return deleteRowFromModel(state, action.payload)
 
     case constants.INIT_STATE: return {loading: true}
-    case constants.INIT_STATE_SUCCEEDED: return {loading: false, teams: action.response.data }
+    case constants.INIT_STATE_SUCCEEDED: return {loading: false, allRoles: action.allRoles }
     case constants.INIT_STATE_FAILED: return {loading: false, error: action.err}
-
-    case constants.FETCH_TEAMS_ROLES: return fetchTeamsRoles(state, action.payload)
 
     default: return state ? state :  {loading: false}
   }

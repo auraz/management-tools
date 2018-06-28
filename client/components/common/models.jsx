@@ -31,8 +31,7 @@ export const Models = {
     return axios.get(`http://localhost:3000/teams_roles?select=id,roles(id,name),teams(id,name)`)
   },
   attachTeamRole: (role_id, team_id) => {
-    const reponse =  axios.post(`http://localhost:3000/teams_roles`, {"role": role_id, "team": team_id});
-    return parseInt(response.data.headers.location.split('.').pop())
+    return axios.post(`http://localhost:3000/teams_roles`, {"role": role_id, "team": team_id});
   }
 }
 
