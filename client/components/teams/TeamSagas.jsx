@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { put, takeEvery, delay, call, takeLatest } from 'redux-saga/effects'
+
 import { Models } from '../common/models'
-import { prepareTeamsRoles } from '../common/utils.jsx'
+
+import { prepareTeamsRoles } from './TeamUtils.jsx'
+
 
 export function* watchTeamsRoles() {
   yield takeEvery('FETCH_TEAMS_ROLES', fetchTeamsRoles);

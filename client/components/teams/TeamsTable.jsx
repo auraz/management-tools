@@ -7,6 +7,8 @@ import DragAndDropTable from "../common/DragAndDropTable.jsx";
 import EditableRow from "../common/EditableRow.jsx";
 import DeleteControl from "../common/DeleteControl.jsx";
 
+import TeamRoles from './TeamRoles.jsx'
+
 
 class TeamsTable extends React.Component {
 
@@ -34,7 +36,7 @@ class TeamsTable extends React.Component {
               </th>
               <th>
                   {/*<TeamProgress team={team.id}/>*/}
-                  {/*<TeamRoles team={team.id}/>*/}
+                  <TeamRoles roles={team.roles} team_id={team.id}/>
                 </th>
             </Row>
           );
@@ -50,9 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchTeamsRoles: () => {
-      dispatch({type: "FETCH_TEAMS_ROLES"})
-    }
+    fetchTeamsRoles: () => dispatch({type: "FETCH_TEAMS_ROLES"})
   }
 }
 
