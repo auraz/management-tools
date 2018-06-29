@@ -25,7 +25,7 @@ let baseTables = ['roles', 'persons', 'skills', 'teams', 'levels', 'params']
 export const Models = {
   all: (modelName) => axios.get(`http://localhost:3000/${modelName}`),
   one: (modelName, id) => axios.get(`http://localhost:3000/${modelName}?id=eq${id}`),
-
+  addBase: (modelName, name) => axios.post(`http://localhost:3000/${modelName}`, {"name": name}),
   // axios.get(`http://localhost:3000/teams_roles?select=role&teams.id=eq.${team_id}`);
   TeamsRoles: () => {
     return axios.get(`http://localhost:3000/teams_roles?select=id,roles(id,name),teams(id,name)`)
@@ -72,9 +72,6 @@ export function updateModelName(model, id, name) {
   return alasql(`UPDATE DB.${model} SET name='${name}' WHERE id=${id}`);
 }
 
-export function insertBaseModel(model, name) {
-  return alasql(`INSERT INTO DB.${model} VALUE {name:?}`, name);
-}
 
 export function attachSkillPerson(skill_id, person_id) {
   return alasql("INSERT INTO DB.persons_skills VALUE {person_id:?, skill_id:?, level_id:1}", [person_id, skill_id]);

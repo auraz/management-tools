@@ -27,16 +27,32 @@ export function* watchAddTeamRole() {
 
 function* setTeamRole(action) {
   try {
-    console.log(action.payload)
     const response = yield Models.attachTeamRole(action.payload.role_id, action.payload.team_id);
-
-    // if we need id of new attached role
-    // return parseInt(response.data.headers.location.split('.').pop())
-
     yield put({type: 'ADD_TEAM_ROLE_SUCCEEDED'})
     yield put({type: 'FETCH_TEAMS_ROLES'})
   }
   catch (err) {
     yield put({type: 'ADD_TEAM_ROLE_FAILED', err})
+  }
+}
+
+
+export function* watchAddTeam() {
+  yield takeEvery('ADD_TEAM', addTeam);
+}
+
+function* addTeam(action) {
+  try {
+    const response1 = yield Models.addBase('teams', action.name)
+    const team_id = parseInt(response1.headers.location.split('.').pop())
+
+    // attach Team Lead role to every team:
+    const response2 = yield Models.attachTeamRole(60, team_id)
+    yield put({type: 'ADD_TEAM_SUCCEEDED'})
+    yield put({type: 'ADD_TEAM_ROLE_SUCCEEDED'})
+    yield put({type: 'FETCH_TEAMS_ROLES'})
+  }
+  catch (err) {
+    yield put({type: 'ADD_TEAM_FAILED', err})
   }
 }
