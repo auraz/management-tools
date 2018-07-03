@@ -17,8 +17,8 @@ import createSagaMiddleware from 'redux-saga'
 import { call, put, takeEvery, delay, all, race, fork, spawn, take, select } from 'redux-saga/effects'
 import createSagaMonitor from 'components/sagaMonitor.jsx'
 
-import { watchInitState } from 'components/Sagas.jsx'
-import { watchTeamsRoles, watchAddTeamRole, watchAddTeam } from 'components/Teams/TeamSagas.jsx'
+import { watchInitState, watchRenameParam } from 'components/Sagas.jsx'
+import { watchTeamsRoles, watchAddTeamRole, watchAddTeam, watchDeleteTeam } from 'components/Teams/TeamSagas.jsx'
 
 import appReducer from 'components/common/reducer.jsx'
 import TeamReducer from 'components/teams/TeamReducer.jsx'
@@ -57,7 +57,9 @@ function* rootSaga() {
     watchInitState(),
     watchTeamsRoles(),
     watchAddTeamRole(),
-    watchAddTeam()
+    watchAddTeam(),
+    watchDeleteTeam(),
+    watchRenameParam()
   ])
 }
 

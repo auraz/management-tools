@@ -56,3 +56,30 @@ function* addTeam(action) {
     yield put({type: 'ADD_TEAM_FAILED', err})
   }
 }
+
+
+export function* watchDeleteTeam() {
+  yield takeEvery('DELETE_TEAM', deleteTeam);
+}
+
+function* deleteTeam(action) {
+  try {
+    // select all tables where this team is used to delete cascade:
+    // TeamsRoles, get team_roles id, where this team is listed
+    const teamRolesForTeam = yield Models.TeamsRolesForTeam(action.team_id);
+    // now get id's of that list
+    const teamRolesIDs = teamRolesForTeam.data.map(e => e.id)
+    // now delete that teamRoles
+    const deleteResponse1 =  Models.DeleteList('teams_roles', teamRolesIDs)
+
+    // delete team
+    const response1 = yield Models.deleteOne('teams', action.team_id)
+
+    yield put({type: 'DELETE_TEAM_SUCCEEDED'})
+    yield put({type: 'FETCH_TEAMS_ROLES'})
+  }
+  catch (err) {
+    yield put({type: 'DELETE_TEAM_FAILED', err})
+  }
+}
+

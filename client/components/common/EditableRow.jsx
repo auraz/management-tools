@@ -74,10 +74,10 @@ class EditableRow_ extends React.Component {
           {this.renderInput()}&nbsp;
           <small>
             <a href="#" onClick={this.handleSave}>
-              Save
-            </a>&nbsp;
+              <i className="fas fa-save"></i>
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="#" onClick={this.handleCancel}>
-              Cancel
+              <i className="fas fa-times-circle"></i>
             </a>
           </small>
         </div>
@@ -88,7 +88,7 @@ class EditableRow_ extends React.Component {
       <div>
         {this.state.value}&nbsp;<small>
           <a href="#" onClick={this.handleEdit}>
-            Edit
+            <i className="far fa-edit"></i>
           </a>
         </small>
       </div>
