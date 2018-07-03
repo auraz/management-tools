@@ -1,50 +1,6 @@
 import  * as models from "./models";
 import * as constants from './actions.jsx';
 
-
-function addData(state, name, table_name) {
-  models.insertBaseModel(table_name, name);
-  state[table_name] = models.fetchModelAll(table_name)
-  return {...state}
-}
-
-function updateParam(state, payload) {
-  models.updateModelName(payload.model, payload.id, payload.name)
-  state[payload.model] = models.fetchModelAll(payload.model)
-  return {...state}
-}
-
-function addSkillPerson(state, payload) {
-  models.attachSkillPerson(payload.skill_id, payload.person_id)
-  state.persons_skills = models.fetchModelAll('persons_skills')
-  return {...state}
-}
-
-function addParamPerson(state, payload) {
-  models.attachParamPerson(payload.param_model, payload.param_id, payload.person_id)
-  var model = "persons_" + payload.param_model;
-  state[model] = models.fetchModelAll(model)
-  return {...state}
-}
-
-function addPersonRole(state, payload) {
-  models.attachPersonRole(payload.role_id, payload.person_id)
-  state.persons_roles = models.fetchModelAll('persons_roles')
-  return {...state}
-}
-function addPersonTeam(state, payload) {
-  models.attachPersonTeam(payload.person_id, payload.team_id)
-  state.persons_teams = models.fetchModelAll('persons_teams')
-  return {...state}
-}
-
-function deleteRowFromModel(state, payload) {
-  models.deleteRowFromModel(payload.model, payload.id)
-  state[payload.model] =  models.fetchModelAll(payload.model)
-  return {...state}
-}
-
-
 function appReducer(state, action) {
   switch (action.type) {
     case constants.ADD_PERSON: return addData(state, action.payload, 'persons')
@@ -53,7 +9,7 @@ function appReducer(state, action) {
     case constants.ADD_TEAM: return addData(state, action.payload, 'teams')
     case constants.ADD_PARAM: return addData(state, action.payload, 'params')
 
-    case constants.UPDATE_PARAM: return updateParam(state, action.payload)
+    case constants.UPDATE_PARAM: return {loading: true, ...state}
     case constants.UPDATE_SKILL_LEVEL: return updateSkillLevel(state, action.payload)
     case constants.UPDATE_PERSON_NAME: return updateModelName(state, 'persons', action.payload)
     case constants.UPDATE_ROLE_NAME: return updateModelName(state, 'roles', action.payload)

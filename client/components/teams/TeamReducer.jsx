@@ -11,8 +11,6 @@ function TeamReducer(state, action) {
     case constants.ADD_TEAM_SUCCEEDED: return log(state, action, state)
     case constants.ADD_TEAM_FAILED: return log(state, action, state)
 
-    // case constants.UPDATE_TEAM_NAME: return updateModelName(state, 'teams', action.payload)
-
     case constants.FETCH_TEAMS_ROLES: return log(state, action, {loading: false, TeamsRoles: action.parsed })
     case constants.TEAMS_ROLES_SUCCEEDED: return log(state, action, {loading: false, TeamsRoles: action.data })
     case constants.TEAMS_ROLES_FAILED: return log(state, action, {loading: false, TeamsRoles: action.parsed })
@@ -21,6 +19,13 @@ function TeamReducer(state, action) {
     case constants.ADD_TEAM_ROLE_SUCCEEDED: return log(state, action, state)
     case constants.ADD_TEAM_ROLE_FAILED: return log(state, action, state)
 
+    case constants.RENAME_TEAM: return log(state, action, state)
+    case constants.RENAME_TEAM_SUCCEEDED: return log(state, action, state)
+    case constants.RENAME_TEAM_FAILED: return log(state, action, state)
+
+    case constants.DELETE_TEAM: return log(state, action, state)
+    case constants.DELETE_TEAM_SUCCEEDED: return log(state, action, state)
+    case constants.DELETE_TEAM_FAILED: return log(state, action, state)
 
     default: return state ? state : {loading: false}
   }

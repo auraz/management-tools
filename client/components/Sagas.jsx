@@ -25,7 +25,7 @@ function* renameParam(action) {
   if (action.payload.model == 'teams') {
     try {
       const response = yield Models.rename(
-        'teams', action.payload.teamId, action.payload.teamName,
+        'teams', action.payload.id, action.payload.name,
       );
 
       yield put({type: 'RENAME_TEAM_SUCCEEDED'})

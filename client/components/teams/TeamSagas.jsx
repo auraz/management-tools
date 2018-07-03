@@ -73,7 +73,7 @@ function* deleteTeam(action) {
     const deleteResponse1 =  Models.DeleteList('teams_roles', teamRolesIDs)
 
     // delete team
-    const response1 = yield Models.deleteOne('teams', action.team_id)
+    const response = yield Models.deleteOne('teams', action.team_id)
 
     yield put({type: 'DELETE_TEAM_SUCCEEDED'})
     yield put({type: 'FETCH_TEAMS_ROLES'})

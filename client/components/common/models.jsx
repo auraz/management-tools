@@ -26,7 +26,7 @@ export const Models = {
   all: (modelName) => axios.get(`http://localhost:3000/${modelName}`),
   one: (modelName, id) => axios.get(`http://localhost:3000/${modelName}?id=eq${id}`),
   deleteOne: (modelName, id) => axios.delete(`http://localhost:3000/${modelName}?id=eq.${id}`),
-  updateName: (modename, id, name) => axios.post(`http://localhost:3000/${modelName}id=eq.${id}`, {"name": name}),
+  rename: (modelName, id, name) => axios.patch(`http://localhost:3000/${modelName}?id=eq.${id}`, {"name": name}),
   addBase: (modelName, name) => axios.post(`http://localhost:3000/${modelName}`, {"name": name}),
 
   // axios.get(`http://localhost:3000/teams_roles?select=role&teams.id=eq.${team_id}`);
