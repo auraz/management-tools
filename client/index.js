@@ -18,7 +18,13 @@ import { call, put, takeEvery, delay, all, race, fork, spawn, take, select } fro
 import createSagaMonitor from 'components/sagaMonitor.jsx'
 
 import { watchInitState, watchRenameParam } from 'components/Sagas.jsx'
-import { watchTeamsRoles, watchAddTeamRole, watchAddTeam, watchDeleteTeam } from 'components/Teams/TeamSagas.jsx'
+import {
+  watchTeamsRoles,
+  watchAddTeamRole,
+  watchAddTeam,
+  watchDeleteTeam,
+  watchDeleteTeamRole
+} from 'components/Teams/TeamSagas.jsx'
 
 import appReducer from 'components/common/reducer.jsx'
 import TeamReducer from 'components/teams/TeamReducer.jsx'
@@ -59,7 +65,8 @@ function* rootSaga() {
     watchAddTeamRole(),
     watchAddTeam(),
     watchDeleteTeam(),
-    watchRenameParam()
+    watchRenameParam(),
+    watchDeleteTeamRole(),
   ])
 }
 

@@ -39,6 +39,10 @@ export const Models = {
   attachTeamRole: (role_id, team_id) => {
     return axios.post(`http://localhost:3000/teams_roles`, {"role": role_id, "team": team_id});
   },
+  deleteTeamRole: (role_id, team_id) => {
+    return axios.delete(`http://localhost:3000/teams_roles?team=eq.${team_id}&role=eq.${role_id}`)
+  },
+
   DeleteList: (modelName, idList) => {
     let args = '(' + idList.join(',') + ')'
     return axios.delete(`http://localhost:3000/${modelName}?id=in.${args}`)
@@ -77,31 +81,5 @@ export function fetchPersonsRoles(person_id) {
 export function fetchPersonsTeamsRoles(person_id, team_id) {
     return alasql(`SELECT ptr.role_id as id, r.name as name FROM DB.persons_teams_roles ptr JOIN DB.roles r ON ptr.role_id = r.id WHERE person_id=${person_id} AND team_id=${team_id}`);
 }
-
-export function updateModelName(model, id, name) {
-  return alasql(`UPDATE DB.${model} SET name='${name}' WHERE id=${id}`);
-}
-
-
-export function attachSkillPerson(skill_id, person_id) {
-  return alasql("INSERT INTO DB.persons_skills VALUE {person_id:?, skill_id:?, level_id:1}", [person_id, skill_id]);
-}
-
-export function attachParamPerson(param_type, param_id, person_id) {
-  return alasql(`INSERT INTO DB.persons_${param_type} VALUE {param_id:?, person_id:?}`, [param_id, person_id]);
-}
-
-export function attachPersonRole(role_id, person_id) {
-  return alasql("INSERT INTO DB.persons_roles VALUE {role_id:?, person_id:?}", [role_id, person_id]);
-}
-
-export function attachPersonTeam(person_id, team_id) {
-  return alasql("INSERT INTO DB.persons_teams VALUE {person_id:?, team_id:?}", [person_id, team_id]);
-}
-
-export function deleteRowFromModel(model, id) {
-  return alasql(`DELETE FROM DB.${model} WHERE id=?`, id);
-}
-
 
 

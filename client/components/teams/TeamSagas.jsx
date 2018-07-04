@@ -83,3 +83,17 @@ function* deleteTeam(action) {
   }
 }
 
+export function* watchDeleteTeamRole() {
+  yield takeEvery('DELETE_TEAM_ROLE', deleteTeamRole);
+}
+
+function* deleteTeamRole(action) {
+  try {
+    const response = yield Models.deleteTeamRole(action.role_id, action.team_id)
+    yield put({type: 'DELETE_TEAM_ROLE_SUCCEEDED'})
+    yield put({type: 'FETCH_TEAMS_ROLES'})
+  }
+  catch (err) {
+    yield put({type: 'DELETE_TEAM_ROLE_FAILED', err})
+  }
+}

@@ -12,10 +12,10 @@ import TeamRoles from './TeamRoles.jsx'
 
 class TeamsTable extends React.Component {
 
-  deleteControl(team_id) {
+  deleteControl(id) {
     return <div tabIndex="-1">
        <small>
-        <a href="#" onClick={(t) => this.props.deleteTeam(team_id: team_id)}><i className="fas fa-times-circle"></i></a>
+        <a href="#" onClick={(t) => this.props.deleteTeam(id)}><i className="fas fa-times-circle"></i></a>
         </small>
       </div>
   }
@@ -62,8 +62,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchTeamsRoles: () => dispatch({type: "FETCH_TEAMS_ROLES"}),
-    deleteTeam: (team_id) => dispatch({type: "DELETE_TEAM", team_id: team_id}),
-
+    deleteTeam: (id) => dispatch({type: "DELETE_TEAM", team_id: id}),
   }
 }
 

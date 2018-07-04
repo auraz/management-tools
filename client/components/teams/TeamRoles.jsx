@@ -15,11 +15,24 @@ class TeamRoles extends React.Component {
     this.state = { isCollapsed: 'show' };
   }
 
+  deleteControl(role_id) {
+    return <div tabIndex="-1">
+      <small>
+        <a href="#" onClick={(t) => this.props.deleteTeamRole(role_id, this.props.team_id)}>
+          <i className="fas fa-times-circle"></i>
+        </a>
+      </small>
+      </div>
+  }
+
+
   listTeamRoles() {
     return (
       <div className="card card-body">
         <ul className="list-group list-group-flush">
-          { this.props.roles.map((r) => <li className="list-group-item" key={r.id}>{r.name}<DeleteControl id={r.id} model="teams_roles" /></li>)}
+          {this.props.roles.map(
+            r => <li className="list-group-item" key={r.id}>{r.name}{ this.deleteControl(r.id) }</li>
+          )}
         </ul>
       </div>
     )
@@ -58,7 +71,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addTeamRole: (target, team_id) => {
         dispatch({payload: { role_id: target.value, team_id: parseInt(team_id) }, type: "ADD_TEAM_ROLE"})
-    }
+    },
+    deleteTeamRole: (role_id, team_id) => dispatch({type: "DELETE_TEAM_ROLE", role_id: role_id, team_id: team_id}),
   }
 }
 
