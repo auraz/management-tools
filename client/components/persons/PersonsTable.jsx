@@ -8,6 +8,20 @@ import EditableRow from "../common/EditableRow.jsx";
 
 
 class PersonsTable extends React.Component {
+
+  deleteControl(id) {
+    return <div tabIndex="-1">
+       <small>
+        <a href="#" onClick={(t) => this.props.deletePerson(id)}><i className="fas fa-times-circle"></i></a>
+        </small>
+      </div>
+  }
+
+  componentWillMount() {
+    this.props.fetchPersons()  //?
+  }
+
+
   render() {
     return (
       <DragAndDropTable>
@@ -32,4 +46,10 @@ const mapStateToProps = state => {
   return { persons: state.persons };
 };
 
-export default connect(mapStateToProps)(PersonsTable);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deletePerson: (id) => dispatch({type: "DELETE_PERSON", person_id: id}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonsTable)

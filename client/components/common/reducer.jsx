@@ -10,7 +10,7 @@ function appReducer(state, action) {
     case constants.ADD_PARAM: return addData(state, action.payload, 'params')
 
     case constants.UPDATE_PARAM: return {loading: true, ...state}
-    case constants.UPDATE_SKILL_LEVEL: return updateSkillLevel(state, action.payload)
+    case constants.UPDATE_SKILL_LEVEL: return updateSkinillLevel(state, action.payload)
     case constants.UPDATE_PERSON_NAME: return updateModelName(state, 'persons', action.payload)
     case constants.UPDATE_ROLE_NAME: return updateModelName(state, 'roles', action.payload)
     case constants.UPDATE_TEAM_NAME: return updateModelName(state, 'teams', action.payload)
