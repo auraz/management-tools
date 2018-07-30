@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { put, takeEvery, delay, call, takeLatest } from 'redux-saga/effects'
 
 import { Models } from '../common/models'

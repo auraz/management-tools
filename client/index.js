@@ -25,14 +25,21 @@ import {
   watchDeleteTeam,
   watchDeleteTeamRole
 } from 'components/Teams/TeamSagas.jsx'
+import {
+  watchPersons,
+  watchAddPerson,
+  watchDeletePerson,
+} from 'components/Persons/PersonsSagas.jsx'
 
 import appReducer from 'components/common/reducer.jsx'
 import TeamReducer from 'components/teams/TeamReducer.jsx'
+import PersonsReducer from 'components/persons/PersonsReducer.jsx'
 
 
 const reducers = combineReducers({
   appReducer,
-  TeamReducer
+  TeamReducer,
+  PersonsReducer
 })
 
 
@@ -67,6 +74,9 @@ function* rootSaga() {
     watchDeleteTeam(),
     watchRenameParam(),
     watchDeleteTeamRole(),
+    watchPersons(),
+    watchAddPerson(),
+    watchDeletePerson(),
   ])
 }
 
@@ -78,5 +88,3 @@ ReactDOM.render(
     <Provider store={store}><App/></Provider>,
     document.getElementById('root')
 );
-
-

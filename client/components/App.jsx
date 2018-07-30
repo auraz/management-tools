@@ -8,8 +8,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import SkillsTable from './skills/SkillsTable.jsx'
 import SkillForm from './skills/SkillForm.jsx'
 
-import PersonForm from './persons/PersonForm.jsx'
-import PersonsTable from './persons/PersonsTable.jsx'
+import Persons from './persons/Persons.jsx'
 import PersonView from './persons/PersonView.jsx'
 
 import RolesTable from './roles/RolesTable.jsx'
@@ -29,8 +28,8 @@ const routes = [
   {
     path: '/',
     exact: true,
-    title: "Teams",
-    component: () => <Teams/>,
+    title: "Test render",
+    component: () => <Persons/>,
   },
   {
     path: '/teams',
@@ -107,5 +106,3 @@ class App extends React.Component {
 App = DragDropContext(HTML5Backend)(App);
 
 export default App;
-
-

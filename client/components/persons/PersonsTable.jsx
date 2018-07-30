@@ -18,11 +18,14 @@ class PersonsTable extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchPersons()  //?
+    this.props.fetchPersons();
   }
 
 
   render() {
+    if (!this.props.persons) {
+      return <div>Loading...</div>
+    }
     return (
       <DragAndDropTable>
         {this.props.persons.map(r => {
@@ -43,11 +46,12 @@ class PersonsTable extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { persons: state.persons };
+  return { persons: state.PersonsReducer.persons };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchPersons: () => dispatch({type: "FETCH_PERSONS"}),
     deletePerson: (id) => dispatch({type: "DELETE_PERSON", person_id: id}),
   }
 }
