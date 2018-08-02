@@ -22,6 +22,7 @@ import {
   watchTeamsRoles,
   watchAddTeamRole,
   watchAddTeam,
+  watchRenameTeam,
   watchDeleteTeam,
   watchDeleteTeamRole
 } from 'components/Teams/TeamSagas.jsx'
@@ -71,6 +72,7 @@ function* rootSaga() {
     watchTeamsRoles(),
     watchAddTeamRole(),
     watchAddTeam(),
+    watchRenameTeam(),
     watchDeleteTeam(),
     watchRenameParam(),
     watchDeleteTeamRole(),

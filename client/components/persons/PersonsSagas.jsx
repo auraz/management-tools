@@ -3,10 +3,9 @@ import { put, takeEvery, delay, call, takeLatest } from 'redux-saga/effects'
 import { Persons } from '../common/models'
 
 
-export function* watchPersons() {
-  yield takeEvery('FETCH_PERSONS', fetchPersons)
-}
+export function* watchPersons() {yield takeEvery('FETCH_PERSONS', fetchPersons)}
 export function* watchAddPerson() { yield takeEvery('ADD_PERSON', addPerson) }
+export function* watchRenamePerson() { yield takeEvery('RENAME_PERSON', renamePerson) }
 export function* watchDeletePerson() { yield takeEvery('DELETE_PERSON', deletePerson) }
 
 function* fetchPersons() {
@@ -23,6 +22,17 @@ function* fetchPersons() {
 function* addPerson(action) {
   try {
     const response = yield Person.add(action.payload.person_name);
+    yield put({type: 'ADD_PERSON_SUCCEEDED'})
+    yield put({type: 'FETCH_PERSONS'})
+  }
+  catch (err) {
+    yield put({type: 'ADD_PERSON_FAILED', err})
+  }
+}
+
+function* renamePerson(action) {
+  try {
+    const response = yield Person.rename(action.payload.id, action.payload.name);
     yield put({type: 'ADD_PERSON_SUCCEEDED'})
     yield put({type: 'FETCH_PERSONS'})
   }

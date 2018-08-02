@@ -24,7 +24,8 @@ class EditableRow_ extends React.Component {
       editMode: false
     });
 
-    this.props.handleSaveRow({model: this.props.model, id: this.props.id, name: this.state.draft});
+    // this.props.handleSaveRow({model: this.props.model, id: this.props.id, name: this.state.draft});
+    this.props.action(this.state.draft)
     event.preventDefault();
   }
 

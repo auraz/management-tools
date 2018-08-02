@@ -1,13 +1,15 @@
 import { put, takeEvery, delay, call, takeLatest } from 'redux-saga/effects'
 
 import { Models } from '../common/models'
-
 import { prepareTeamsRoles } from './TeamUtils.jsx'
 
 
-export function* watchTeamsRoles() {
-  yield takeEvery('FETCH_TEAMS_ROLES', fetchTeamsRoles);
-}
+export function* watchTeamsRoles() { yield takeEvery('FETCH_TEAMS_ROLES', fetchTeamsRoles)}
+export function* watchAddTeamRole() { yield takeEvery('ADD_TEAM_ROLE', setTeamRole)}
+export function* watchAddTeam() { yield takeEvery('ADD_TEAM', addTeam)}
+export function* watchRenameTeam() { yield takeEvery('RENAME_TEAM', renameTeam)}
+export function* watchDeleteTeam() { yield takeEvery('DELETE_TEAM', deleteTeam)}
+export function* watchDeleteTeamRole() { yield takeEvery('DELETE_TEAM_ROLE', deleteTeamRole)}
 
 function* fetchTeamsRoles() {
   try {
@@ -20,10 +22,6 @@ function* fetchTeamsRoles() {
   }
 }
 
-export function* watchAddTeamRole() {
-  yield takeEvery('ADD_TEAM_ROLE', setTeamRole);
-}
-
 function* setTeamRole(action) {
   try {
     const response = yield Models.attachTeamRole(action.payload.role_id, action.payload.team_id);
@@ -33,11 +31,6 @@ function* setTeamRole(action) {
   catch (err) {
     yield put({type: 'ADD_TEAM_ROLE_FAILED', err})
   }
-}
-
-
-export function* watchAddTeam() {
-  yield takeEvery('ADD_TEAM', addTeam);
 }
 
 function* addTeam(action) {
@@ -56,9 +49,15 @@ function* addTeam(action) {
   }
 }
 
-
-export function* watchDeleteTeam() {
-  yield takeEvery('DELETE_TEAM', deleteTeam);
+function* renameTeam(action) {
+  try {
+    const response = yield Models.rename('teams', action.payload.id, action.payload.name)
+    yield put({type: 'RENAME_TEAM_SUCCEEDED'})
+    yield put({type: 'FETCH_TEAMS_ROLES'})
+  }
+  catch (err) {
+    yield put({type: 'RENAME_TEAM_FAILED', err})
+  }
 }
 
 function* deleteTeam(action) {
@@ -80,10 +79,6 @@ function* deleteTeam(action) {
   catch (err) {
     yield put({type: 'DELETE_TEAM_FAILED', err})
   }
-}
-
-export function* watchDeleteTeamRole() {
-  yield takeEvery('DELETE_TEAM_ROLE', deleteTeamRole);
 }
 
 function* deleteTeamRole(action) {

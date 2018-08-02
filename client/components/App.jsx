@@ -41,7 +41,7 @@ const routes = [
   {
     path: '/persons',
     title: "Persons",
-    component: () => <div><h2>People</h2><PersonForm /><PersonsTable /></div>,
+    component: () => <Persons/>,
     type: 'LeftNav'
   },
   {

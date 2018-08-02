@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 import { Link } from "react-router-dom";
+import _ from 'lodash'
 
 import Row from "../common/Row.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
@@ -38,7 +39,7 @@ class TeamsTable extends React.Component {
                 <Link to={{ pathname: "/team/" + team.id }}>{ team.name }</Link>
               </th>
               <th>
-                <EditableRow  id={team.id} model="teams" value="" formMode="textInput" />
+                <EditableRow action={_.partial(this.props.renameTeam, team.id)} value="" formMode="textInput" />
               </th>
               <th>
                 { this.deleteControl(team.id) }
@@ -62,6 +63,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchTeamsRoles: () => dispatch({type: "FETCH_TEAMS_ROLES"}),
+    renameTeam: (id, newName) => dispatch({type: "RENAME_TEAM", payload: {id: id, name: newName}}),
     deleteTeam: (id) => dispatch({type: "DELETE_TEAM", team_id: id}),
   }
 }

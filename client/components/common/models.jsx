@@ -26,10 +26,10 @@ axios.defaults.baseURL = hostname;
 
 export const Models = {
   all: (modelName) => axios.get(modelName),
-  one: (modelName, id) => axios.get(`{modelName}?id=eq${id}`),
-  deleteOne: (modelName, id) => axios.delete(`{modelName}?id=eq.${id}`),
-  rename: (modelName, id, name) => axios.patch(`{modelName}?id=eq.${id}`, {"name": name}),
-  addBase: (modelName, name) => axios.post(`{modelName}`, {"name": name}),
+  one: (modelName, id) => axios.get(`${modelName}?id=eq${id}`),
+  deleteOne: (modelName, id) => axios.delete(`${modelName}?id=eq.${id}`),
+  rename: (modelName, id, name) => axios.patch(`${modelName}?id=eq.${id}`, {"name": name}),
+  addBase: (modelName, name) => axios.post(`${modelName}`, {"name": name}),
 
   // axios.get(`/teams_roles?select=role&teams.id=eq.${team_id}`);
   TeamsRoles: () => {
@@ -56,6 +56,7 @@ export const Persons = {
   get: (id) => Models.one('persons', id),
   add: (name) => Models.addBase('persons', name),
   delete: (id) => Models.deleteOne('persons', id),
+  rename: (id, newName) => Models.rename('persons', id, newName)
 }
 
 
