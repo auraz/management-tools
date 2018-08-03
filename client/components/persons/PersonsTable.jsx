@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 import { Link } from "react-router-dom";
+import _ from 'lodash'
 
 import Row from "../common/Row.jsx";
 import DragAndDropTable from "../common/DragAndDropTable.jsx";
@@ -28,14 +29,14 @@ class PersonsTable extends React.Component {
     }
     return (
       <DragAndDropTable>
-        {this.props.persons.map(r => {
+        {this.props.persons.map(person => {
           return (
-            <Row key={r.id} id={r.id}>
+            <Row key={person.id} id={person.id}>
               <th>
-                <Link to={{ pathname: "/person/" + r.id }}>{r.name}</Link>
+                <Link to={{ pathname: "/person/" + person.id }}>{person.name}</Link>
               </th>
               <td>
-                <EditableRow value="" model="persons" id={r.id} formMode="textInput" />
+                <EditableRow action={_.partial(this.props.renamePerson, person.id)} formMode="textInput" />
               </td>
             </Row>
           );
@@ -52,6 +53,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPersons: () => dispatch({type: "FETCH_PERSONS"}),
+    renamePerson: (id, newName) => dispatch({type: "RENAME_PERSON", payload: {id: id, name: newName}}),
     deletePerson: (id) => dispatch({type: "DELETE_PERSON", person_id: id}),
   }
 }

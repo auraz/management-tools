@@ -32,14 +32,14 @@ class TeamsTable extends React.Component {
     }
     return (
       <DragAndDropTable>
-        {this.props.TeamsRoles.map( team => {
+        {this.props.TeamsRoles.map(team => {
           return (
             <Row key={team.id} id={team.id}>
               <th>
                 <Link to={{ pathname: "/team/" + team.id }}>{ team.name }</Link>
               </th>
               <th>
-                <EditableRow action={_.partial(this.props.renameTeam, team.id)} value="" formMode="textInput" />
+                <EditableRow action={_.partial(this.props.renameTeam, team.id)} formMode="textInput" />
               </th>
               <th>
                 { this.deleteControl(team.id) }

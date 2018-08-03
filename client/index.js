@@ -29,6 +29,7 @@ import {
 import {
   watchPersons,
   watchAddPerson,
+  watchRenamePerson,
   watchDeletePerson,
 } from 'components/Persons/PersonsSagas.jsx'
 
@@ -78,6 +79,7 @@ function* rootSaga() {
     watchDeleteTeamRole(),
     watchPersons(),
     watchAddPerson(),
+    watchRenamePerson(),
     watchDeletePerson(),
   ])
 }

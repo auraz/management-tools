@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 
 
 class EditableRow_ extends React.Component {
@@ -24,7 +23,6 @@ class EditableRow_ extends React.Component {
       editMode: false
     });
 
-    // this.props.handleSaveRow({model: this.props.model, id: this.props.id, name: this.state.draft});
     this.props.action(this.state.draft)
     event.preventDefault();
   }
@@ -97,12 +95,5 @@ class EditableRow_ extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleSaveRow: (payload) => dispatch({ payload: payload, type: "UPDATE_PARAM" })
-  };
-};
 
-const EditableRow = connect(null, mapDispatchToProps)(EditableRow_);
-
-export default EditableRow;
+export default EditableRow_;

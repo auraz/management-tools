@@ -18,10 +18,9 @@ function* fetchPersons() {
   }
 }
 
-
 function* addPerson(action) {
   try {
-    const response = yield Person.add(action.payload.person_name);
+    const response = yield Persons.add(action.payload.name);
     yield put({type: 'ADD_PERSON_SUCCEEDED'})
     yield put({type: 'FETCH_PERSONS'})
   }
@@ -32,12 +31,12 @@ function* addPerson(action) {
 
 function* renamePerson(action) {
   try {
-    const response = yield Person.rename(action.payload.id, action.payload.name);
-    yield put({type: 'ADD_PERSON_SUCCEEDED'})
+    const response = yield Persons.rename(action.payload.id, action.payload.name);
+    yield put({type: 'RENAME_PERSON_SUCCEEDED'})
     yield put({type: 'FETCH_PERSONS'})
   }
   catch (err) {
-    yield put({type: 'ADD_PERSON_FAILED', err})
+    yield put({type: 'RENAME_PERSON_FAILED', err})
   }
 }
 
