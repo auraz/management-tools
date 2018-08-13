@@ -4,7 +4,6 @@ function appReducer(state, action) {
   switch (action.type) {
 
     case constants.ADD_ROLE: return addData(state, action.payload, 'roles')
-    case constants.ADD_SKILL: return addData(state, action.payload, 'skills')
 
     case constants.ADD_PARAM: return addData(state, action.payload, 'params')
 

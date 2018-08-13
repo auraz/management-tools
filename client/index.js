@@ -14,7 +14,7 @@ import { combineReducers } from 'redux'
 import App from 'components/App.jsx';
 
 import createSagaMiddleware from 'redux-saga'
-import { call, put, takeEvery, delay, all, race, fork, spawn, take, select } from 'redux-saga/effects'
+import { all } from 'redux-saga/effects'
 import createSagaMonitor from 'components/sagaMonitor.jsx'
 
 import { watchInitState, watchRenameParam } from 'components/Sagas.jsx'
@@ -25,23 +25,33 @@ import {
   watchRenameTeam,
   watchDeleteTeam,
   watchDeleteTeamRole
-} from 'components/Teams/TeamSagas.jsx'
+} from 'components/teams/TeamSagas.jsx'
+
 import {
   watchPersons,
   watchAddPerson,
   watchRenamePerson,
   watchDeletePerson,
-} from 'components/Persons/PersonsSagas.jsx'
+} from 'components/persons/PersonsSagas.jsx'
+
+import {
+  watchSkills,
+  watchAddSkill,
+  watchRenameSkill,
+  watchDeleteSkill,
+} from 'components/skills/SkillsSagas.jsx'
 
 import appReducer from 'components/common/reducer.jsx'
 import TeamReducer from 'components/teams/TeamReducer.jsx'
 import PersonsReducer from 'components/persons/PersonsReducer.jsx'
+import SkillsReducer from 'components/skills/SkillsReducer.jsx'
 
 
 const reducers = combineReducers({
   appReducer,
   TeamReducer,
-  PersonsReducer
+  PersonsReducer,
+  SkillsReducer,
 })
 
 
@@ -51,8 +61,7 @@ function logger({getState}) {
         // Call the next dispatch method in the middleware chain.
         let returnValue = next(action);
         console.log('state after dispatch', getState());
-        // This will likely be the action itself, unless
-        // a middleware further in chain changed it.
+        // This will likely be the action itself, unless a middleware further in chain changed it.
         return returnValue;
     }
 }
@@ -81,6 +90,10 @@ function* rootSaga() {
     watchAddPerson(),
     watchRenamePerson(),
     watchDeletePerson(),
+    watchSkills(),
+    watchAddSkill(),
+    watchRenameSkill(),
+    watchDeleteSkill()
   ])
 }
 

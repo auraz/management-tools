@@ -5,8 +5,7 @@ import { connect } from "react-redux";
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'
 
-import SkillsTable from './skills/SkillsTable.jsx'
-import SkillForm from './skills/SkillForm.jsx'
+import Skills from './skills/Skills.jsx'
 
 import Persons from './persons/Persons.jsx'
 import PersonView from './persons/PersonView.jsx'
@@ -47,7 +46,7 @@ const routes = [
   {
     path: '/skills',
     title: "Skills",
-    component: () => <div><h2>Skills</h2><SkillForm /><SkillsTable /></div>,
+    component: () =>  <Skills/>,
     type: 'LeftNav'
   },
   {

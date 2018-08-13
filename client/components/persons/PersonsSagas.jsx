@@ -43,20 +43,14 @@ function* renamePerson(action) {
 function* deletePerson(action) {
   try {
     // select all tables where this person is used to delete cascade:
-    // TeamsRoles, get team_roles id, where this team is listed
-    const teamRolesForTeam = yield Models.TeamsRolesForTeam(action.team_id);
-    // now get id's of that list
-    const teamRolesIDs = teamRolesForTeam.data.map(e => e.id)
-    // now delete that teamRoles
-    const deleteResponse1 =  Models.DeleteList('teams_roles', teamRolesIDs)
-
-    // delete team
-    const response = yield Models.deleteOne('teams', action.team_id)
-
-    yield put({type: 'DELETE_TEAM_SUCCEEDED'})
-    yield put({type: 'FETCH_TEAMS_ROLES'})
+    // PersonRoles, PersonTeams, and others.
+    // For now, persons are not connected to any other models.
+    // So delete just persons from db.
+    const response = yield Persons.delete(action.person_id)
+    yield put({type: 'DELETE_PERSON_SUCCEEDED'})
+    yield put({type: 'FETCH_PERSONS'})
   }
   catch (err) {
-    yield put({type: 'DELETE_TEAM_FAILED', err})
+    yield put({type: 'DELETE_PERSON_FAILED', err})
   }
 }

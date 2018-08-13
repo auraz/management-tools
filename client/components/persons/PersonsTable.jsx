@@ -38,6 +38,9 @@ class PersonsTable extends React.Component {
               <td>
                 <EditableRow action={_.partial(this.props.renamePerson, person.id)} formMode="textInput" />
               </td>
+              <th>
+                { this.deleteControl(person.id) }
+              </th>
             </Row>
           );
         })}
