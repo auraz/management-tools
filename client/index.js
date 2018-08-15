@@ -41,10 +41,18 @@ import {
   watchDeleteSkill,
 } from 'components/skills/SkillsSagas.jsx'
 
+import {
+  watchRoles,
+  watchAddRole,
+  watchRenameRole,
+  watchDeleteRole,
+} from 'components/roles/RolesSagas.jsx'
+
 import appReducer from 'components/common/reducer.jsx'
 import TeamReducer from 'components/teams/TeamReducer.jsx'
 import PersonsReducer from 'components/persons/PersonsReducer.jsx'
 import SkillsReducer from 'components/skills/SkillsReducer.jsx'
+import RolesReducer from 'components/roles/RolesReducer.jsx'
 
 
 const reducers = combineReducers({
@@ -52,6 +60,7 @@ const reducers = combineReducers({
   TeamReducer,
   PersonsReducer,
   SkillsReducer,
+  RolesReducer,
 })
 
 
@@ -93,7 +102,11 @@ function* rootSaga() {
     watchSkills(),
     watchAddSkill(),
     watchRenameSkill(),
-    watchDeleteSkill()
+    watchDeleteSkill(),
+    watchRoles(),
+    watchAddRole(),
+    watchRenameRole(),
+    watchDeleteRole()
   ])
 }
 

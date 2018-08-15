@@ -10,8 +10,7 @@ import Skills from './skills/Skills.jsx'
 import Persons from './persons/Persons.jsx'
 import PersonView from './persons/PersonView.jsx'
 
-import RolesTable from './roles/RolesTable.jsx'
-import RoleForm from './roles/RoleForm.jsx'
+import Roles from './roles/Roles.jsx'
 
 import Teams from './teams/Teams.jsx'
 import TeamView from './teams/TeamView.jsx'
@@ -52,7 +51,7 @@ const routes = [
   {
     path: '/roles',
     title: "Roles",
-    component: () => <div><h2>Roles</h2><RoleForm /><RolesTable /></div>,
+    component: () => <Roles/>,
     type: 'LeftNav'
   },
   {

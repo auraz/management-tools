@@ -67,6 +67,14 @@ export const Skills = {
   rename: (id, newName) => Models.rename('skills', id, newName)
 }
 
+export const Roles = {
+  all: () => Models.all('roles'),
+  get: (id) => Models.one('roles', id),
+  add: (name) => Models.addBase('roles', name),
+  delete: (id) => Models.deleteOne('roles', id),
+  rename: (id, newName) => Models.rename('roles', id, newName)
+}
+
 
 export function fixturesToDb() {
   let postFixtures = async (tablename) => {

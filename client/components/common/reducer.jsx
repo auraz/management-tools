@@ -3,14 +3,10 @@ import * as constants from './actions.jsx';
 function appReducer(state, action) {
   switch (action.type) {
 
-    case constants.ADD_ROLE: return addData(state, action.payload, 'roles')
-
     case constants.ADD_PARAM: return addData(state, action.payload, 'params')
 
     case constants.UPDATE_PARAM: return {loading: true, ...state}
     case constants.UPDATE_SKILL_LEVEL: return updateSkinillLevel(state, action.payload)
-    case constants.UPDATE_PERSON_NAME: return updateModelName(state, 'persons', action.payload)
-    case constants.UPDATE_ROLE_NAME: return updateModelName(state, 'roles', action.payload)
 
     case constants.UPDATE_SKILL_NAME: return updateModelName(state, 'skills', action.payload)
     case constants.UPDATE_PARAMETER_NAME: return updateParamName(state, action.payload)
