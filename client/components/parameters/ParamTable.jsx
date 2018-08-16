@@ -30,8 +30,11 @@ class ParamTable extends React.Component {
           return <Row key={param.id} id={param.id}>
             <th>{param.name}</th>
             <td>
-              <EditableRow value="" model="params" id={param.id} formMode="textInput" />
+            <EditableRow action={_.partial(this.props.renameParam, param.id)} formMode="textInput" />
             </td>
+            <th>
+              { this.deleteControl(param.id) }
+            </th>
           </Row>
         })
       }

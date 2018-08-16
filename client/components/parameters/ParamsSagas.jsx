@@ -45,7 +45,7 @@ function* deleteParam(action) {
     // select all tables where this Param is used to delete cascade: in future.
     // For now, Params are not connected to any other models.
     // So delete just Params from db.
-    const response = yield Params.delete(action.Param_id)
+    const response = yield Params.delete(action.param_id)
     yield put({type: 'DELETE_PARAM_SUCCEEDED'})
     yield put({type: 'FETCH_PARAMS'})
   }

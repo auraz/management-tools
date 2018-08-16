@@ -1,6 +1,6 @@
 import React from "react";
 
-import ParamsTable from './ParamsTable.jsx'
+import ParamTable from './ParamTable.jsx'
 import ParamForm from './ParamForm.jsx'
 
 
@@ -10,7 +10,7 @@ class Params extends React.Component {
     return (
       <div>
         <h2>Params</h2>
-        <ParamsTable/>
+        <ParamTable/>
         <br/>
         <ParamForm />
       </div>

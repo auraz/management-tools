@@ -15,25 +15,3 @@ function* initState() {
     yield put({type: 'INIT_STATE_FAILED', err})
   }
 }
-
-
-export function* watchRenameParam() {
-  yield takeEvery('UPDATE_PARAM', renameParam);
-}
-
-function* renameParam(action) {
-  if (action.payload.model == 'teams') {
-    try {
-      const response = yield Models.rename(
-        'teams', action.payload.id, action.payload.name,
-      );
-
-      yield put({type: 'RENAME_TEAM_SUCCEEDED'})
-      yield put({type: 'FETCH_TEAMS_ROLES'})
-    }
-    catch (err) {
-      yield put({type: 'RENAME_TEAM_FAILED', err})
-    }
-  }
-
-}
