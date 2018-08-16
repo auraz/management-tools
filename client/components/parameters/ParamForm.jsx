@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleSubmit: (event) => {
             event.preventDefault();
-            dispatch({ payload: event.target[0].value, type: "ADD_PARAM"})
+            dispatch({ payload:  { name: event.target[0].value }, type: "ADD_PARAM"})
         }
     }
 }
