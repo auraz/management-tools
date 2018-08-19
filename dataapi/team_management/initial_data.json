@@ -1,0 +1,538 @@
+[
+    {
+        "model": "team_management.role",
+        "pk": 1,
+        "fields": {
+            "name": "Front-end Developer",
+            "prefix": "Jr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 2,
+        "fields": {
+            "name": "Front-end Developer",
+            "prefix": "Md",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 3,
+        "fields": {
+            "name": "Front-end Developer",
+            "prefix": "Sr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 4,
+        "fields": {
+            "name": "Back-end Developer",
+            "prefix": "Jr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 5,
+        "fields": {
+            "name": "Back-end Developer",
+            "prefix": "Md",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 6,
+        "fields": {
+            "name": "Back-end Developer",
+            "prefix": "Sr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 7,
+        "fields": {
+            "name": "DevOps",
+            "prefix": "Jr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 8,
+        "fields": {
+            "name": "DevOps",
+            "prefix": "Md",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 9,
+        "fields": {
+            "name": "DevOPS",
+            "prefix": "Sr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 10,
+        "fields": {
+            "name": "QA",
+            "prefix": "Jr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 11,
+        "fields": {
+            "name": "QA",
+            "prefix": "Md",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 12,
+        "fields": {
+            "name": "QA",
+            "prefix": "Sr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 13,
+        "fields": {
+            "name": "Architecture",
+            "prefix": "Jr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 14,
+        "fields": {
+            "name": "Architecture",
+            "prefix": "Md",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 15,
+        "fields": {
+            "name": "Architecture",
+            "prefix": "Sr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 16,
+        "fields": {
+            "name": "Team Lead",
+            "prefix": "",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 17,
+        "fields": {
+            "name": "Product Owner",
+            "prefix": "Jr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 18,
+        "fields": {
+            "name": "Product Owner",
+            "prefix": "Md",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 19,
+        "fields": {
+            "name": "Product Owner",
+            "prefix": "Sr",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 20,
+        "fields": {
+            "name": "Project Coordinator",
+            "prefix": "",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 21,
+        "fields": {
+            "name": "Team Coordinator",
+            "prefix": "",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.role",
+        "pk": 22,
+        "fields": {
+            "name": "Tech Lead",
+            "prefix": "",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "about": "me",
+            "location": "Kiev",
+            "birth_date": "1982-08-14",
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "about": "",
+            "location": "",
+            "birth_date": null,
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 3,
+        "fields": {
+            "user": 3,
+            "about": "",
+            "location": "",
+            "birth_date": null,
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 4,
+        "fields": {
+            "user": 4,
+            "about": "",
+            "location": "",
+            "birth_date": null,
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 5,
+        "fields": {
+            "user": 5,
+            "about": "",
+            "location": "",
+            "birth_date": null,
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 6,
+        "fields": {
+            "user": 6,
+            "about": "",
+            "location": "",
+            "birth_date": null,
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 7,
+        "fields": {
+            "user": 7,
+            "about": "",
+            "location": "",
+            "birth_date": null,
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 8,
+        "fields": {
+            "user": 8,
+            "about": "",
+            "location": "",
+            "birth_date": null,
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 9,
+        "fields": {
+            "user": 9,
+            "about": "",
+            "location": "",
+            "birth_date": null,
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.profile",
+        "pk": 10,
+        "fields": {
+            "user": 10,
+            "about": "",
+            "location": "",
+            "birth_date": null,
+            "avatar": "",
+            "team": []
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 1,
+        "fields": {
+            "name": "Javascript",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 2,
+        "fields": {
+            "name": "Python",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 3,
+        "fields": {
+            "name": "Django",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 4,
+        "fields": {
+            "name": "React",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 5,
+        "fields": {
+            "name": "Redux",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 6,
+        "fields": {
+            "name": "Php",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 7,
+        "fields": {
+            "name": "Communication",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 8,
+        "fields": {
+            "name": "Initiative",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 9,
+        "fields": {
+            "name": "Devops Architecture",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 10,
+        "fields": {
+            "name": "Delivery in time",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 11,
+        "fields": {
+            "name": "Architecture",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 12,
+        "fields": {
+            "name": "Testing",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 13,
+        "fields": {
+            "name": "Manual testing",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 14,
+        "fields": {
+            "name": "Integration testing",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 15,
+        "fields": {
+            "name": "Prototyping",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 16,
+        "fields": {
+            "name": "Communication",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.skill",
+        "pk": 17,
+        "fields": {
+            "name": "Databases",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.team",
+        "pk": 1,
+        "fields": {
+            "name": "Web development",
+            "description": "",
+            "logo": ""
+        }
+    },
+    {
+        "model": "team_management.team",
+        "pk": 2,
+        "fields": {
+            "name": "DevOPS",
+            "description": "",
+            "logo": ""
+        }
+    },
+    {
+        "model": "team_management.level",
+        "pk": 1,
+        "fields": {
+            "name": "Good",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.level",
+        "pk": 2,
+        "fields": {
+            "name": "Need Improve",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.parameter",
+        "pk": 1,
+        "fields": {
+            "name": "Architecture",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.parameter",
+        "pk": 2,
+        "fields": {
+            "name": "No lean approach",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.parameter",
+        "pk": 3,
+        "fields": {
+            "name": "Stubborn sometimes",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.parameter",
+        "pk": 4,
+        "fields": {
+            "name": "Openness",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.parameter",
+        "pk": 5,
+        "fields": {
+            "name": "Deep thinking",
+            "description": ""
+        }
+    },
+    {
+        "model": "team_management.parameter",
+        "pk": 6,
+        "fields": {
+            "name": "Experience",
+            "description": ""
+        }
+    }
+]
